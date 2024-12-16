@@ -5,7 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACFTC OUJDA</title>
 	<link rel="icon" type="image/png" href="https://i.postimg.cc/Y0HqKXKf/Photoleap-15-12-2024-16-43-15-v-Y663-copy-512x512.png">
-    <style>
+  <!-- OneSignal SDK -->
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "4103db19-8ea6-476f-b4a0-392f67d176e9",  // استبدل بـ App ID الخاص بك من OneSignal
+      notifyButton: {
+        enable: true, // زر الإشعارات سيظهر للمستخدم
+      },
+      allowLocalhostAsSecureOrigin: true // للسماح بالاختبار محليًا
+    });
+  });
+</script>
+	<style>
         body {
             display: flex;
             flex-direction: column;
