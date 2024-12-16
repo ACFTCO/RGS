@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliothèque PDF</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+    background-image: url('https://i.postimg.cc/BvDYTBQr/Photoleap-15-12-2024-16-43-15-v-Y663.png');
+    background-size: 500px 500px; /* حجم صغير للصورة */
+    background-repeat: no-repeat; /* تكرار الصورة */
+    background-position: center; /* بداية التكرار من الأعلى يسار */
+    background-attachment: fixed; /* تثبيت الخلفية عند التمرير */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.96); /* طبقة شفافة فوق الخلفية */
+    pointer-events: none; /* السماح بالتفاعل مع العناصر الأخرى */
+    z-index: -1; /* لضمان بقاء الطبقة في الخلف */
+
+        }
+        body.night-mode {
+            background-color: #121212; /* لون داكن */
+            color: #ffffff; /* لون النص */
+        }
+
+        body.night-mode::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* زر التبديل */
+       
+
+        #mode-toggle:hover {
+            background-color: #0056b3;
+        }
+  /* Add new date display style */
+   #date-display {
+            color: red;
+            font-weight: bold;
+            font-size: 10px; /* Smaller font size */
+            margin: 10px 0;
+            padding: 5px 10px;
+            background-color: #f8f8f8;
+            border-radius: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px; /* Adjusted gap */
+        }
+        .date-time-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .icon {
+            width: 16px; /* Smaller icon size */
+            height: 16px;
+            vertical-align: middle;
+        }
+        header {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            width: calc(100% - 40px);
+            max-width: 800px;
+            margin: 10px auto;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.0rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+   .header-logo {
+    width: 40px; /* تحديد عرض الصورة */
+    height: 40px; /* تحديد ارتفاع الصورة */
+    vertical-align: middle; /* محاذاة الصورة مع النص */
+    margin: 0 5px; /* إضافة مسافة بين الصورة والكلمات */
+}
+
+        .documentations {
+            font-size: 1.2rem;
+            margin-top: 8px;
+            font-weight: 500;
+            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            color : white ;
+       }
+
+        .documentations:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 15px;
+                margin: 5px auto;
+            }
+
+            header h1 {
+                font-size: 1.4rem;
+                
+            }
+
+            .documentations{
+                font-size: 1rem;
+                padding: 4px 12px;
+            }
+        }
+        /* Header styles */
+        
+
+        /* Container for the title and images */
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Image styling */
+        .title-image {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            position: absolute;
+            top: 0;
+        }
+
+     
+        /* News bar styles */
+    /* News bar styles */
+#news-bar {
+    background-color: #ffff00;
+    color: #000000;
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: left; /* تغيير إلى اليسار لتأكد من البدء من اليمين */
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    width: 98%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    margin: 10px;
+    position: relative;
+}
+
+.scroll-text {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+    padding-left: 150%; /* إضافة */
+}
+
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%); /* استخدام 100% بدلاً من 150% للتأكد من عدم وجود فجوة */
+    }
+}
+
+        /* Book card styles */
+.book-card ,.section-card ,.branch-button {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px; /* تقليل padding حول المحتوى */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-align: center;
+    border: 3px solid #ccc;
+    margin: 3px; /* تقليل margin حول البطاقة */
+    font-weight: bold;
+}
+
+.book-title {
+    font-size: 8px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0; /* تقليل المسافة حول العنوان */
+}
+
+.book-note {
+	background-color : red;
+	color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 8px;
+    margin-top: 5px;
+    font-weight: bold;
+    width: auto;
+    text-align: center;
+}
+
+.section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    
+}
+.section-card img ,.book-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 10px; /* تقليل المسافة أسفل الصورة */
+    
+}
+.section-card .section-name{
+    font-size: 9px;
+    font-weight: bold;
+    color: #333;
+    
+}
+        .book-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            
+        }
+
+      /* Update book-note style to show below book */
+
+
+        #sections-container {
+            text-align: center;
+            padding: 20px;
+            
+        }
+
+    #book-viewer-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    #book-viewer {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: white;
+    }
+
+    .viewer-buttons {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        padding: 8px;
+        z-index: 1000;
+        justify-content: center;
+    }
+
+    .close-button, .open-button {
+        padding: 8px 15px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9em;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 25px;
+    }
+
+    .close-button {
+        background-color: #0000FF;
+    }
+
+    .open-button {
+        background-color: #008000;
+        font-size: 0.6em;
+    }
+
+        .back-button ,   .skip-button {
+            
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+            align-items: center;
+            font-weight : bold ;             
+        }
+            .skip-button:hover {
+            background-color: #0056b3;
+        }
+
+        #search-input {
+            width: 95%;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            white-space: nowrap;
+            display: inline-block;
+            margin: 10px;
+            background-color: #F5F5F5;
+        }
+        .countdown {
+    background-color: #2d3436;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 5px;
+    margin-top: 5px;
+    font-weight: bold;
+    width: auto;
+    text-align: center;
+}
+
+.countdown-expired {
+    background-color: #e74c3c;
+}
+.book-count {
+            background-color: rgba(255, 0, 0, 0.1); /* خلفية حمراء خفيفة */
+            color: red;
+            font-size: 12px;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%; /* يجعل الشكل دائرياً */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 8px auto 0;
+            border: 1px solid rgba(255, 0, 0, 0.2); /* إطار خفيف */
+        }
+#popup-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    font-weight: bold;
+    background: #f8f9fa;
+    padding: 8px;
+    border-radius: 20px;
+    max-width: 90%;
+    text-align: center;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border: 3px solid #ccc;
+    border-color: 4B0082;
+     font-size: 16px;
+}
+
+.popup-content .book-note {
+    background-color : red;
+	color: white;
+    padding: 2px 3px;
+    border-radius: 4px;
+    font-size: 8px;
+    margin-top: 5px;
+    font-weight: bold;
+    width: auto;
+    text-align: center;
+    justify-content: center;
+    position : flex; 
+}
+
+
+.popup-content .countdown {
+    background-color: #2d3436;
+    color: white;
+    padding: 2px 3px;
+    border-radius: 4px;
+    font-size: 5px;
+    margin-top: 7px;
+    font-weight: bold;
+    width: auto;
+    text-align: center;
+    margin: 1px;
+    position : flex; 
+}
+
+.book-title-clickable {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 20px;
+    gap: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 4px 0;
+    width: 300px; /* Fixed width for all book titles */
+    justify-content: flex-start;
+    font-size: 12px;
+    
+}
+
+.book-title-clickable img {
+    width: 20px;
+    height: 20px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    
+}
+
+.book-title-clickable:hover {
+    
+    transform: translateY(-1px);
+    
+}
+
+.popup-message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    text-align: center;
+    
+}
+
+.book-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    width: 100%;
+    
+}
+
+.book-title-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    justify-content: flex-start; /* Align to the left */
+    padding-left: 20px; /* Add some padding from the left edge */
+    border: 1.5px solid #ccc;
+    border-color: 4B0082;
+    border-radius: 25px;
+}
+
+.book-image-container {
+    flex-shrink: 0;
+    
+}
+
+.book-additional-info {
+    font-size: 11px;
+    margin-top: 2px;
+    text-align: center;
+    width: 100%;
+    color: #900C3F;
+    font-weight: bold;
+    
+}
+      .whatsapp-button {
+      	font-size: 10px; /* Smaller font size */
+      margin: 10px 0;
+            padding: 5px 10px;
+            display: inline-block;
+            
+            color: white;
+            background-color: #25D366;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .whatsapp-button:hover {
+            background-color: #1EBE56;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .contact-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #open-contact-btn ,#mode-toggle {
+            background-color: #3498db; /* Vibrant blue */
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 25px; /* Fully rounded corners */
+            font-size: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        #open-contact-btn:hover {
+            background-color: #2980b9; /* Slightly darker blue on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+
+        #open-contact-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Popup styles */
+        #contact-popup,   #password-popup, #form-popup, #messages-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            color: #4B0082;
+        
+        }
+        .popup-content1, .popup-content2{
+    	margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+                
+        background: white ; 
+            font-size : 10px;
+            
+        }
+        .popup-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .popup-form input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .popup-form button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .popup-form button[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 25px; /* Fully rounded corners */
+            width: auto;
+            font-weight: bold;
+        }
+        .popup-form button[type="button"] {
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 25px; /* Fully rounded corners */
+            width: auto;
+            font-weight: bold;
+        }
+        #email-error {
+            color: red;
+            margin-bottom: 10px;
+            display: none;
+            }
+            
+               
+
+    
+
+        .popup-content input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            
+        }
+
+        .popup-content button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .popup-content button[type="submit"] {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .popup-content button[type="button"] {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+.message-item {
+    background-color: #f4f4f4;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    
+}
+    </style>
+</head>
+<body>
+	
+<div id="popup-modal">
+        <div class="popup-content">
+            <div id="popup-messages"></div>
+            <button class="skip-button" onclick="closePopup()">Ignorer</button>
+        </div>
+    </div>
+
+
+   <header>
+  
+    <h1>
+        ACFTC 
+        <img src="https://i.postimg.cc/BvDYTBQr/Photoleap-15-12-2024-16-43-15-v-Y663.png" alt="Logo" class="header-logo">
+        OUJDA
+    </h1>
+
+           <button id="open-documentations" class="documentations">DOCUMENTATIONS</button>
+       <Button id="open-contact-btn">notifications par gmail</button>
+   <button id="mode-toggle">Mode Nuit 🌙</button>
+    <!-- Popup Modal -->
+    <div id="contact-popup">
+        <div class="popup-content1">
+            <form id="contact-form" class="popup-form">
+                <h2>Pour recevoir des notifications par GMAIL</h2>
+                <input type="text" id="name-input" placeholder="Votre nom" required>
+                <input type="email" id="email-input" placeholder="Votre email" required>
+                <button type="submit">Envoyer</button>
+                <button type="button" id="close-popup">Fermer</button>
+            </form>
+        </div>
+    </div>
+    </header>
+        <!-- Password Popup -->
+    <div id="password-popup">
+        <div class="popup-content">
+            <h3>    Page réservée à l'administrateur</h3>
+            <input type="password" id="password-input" placeholder="Mot de passe">
+            <button type="submit" id="submit-password" class="skip-button" >Confirmer</button>
+            <button type="button" id="close-password-popup">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Form Popup -->
+    <div id="form-popup">
+        <div class="popup-content">
+            <h2>Ajouter une Notification</h2>
+            <textarea id="message-input" class="popup-content2" placeholder="Message"></textarea>
+            <input type="datetime-local" id="datetime-input" placeholder="Date et Heure">
+            <input type="url" id="link-input" placeholder="Lien (optionnel)">
+            <button type="submit" id="submit-form">Envoyer</button>
+                 <button class="skip-button" onclick="showScheduledMessages()">Affichage des messages</button>
+            <button type="button" id="close-form-popup">Fermer</button>
+       
+        </div>
+    </div>
+
+    <!-- Messages Popup -->
+    <div id="messages-popup">
+        <div class="popup-content">
+            <h2>Messages</h2>
+            <div id="messages-list"></div>
+            <button type="button" id="close-messages-popup">Fermer</button>
+        </div>
+    </div>
+    
+<div class="contact-container">
+    <a href="whatsapp://send?text=SALAM MOHAMMED&phone=0641434629" class="whatsapp-button">📱 Contactez-moi</a>
+    <div id="date-display">
+        <span class="date-time-container">
+            <img src="https://img.icons8.com/ios/50/calendar--v1.png" alt="calendar" class="icon">
+            <span id="date-text"></span>
+        </span>
+        <span class="date-time-container">
+            <img src="https://img.icons8.com/ios/50/clock--v1.png" alt="clock" class="icon">
+            <span id="time-text"></span>
+        </span>
+    </div>
+</div>
+    	    <div id="news-bar">
+        <div class="scroll-text" id="scroll-content"></div>
+    </div>
+
+    <input type="text" id="search-input" placeholder="Rechercher un livre ou une section">
+
+    <div id="sections-container"></div>
+
+ <div id="book-viewer-container">
+        <iframe id="book-viewer"></iframe>
+        <div class="viewer-buttons">
+            <button class="close-button">Fermer</button>
+            <button class="open-button">Ouvrir dans un nouvel onglet</button>
+        </div>
+    </div>
+    <div id="messages-list"></div>
+    
+        <script>
+        	 const toggleButton = document.getElementById('mode-toggle');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('night-mode'); // Active/Désactive le mode nuit
+
+            // Met à jour le texte du bouton selon le mode
+            if (body.classList.contains('night-mode')) {
+                toggleButton.textContent = 'Mode Jour ☀️';
+            } else {
+                toggleButton.textContent = 'Mode Nuit 🌙';
+            }
+        });
+        	
+async function showScheduledMessages() {
+    const sheetId = "1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c";
+    const sheetName = "NOTIFICATIONS";
+    const apiKey = "AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw";
+
+    try {
+        // Récupération des données depuis Google Sheets
+        const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`);
+        const data = await response.json();
+
+        if (!data.values || data.values.length < 2) {
+            alert("Aucune donnée à afficher.");
+            return;
+        }
+
+        const now = new Date();
+        const messages = data.values.slice(1)
+            .filter(row => {
+                const message = row[0];
+                const scheduleTime = row[1];
+                
+                if (!message || !scheduleTime) return false;
+
+                const [datePart, timePart] = scheduleTime.split(' ');
+                const [day, month, year] = datePart.split('/');
+                const [hour, minute] = timePart ? timePart.split(':') : [0, 0];
+                const scheduleDate = new Date(year, month - 1, day, hour, minute);
+
+                return scheduleDate > now;
+            })
+            .map(row => ({
+                message: row[0],
+                scheduleTime: row[1],
+            }));
+
+        // Afficher les messages dans la popup
+        const messagesPopup = document.getElementById('messages-popup');
+        const messagesList = document.getElementById('messages-list');
+        messagesList.innerHTML = ''; // Vider la liste précédente
+
+        if (messages.length === 0) {
+            messagesList.innerHTML = '<p>Aucun message programmé à venir.</p>';
+        } else {
+            messages.forEach(({ message, scheduleTime }) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message-item';
+                messageDiv.innerHTML = `
+                    <strong></strong> ${message}<br>
+                    <strong>Date :</strong> ${scheduleTime}
+                `;
+                messagesList.appendChild(messageDiv);
+            });
+        }
+
+        // Afficher la popup des messages
+        messagesPopup.style.display = 'flex';
+
+        // Fermer la popup de formulaire si elle est ouverte
+        const formPopup = document.getElementById('form-popup');
+        if (formPopup) {
+            formPopup.style.display = 'none';
+        }
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+        alert("Une erreur est survenue lors de la récupération des données.");
+    }
+}
+
+// Ajouter un écouteur d'événement pour fermer la popup
+document.getElementById('close-messages-popup').addEventListener('click', function() {
+    document.getElementById('messages-popup').style.display = 'none';
+});
+        
+        
+        // Password verification
+        const passwordPopup = document.getElementById('password-popup');
+        const formPopup = document.getElementById('form-popup');
+        const messagesPopup = document.getElementById('messages-popup');
+        const openDocumentationsButton = document.getElementById('open-documentations');
+        const submitPasswordButton = document.getElementById('submit-password');
+        const closePasswordPopupButton = document.getElementById('close-password-popup');
+        const closeFormPopupButton = document.getElementById('close-form-popup');
+        const closeMessagesPopupButton = document.getElementById('close-messages-popup');
+        const submitFormButton = document.getElementById('submit-form');
+        const passwordInput = document.getElementById('password-input');
+        const messageInput = document.getElementById('message-input');
+        const datetimeInput = document.getElementById('datetime-input');
+        const linkInput = document.getElementById('link-input');
+        const messagesList = document.getElementById('messages-list');
+
+        const PASSWORD = 'Mf@740704wris'; // الرقم السري
+
+        // فتح شاشة إدخال الرقم السري
+        openDocumentationsButton.addEventListener('click', () => {
+            passwordPopup.style.display = 'flex';
+        });
+
+        // التحقق من الرقم السري
+        submitPasswordButton.addEventListener('click', () => {
+            if (passwordInput.value === PASSWORD) {
+                passwordPopup.style.display = 'none';
+                formPopup.style.display = 'flex';
+            } else {
+                alert('Mot de passe incorrect');
+            }
+        });
+
+        // إغلاق الشاشة المنبثقة
+        closePasswordPopupButton.addEventListener('click', () => {
+            passwordPopup.style.display = 'none';
+        });
+
+        closeFormPopupButton.addEventListener('click', () => {
+            formPopup.style.display = 'none';
+        });
+
+        closeMessagesPopupButton.addEventListener('click', () => {
+            messagesPopup.style.display = 'none';
+        });
+
+        // إرسال البيانات إلى Google Sheets
+        submitFormButton.addEventListener('click', () => {
+            const message = messageInput.value;
+            const datetime = datetimeInput.value;
+            const link = linkInput.value;
+
+            if (!message || !datetime) {
+                alert('Veuillez remplir tous les champs obligatoires.');
+                return;
+            }
+
+            const payload = {
+                message,
+                datetime,
+                link,
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycbzk0dEIDFncj20HyiLxO-9JwDFqrYyZER5zLOIUtV-3oE5oAq4EeeO7nK1ayfzQc4zX6A/exec', {
+                method: 'POST',
+                body: JSON.stringify(payload),
+            }).then((response) => {
+                if (response.ok) {
+                    alert('Notification envoyée avec succès !');
+                    formPopup.style.display = 'none';
+                } else {
+                    alert('Erreur lors de l envoi de la notification.');
+                }
+            });
+        });
+
+        // فتح شاشة عرض الرسائل
+        document.getElementById('open-messages').addEventListener('click', () => {
+            fetch('https://script.google.com/macros/s/AKfycbzk0dEIDFncj20HyiLxO-9JwDFqrYyZER5zLOIUtV-3oE5oAq4EeeO7nK1ayfzQc4zX6A/exec')
+                .then((response) => response.json())
+                .then((data) => {
+                    messagesList.innerHTML = '';
+                    data.forEach((item) => {
+                        const messageElement = document.createElement('div');
+                        messageElement.textContent = `${item.datetime}: ${item.message}`;
+                        messagesList.appendChild(messageElement);
+                    });
+                    messagesPopup.style.display = 'flex';
+                });
+        });
+    </script>
+   
+    <script>
+    
+
+
+
+
+let cachedNotifications = null;  // تخزين بيانات الإشعارات (شريط الأخبار)
+
+      let cachedData = null;
+let cachedSections = null;
+let hasShownPopup = false;
+
+function closePopup() {
+    document.getElementById('popup-modal').style.display = 'none';
+}
+
+document.querySelector('.close-button').addEventListener('click', () => {
+    const bookViewerContainer = document.getElementById('book-viewer-container');
+    bookViewerContainer.style.display = 'none';
+
+    // إعادة الحالة إلى الرئيسية دون تحميل الصفحة
+    history.replaceState({ view: 'main' }, '', '#main');
+});
+
+document.querySelector('.open-button').addEventListener('click', () => {
+    const viewerUrl = document.getElementById('book-viewer').src;
+    window.open(viewerUrl, '_blank');
+});
+
+
+
+function showPopup(messages) {
+    if (sessionStorage.getItem('popupShown')) {
+        return;
+    }
+    
+    const popupModal = document.getElementById('popup-modal');
+    const popupMessages = document.getElementById('popup-messages');
+    
+    if (messages.length > 0) {
+        popupMessages.innerHTML = '';
+        messages.forEach(msg => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'popup-message';
+            
+            const cleanText = msg.columnP.text.replace(/&/g, '');
+            let messageContent = `<div style="color: ${msg.columnP.color};">${cleanText}</div>`;
+            
+            if (msg.additionalInfo) {
+                messageContent += `
+                    <div class="book-info-container">
+                        ${msg.additionalInfo.columnA?.trim() ? `
+                            <div class="book-title-container">
+                                <div class="book-image-container book-clickable" data-book-title="${msg.additionalInfo.columnA}">
+                                    <img src="" alt="" style="width: 40px; height: 40px; display: none; border-radius: 5px;">
+                                </div>
+                                <div class="book-title-clickable" style="color: ${msg.additionalInfo.color};">
+                                    ${msg.additionalInfo.columnA}
+                                </div>
+                            </div>
+                        ` : ''}
+                        ${msg.additionalInfo.columnL ? `
+                            <div class="book-additional-info" style="color: ${msg.additionalInfo.color};">
+                                ${msg.additionalInfo.columnL}
+                            </div>
+                        ` : ''}
+                    </div>`;
+            }
+            
+            messageDiv.innerHTML = messageContent;
+            
+            if (msg.additionalInfo && msg.additionalInfo.columnA?.trim()) {
+                const bookImageContainer = messageDiv.querySelector('.book-image-container');
+                if (bookImageContainer) {
+                    const book = cachedData.slice(1).find(row => row[0] === msg.additionalInfo.columnA);
+                    if (book) {
+                        if (book[2]) {
+                            const imgElement = bookImageContainer.querySelector('img');
+                            imgElement.src = book[2];
+                            imgElement.style.display = 'block';
+                        }
+                        const backgroundColor = book[14] || 'transparent';
+                        const titleContainer = messageDiv.querySelector('.book-title-container');
+                        if (titleContainer) {
+                            titleContainer.style.backgroundColor = backgroundColor;
+                        }
+                    }
+                }
+
+                const handleBookClick = () => {
+                    if (!cachedData) return;
+                    
+                    const book = cachedData.slice(1).find(row => row[0] === msg.additionalInfo.columnA);
+                    
+                 if (book) {
+    const bookCard = document.createElement('div');
+    bookCard.className = 'book-card';
+
+    if (book[12]) {
+        bookCard.style.backgroundColor = book[12];
+    }
+
+    const imageUrl = book[2]; // استخدم دائمًا صورة الكتاب الأصلية
+
+    bookCard.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <img src="${imageUrl}" alt="Image du livre" style="width: 50px; height: 60px; margin-bottom: 8px;">
+            <div>
+                <h4 class="book-title" style="margin: 0;">${book[0]}</h4>
+                ${book[11] ? `<div class="book-note">${book[11]}</div>` : ''}
+                ${book[13] ? `<div class="countdown" data-deadline="${book[13]}">جاري حساب الوقت المتبقي...</div>` : ''}
+            </div>
+        </div>
+    `;
+
+    bookCard.onclick = () => {
+        const viewerUrl = book[1].replace('view?usp=drivesdk', 'preview');
+        document.getElementById('book-viewer').src = viewerUrl;
+        document.getElementById('book-viewer-container').style.display = 'flex';
+        popupModal.style.display = 'none';
+    };
+
+    const existingBookCards = popupMessages.querySelectorAll('.book-card');
+    existingBookCards.forEach(card => card.remove());
+
+    messageDiv.appendChild(bookCard);
+    updateAllCountdowns();
+}
+                };
+
+                const bookTitleElement = messageDiv.querySelector('.book-title-clickable');
+                if (bookTitleElement) {
+                    bookTitleElement.onclick = handleBookClick;
+                }
+
+                if (bookImageContainer) {
+                    bookImageContainer.onclick = handleBookClick;
+                }
+            }
+            
+            popupMessages.appendChild(messageDiv);
+        });
+        
+        popupModal.style.display = 'flex';
+        sessionStorage.setItem('popupShown', 'true');
+    }
+}
+
+function updateDateTime() {
+    const now = new Date();
+    const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    
+    const dayName = days[now.getDay()];
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    document.getElementById('date-text').textContent = `${dayName} : ${day}/${month}/${year}`;
+    document.getElementById('time-text').textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+const apiKey = 'AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw';
+const sheetId = '1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c';
+const sheetName = 'RGS';
+
+// تعديل العد التنازلي ليظهر النص فقط إذا لم يوجد تاريخ/وقت
+function calculateTimeLeft(targetDateStr) {
+    if (!targetDateStr) return { textOnly: true };
+
+    targetDateStr = targetDateStr.trim();
+    const parts = targetDateStr.split(' ');
+    const datePart = parts[0];
+    const timePart = parts[1];
+
+    if (!isValidDateFormat(datePart)) return { textOnly: true };
+
+    // إذا كان التاريخ صالحاً ولكن بدون وقت
+    const [day, month, year] = datePart.split('/');
+    const [hours, minutes] = timePart ? timePart.split(':') : [0, 0];
+    const targetDate = new Date(year, month - 1, day, hours, minutes);
+
+    if (isNaN(targetDate.getTime())) return { textOnly: true };
+
+    const now = new Date().getTime();
+    const difference = targetDate.getTime() - now;
+
+    if (difference <= 0) return null;
+
+    return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        textOnly: false
+    };
+}
+
+// تحديث لعرض النصوص
+function updateAllCountdowns() {
+    const countdownElements = document.querySelectorAll('.countdown');
+    countdownElements.forEach(element => {
+        const deadline = element.dataset.deadline;
+        if (!deadline) return;
+
+        const timeLeft = calculateTimeLeft(deadline);
+        if (!timeLeft || timeLeft.textOnly) {
+            element.textContent = deadline; // عرض النص فقط
+            element.style.backgroundColor = '#2d3436'; // نفس خلفية العد التنازلي
+        } else {
+            element.textContent = formatCountdown(timeLeft);
+        }
+    });
+}
+
+function formatCountdown(timeLeft) {
+    if (!timeLeft) return '';
+    
+    const parts = [];
+    if (timeLeft.days > 0) parts.push(`${timeLeft.days} jr${timeLeft.days > 1 ? 's' : ''}`);
+    if (timeLeft.hours > 0) parts.push(`${timeLeft.hours} hr${timeLeft.hours > 1 ? 's' : ''}`);
+    if (timeLeft.minutes > 0) parts.push(`${timeLeft.minutes} min${timeLeft.minutes > 1 ? 's' : ''}`);
+    if (timeLeft.seconds > 0) parts.push(`${timeLeft.seconds} sec${timeLeft.seconds > 1 ? 's' : ''}`);
+    
+    return parts.join(' ');
+}
+
+function isValidDateFormat(dateStr) {
+    if (!dateStr) return false;
+    
+    dateStr = dateStr.trim();
+    
+    // Match these formats:
+    // DD/MM/YYYY
+    // DD/MM/YYYY HH:mm
+    const formatRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})(\s\d{1,2}:\d{1,2})?$/;
+    
+    return formatRegex.test(dateStr);
+}
+
+
+setInterval(updateAllCountdowns, 1000);
+
+async function processPopupMessages(data) {
+    const popupMessages = [];
+    
+    data.slice(1).forEach(row => {
+        if (row[15] && row[15].trim() !== '') {
+            const dateRange = row[17] ? row[17].trim() : '';
+            let isValid = true;
+            
+            if (dateRange) {
+                const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
+                    const [date, time] = dateTime.split(' ');
+                    const [day, month, year] = date.split('/');
+                    const [hours, minutes] = time ? time.split(':') : ['00', '00'];
+                    return new Date(year, month - 1, day, hours, minutes);
+                });
+                
+                const now = new Date();
+                isValid = now >= startDateTime && now <= endDateTime;
+            } else {
+                isValid = row[15].includes('&');
+            }
+            
+            if (isValid) {
+                const message = {
+                    columnP: {
+                        text: row[15],
+                        color: row[16] || '#000000'
+                    }
+                };
+                
+                if (row[15].includes('&')) {
+                    message.additionalInfo = {
+                        columnL: row[11] || '',
+                        columnA: row[0] || '',
+                        color: row[16] || '#000000'
+                    };
+                }
+                
+                popupMessages.push(message);
+            }
+        }
+    });
+    
+    return popupMessages;
+}
+
+async function fetchData(forceRefresh = false) {
+    if (cachedData && !forceRefresh) {
+        return cachedData;
+    }
+
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.error('Erreur de récupération des données:', response.status, response.statusText);
+            return null;
+        }
+        const data = await response.json();
+        cachedData = data.values;
+        
+        // Process popup messages after updating cache
+        const popupMessages = await processPopupMessages(cachedData);
+        if (popupMessages.length > 0 && !hasShownPopup) {
+            showPopup(popupMessages);
+            hasShownPopup = true;
+        }
+        
+        return cachedData;
+    } catch (error) {
+        console.error('Erreur de requête:', error);
+        return null;
+    }
+}
+
+function showSections() {
+    document.getElementById('sections-container').innerHTML = '';
+    document.getElementById('book-viewer-container').style.display = 'none';
+    
+    if (cachedSections) {
+        displayResults(cachedSections);
+    } else {
+        loadPage();
+    }
+}
+    
+ function filterResults(data, searchTerm) {
+    const filteredBooks = [];
+    console.log("Started filtering...");
+    
+    const lowercaseSearchTerm = searchTerm.toLowerCase();
+    
+    data.slice(1).forEach(row => {
+        if (!row || row.length === 0) {
+            console.log("Empty row, skipping...");
+            return;
+        }
+
+        const bookTitle = (row[0] || '').toLowerCase();
+        const bookUrl = row[1] || '';
+        const bookImage = row[2] || '';
+        const section = row[3] || '';
+        const branch = row[6] || section || '';
+        const deadline = row[13] || '';
+        const bookContent = (row[18] || '').toLowerCase();
+        const dateRangeStr = row[17] ? row[17].trim() : '';
+
+        console.log("Processing row: ", row);
+
+        // تعديل منطق التحقق من تاريخ العرض
+        let shouldDisplay = true;
+
+        if (dateRangeStr && dateRangeStr.includes('au')) {
+            console.log("Date range found: ", dateRangeStr);
+            const [startDateStr, endDateStr] = dateRangeStr.split('au').map(str => str.trim());
+            
+            if (startDateStr && endDateStr && dateRangeStr.includes('&')) {
+                const parseDate = (dateStr) => {
+                    const [date, time = '00:00'] = dateStr.trim().split(' ');
+                    const [day, month, year] = date.split('/');
+                    const [hours, minutes] = time.split(':');
+                    return new Date(year, month - 1, day, hours || 0, minutes || 0);
+                };
+
+                const startDateTime = parseDate(startDateStr);
+                const endDateTime = parseDate(endDateStr);
+                const now = new Date();
+
+                shouldDisplay = now >= startDateTime && now <= endDateTime;
+            }
+        }
+
+        const matchesSearch = bookTitle.includes(lowercaseSearchTerm) || 
+                            bookContent.includes(lowercaseSearchTerm);
+
+        if (shouldDisplay && bookTitle && bookUrl && matchesSearch) {
+            console.log("Adding book to filtered list: ", bookTitle);
+            
+            let highlightedTitle = row[0];
+            if (bookTitle.includes(lowercaseSearchTerm)) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                highlightedTitle = row[0].replace(regex, '<mark>$1</mark>');
+            }
+
+            let contentExcerpt = '';
+            if (bookContent.includes(lowercaseSearchTerm)) {
+                const index = bookContent.indexOf(lowercaseSearchTerm);
+                const start = Math.max(0, index - 50);
+                const end = Math.min(bookContent.length, index + searchTerm.length + 50);
+                contentExcerpt = '...' + row[18].substring(start, end).replace(
+                    new RegExp(`(${searchTerm})`, 'gi'),
+                    '<mark>$1</mark>'
+                ) + '...';
+            }
+
+            filteredBooks.push({
+                title: highlightedTitle,
+                url: bookUrl,
+                image: bookImage,
+                section: section,
+                branch: branch,
+                color: row[10] || '',
+                note: row[11] || '',
+                backgroundColor: row[12] || '',
+                deadline: deadline,
+                excerpt: contentExcerpt
+            });
+        }
+    });
+
+    console.log("Filtered books: ", filteredBooks);
+    return filteredBooks;
+}
+
+function processPopupMessages(data) {
+    const popupMessages = [];
+    
+    data.slice(1).forEach(row => {
+        if (row[15] && row[15].trim() !== '') {
+            const dateRange = row[17] ? row[17].trim() : '';
+            let isValid = true;
+            
+            if (dateRange) {
+                const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
+                    const [date, time] = dateTime.trim().split(' ');  // استخدم .trim() هنا
+                    const [day, month, year] = date.trim().split('/');
+                    const [hours, minutes] = time ? time.trim().split(':') : ['00', '00'];  // استخدم .trim() هنا
+
+                    return new Date(year, month - 1, day, hours, minutes);
+                });
+                
+                const now = new Date();
+                isValid = now >= startDateTime && now <= endDateTime;
+            } else {
+                isValid = row[15].includes('&');
+            }
+            
+            if (isValid) {
+                const message = {
+                    columnP: {
+                        text: row[15],
+                        color: row[16] || '#000000'
+                    }
+                };
+                
+                if (row[15].includes('&')) {
+                    message.additionalInfo = {
+                        columnL: row[11] || '',
+                        columnA: row[0] || '',
+                        color: row[16] || '#000000'
+                    };
+                }
+                
+                popupMessages.push(message);
+            }
+        }
+    });
+    
+    return popupMessages;
+}
+
+
+
+    function displayFilteredResults(filteredBooks) {
+    // إضافة حالة البحث إلى التاريخ
+    history.pushState({ view: 'search', searchResults: filteredBooks }, '', '#search');
+
+    const sectionsContainer = document.getElementById('sections-container');
+    sectionsContainer.innerHTML = '';
+
+    if (filteredBooks.length === 0) {
+        sectionsContainer.innerHTML = '<p style="text-align: center;">Il n y a pas de résultats</p>';
+        return;
+    }
+
+    filteredBooks.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.className = 'book-card';
+        
+        if (book.backgroundColor) {
+            bookCard.style.backgroundColor = book.backgroundColor;
+        }
+
+        bookCard.innerHTML = `
+            <img class="book-image" src="${book.image}" alt="${book.title}" style="width: 50px; height: auto; margin-bottom: 5px;">
+            <div class="book-title">${book.title}</div>
+            ${book.excerpt ? `<div class="book-excerpt">${book.excerpt}</div>` : ''}
+            ${book.note ? `<div class="book-note">${book.note}</div>` : ''}
+            ${book.deadline ? `<div class="countdown" data-deadline="${book.deadline}">جاري حساب الوقت المتبقي...</div>` : ''}
+        `;
+
+        bookCard.onclick = () => {
+            const viewerUrl = book.url.replace('view?usp=drivesdk', 'preview');
+            document.getElementById('book-viewer').src = viewerUrl;
+            document.getElementById('book-viewer-container').style.display = 'flex';
+        };
+
+        sectionsContainer.appendChild(bookCard);
+    });
+
+    // إضافة زر العودة
+    const backButton = createBackButton();
+    sectionsContainer.appendChild(backButton);
+
+    updateAllCountdowns();
+    setTimeout(setUniformCardDimensions, 100);
+}
+
+// تحديث معالج حدث popstate ليشمل حالة البحث
+// تحديث عند فتح الكتاب
+function showBookViewer(url) {
+    const viewerUrl = url.replace('view?usp=drivesdk', 'preview');
+    document.getElementById('book-viewer').src = viewerUrl;
+    document.getElementById('book-viewer-container').style.display = 'flex';
+    history.pushState({ view: 'book' }, '', '#book');
+}
+
+// تعديل وظيفة onpopstate
+window.onpopstate = function (event) {
+    const bookViewerContainer = document.getElementById('book-viewer-container');
+
+    if (bookViewerContainer.style.display === 'flex') {
+        // إذا كان الكتاب مفتوحًا، قم بمحاكاة النقر على زر الإغلاق
+        document.querySelector('.close-button').click();
+    } else if (event.state) {
+        if (event.state.view === 'main') {
+            // العودة إلى الصفحة الرئيسية
+            document.getElementById('sections-container').innerHTML = '';
+            document.getElementById('book-viewer-container').style.display = 'none';
+            if (cachedSections) {
+                displayResults(cachedSections);
+            } else {
+                loadPage();
+            }
+        } else if (event.state.view === 'section' && event.state.sectionData) {
+            // العودة إلى عرض القسم
+            showBranchAndBooks(event.state.sectionData);
+        }
+    } else {
+        // العودة الافتراضية إلى الصفحة الرئيسية
+        document.getElementById('sections-container').innerHTML = '';
+        document.getElementById('book-viewer-container').style.display = 'none';
+        if (cachedSections) {
+            displayResults(cachedSections);
+        } else {
+            loadPage();
+        }
+    }
+};
+    function setupNewsBar(notifications) {
+    if (notifications.length > 0) {
+        const scrollContent = document.getElementById('scroll-content');
+        let newsText = '';
+
+        notifications.forEach(notification => {
+            const notificationText = `${notification[9]} | `;
+            const notificationColor = notification[10];
+            newsText += `<span style="color: ${notificationColor};">${notificationText}</span>`;
+        });
+
+        scrollContent.innerHTML = newsText;
+        scrollContent.setAttribute('data-text', newsText); // إضافة النص كخاصية data
+        document.getElementById('news-bar').style.display = 'block';
+    }
+}
+    function showBranchAndBooks(sectionData) {
+    // أضف حالة جديدة إلى سجل التصفح
+    history.pushState({ view: 'section', sectionData: sectionData }, '', '#section');
+
+    const sectionsContainer = document.getElementById('sections-container');
+    sectionsContainer.innerHTML = '';
+
+    // إضافة عنوان القسم في المنتصف
+    const sectionTitleContainer = document.createElement('div');
+sectionTitleContainer.style.textAlign = 'center';
+sectionTitleContainer.style.width = '100%';
+sectionTitleContainer.style.marginBottom = '6px';
+sectionTitleContainer.style.fontWeight = 'bold';
+sectionTitleContainer.style.fontSize = '0.8em';
+sectionTitleContainer.style.color = '#4B0082'; // لون النص أبيض للتباين
+sectionTitleContainer.style.backgroundColor = 'rgb(230, 240, 250)'; // أزرق سماوي خفيف
+sectionTitleContainer.style.padding = '4px 7px'; // مساحة داخلية
+sectionTitleContainer.style.borderRadius = '25px'; // زوايا دائرية
+sectionTitleContainer.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'; // ظل خفيف
+sectionTitleContainer.style.display = 'inline-block'; // لتناسب العرض مع المحتوى
+sectionTitleContainer.style.maxWidth = '90%'; // لمنع الامتداد الكامل
+sectionTitleContainer.style.margin = '0 auto 20px'; // توسيط العنصر
+    
+    // العثور على اسم القسم (أول مفتاح في كائن الفروع)
+    const sectionName = Object.keys(sectionData.branches)[0];
+    sectionTitleContainer.textContent = sectionName;
+    sectionsContainer.appendChild(sectionTitleContainer);
+
+     const booksContainer = document.createElement('div');
+    booksContainer.style.marginBottom = '20px';
+
+    const branches = Object.keys(sectionData.branches);
+    const hasBranches = branches.length > 0 && 
+        branches.some(branch => branch !== branches[0]);
+
+    if (!hasBranches && (!sectionData.branches[branches[0]] || !sectionData.branches[branches[0]].books.length)) {
+        const emptyMessage = document.createElement('p');
+        emptyMessage.style.textAlign = 'center';
+        emptyMessage.style.margin = '20px';
+        emptyMessage.style.color = '#666';
+        emptyMessage.innerText = 'Aucun livre dans cette section';
+        sectionsContainer.appendChild(emptyMessage);
+    } 
+    else if (!hasBranches) {
+        const sortedBooks = [...sectionData.branches[branches[0]].books].sort((a, b) => {
+            const hasCountdownA = a[5] && calculateTimeLeft(a[5]);
+            const hasCountdownB = b[5] && calculateTimeLeft(b[5]);
+            return hasCountdownB - hasCountdownA;
+        });
+
+        sortedBooks.forEach(book => {
+    const bookCard = document.createElement('div');
+    bookCard.className = 'book-card';
+
+    if (book[4]) {
+        bookCard.style.backgroundColor = book[4];
+    }
+
+    // استخدم دائمًا صورة الكتاب بدون التحقق من العد التنازلي
+    const imageUrl = book[2]; 
+
+    bookCard.innerHTML = `
+        <img src="${imageUrl}" alt="Image du livre" style="width: 50px; height: 60px;">
+        <h4 class="book-title">${book[0]}</h4>
+        ${book[3] ? `<div class="book-note">${book[3]}</div>` : ''}
+        ${book[5] ? `<div class="countdown" data-deadline="${book[5]}">جاري حساب الوقت المتبقي...</div>` : ''}
+    `;
+
+    bookCard.onclick = () => {
+        document.getElementById('book-viewer').src = book[1].replace('view?usp=drivesdk', 'preview');
+        document.getElementById('book-viewer-container').style.display = 'flex';
+    };
+
+    booksContainer.appendChild(bookCard);
+});
+
+        sectionsContainer.appendChild(booksContainer);
+        setTimeout(() => setUniformCardDimensions(), 100);
+    }
+    else {
+        const allBookContainers = [];
+        
+        for (const [branchName, branchData] of Object.entries(sectionData.branches)) {
+            const branchButton = document.createElement('button');
+            branchButton.className = 'branch-button';
+            branchButton.style.backgroundColor = branchData.color;
+            branchButton.innerText = branchName;
+
+            const bookContainer = document.createElement('div');
+            bookContainer.className = 'branch-books-container';
+            bookContainer.style.display = 'none';
+            allBookContainers.push(bookContainer);
+
+            if (branchData.books.length === 0) {
+                const emptyBranchMessage = document.createElement('p');
+                emptyBranchMessage.style.textAlign = 'center';
+                emptyBranchMessage.style.margin = '20px';
+                emptyBranchMessage.style.color = '#666';
+                emptyBranchMessage.innerText = 'Aucun livre dans cette section';
+                bookContainer.appendChild(emptyBranchMessage);
+            } else {
+                const sortedBooks = [...branchData.books].sort((a, b) => {
+                    const hasCountdownA = a[5] && calculateTimeLeft(a[5]);
+                    const hasCountdownB = b[5] && calculateTimeLeft(b[5]);
+                    return hasCountdownB - hasCountdownA;
+                });
+
+                sortedBooks.forEach(book => {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'book-card';
+                    if (book[4]) {
+                        bookCard.style.backgroundColor = book[4];
+                    }
+
+                    const hasActiveCountdown = book[5] && calculateTimeLeft(book[5]);
+                    const imageUrl = hasActiveCountdown ? 
+                        'https://img.icons8.com/?size=100&id=uVPVzPo-AQyA&format=png&color=000000' : 
+                        book[2];
+
+                    bookCard.innerHTML = `
+                        <img src="${imageUrl}" alt="Image du livre" style="width: 50px; height: 60px;">
+                        <h4 class="book-title">${book[0]}</h4>
+                        ${book[3] ? `<div class="book-note">${book[3]}</div>` : ''}
+                        ${book[5] ? `<div class="countdown" data-deadline="${book[5]}">جاري حساب الوقت المتبقي...</div>` : ''}
+                    `;
+
+                    bookCard.onclick = () => {
+                        document.getElementById('book-viewer').src = book[1].replace('view?usp=drivesdk', 'preview');
+                        document.getElementById('book-viewer-container').style.display = 'flex';
+                    };
+                    bookContainer.appendChild(bookCard);
+                });
+            }
+
+            branchButton.onclick = () => {
+                allBookContainers.forEach(container => container.style.display = 'none');
+                booksContainer.innerHTML = '';
+                booksContainer.appendChild(bookContainer);
+                bookContainer.style.display = 'block';
+                
+                // Apply uniform dimensions after making container visible
+                setTimeout(() => {
+                    updateAllCountdowns();
+                    setUniformCardDimensions();
+                }, 100);
+            };
+
+            sectionsContainer.appendChild(branchButton);
+        }
+
+        sectionsContainer.appendChild(booksContainer);
+    }
+
+    sectionsContainer.appendChild(createBackButton());
+
+    // استدعاء تحديث العد التنازلي وأبعاد البطاقات
+    updateAllCountdowns();
+    setTimeout(() => setUniformCardDimensions(), 100);
+}
+
+// الاستماع لأحداث الرجوع باستخدام زر العودة في المتصفح أو الهاتف
+window.onpopstate = function(event) {
+    if (event.state) {
+        if (event.state.view === 'main') {
+            // العودة إلى الصفحة الرئيسية
+            document.getElementById('sections-container').innerHTML = '';
+            document.getElementById('book-viewer-container').style.display = 'none';
+            if (cachedSections) {
+                displayResults(cachedSections);
+            } else {
+                loadPage();
+            }
+        } else if (event.state.view === 'section' && event.state.sectionData) {
+            // العودة إلى عرض القسم
+            showBranchAndBooks(event.state.sectionData);
+        }
+    } else {
+        // إذا لم تكن هناك حالة محفوظة، نعود إلى الصفحة الرئيسية
+        document.getElementById('sections-container').innerHTML = '';
+        document.getElementById('book-viewer-container').style.display = 'none';
+        if (cachedSections) {
+            displayResults(cachedSections);
+        } else {
+            loadPage();
+        }
+    }
+};
+
+// تعديل زر العودة ليتصرف مثل زر العودة في المتصفح
+function createBackButton() {
+    const backButton = document.createElement('button');
+    backButton.className = 'back-button';
+    backButton.innerText = 'Retour';
+    backButton.onclick = () => {
+        history.back(); // استخدام history.back() بدلاً من showSections مباشرة
+    };
+    return backButton;
+}
+
+// إضافة حدث الضغط على زر العودة في الهاتف
+window.addEventListener('popstate', (event) => {
+    // Trigger back button behavior
+    const backButton = document.querySelector('.back-button');
+    if (backButton) {
+        backButton.click();
+    }
+});
+
+    async function loadPage() {
+    const data = await fetchData();
+    if (!data) return;
+
+    const notifications = [];
+    const sections = {};
+
+    // تهيئة الأقسام
+    data.slice(1).forEach(row => {
+        if (!row || row.length === 0) return;
+        
+        const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
+        
+        sectionNames.forEach(section => {
+            if (section && !sections[section]) {
+                sections[section] = { 
+                    color: row[4] || '#f5f5f5', 
+                    image: row[5] || '', 
+                    branches: {} 
+                };
+            }
+        });
+
+        if (row[9]) notifications.push(row);
+    });
+
+    // إضافة الكتب إلى الأقسام
+    data.slice(1).forEach(row => {
+        if (!row || row.length === 0) return;
+
+        const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
+        
+        if (row[0] && row[1]) {
+            const dateRangeStr = row[17] ? row[17].trim() : '';
+            let shouldDisplay = true;
+
+            // تعديل منطق التحقق من تاريخ العرض
+            if (dateRangeStr && dateRangeStr.includes('au') && dateRangeStr.includes('&')) {
+                const [startDateStr, endDateStr] = dateRangeStr.split('au').map(str => str.trim());
+                
+                if (startDateStr && endDateStr) {
+                    const parseDate = (dateStr) => {
+                        const [date, time = '00:00'] = dateStr.trim().split(' ');
+                        const [day, month, year] = date.split('/');
+                        const [hours, minutes] = time.split(':');
+                        return new Date(year, month - 1, day, hours || 0, minutes || 0);
+                    };
+
+                    const startDateTime = parseDate(startDateStr);
+                    const endDateTime = parseDate(endDateStr);
+                    const now = new Date();
+                    
+                    shouldDisplay = now >= startDateTime && now <= endDateTime;
+                }
+            }
+
+            if (shouldDisplay) {
+                sectionNames.forEach(section => {
+                    if (section) {
+                        const branch = row[6] || section;
+                        
+                        if (!sections[section].branches[branch]) {
+                            sections[section].branches[branch] = { 
+                                color: row[7] || '#f5f5f5', 
+                                image: row[8] || '', 
+                                books: [] 
+                            };
+                        }
+                        
+                        const bookData = [
+                            row[0] || '',
+                            row[1] || '',
+                            row[2] || '',
+                            row[11] || '',
+                            row[12] || '',
+                            row[13] || ''
+                        ];
+                        
+                        sections[section].branches[branch].books.push(bookData);
+                    }
+                });
+            }
+        }
+    });
+
+    setupNewsBar(notifications);
+
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm.length > 0) {
+            const filteredBooks = filterResults(data, searchTerm);
+            displayFilteredResults(filteredBooks);
+        } else {
+            displayResults(sections);
+        }
+    });
+    
+    displayResults(sections);
+}
+function updateMarqueeDuration() {
+    const scrollContent = document.getElementById('scroll-content');
+    const contentLength = scrollContent.textContent.length; // طول النص
+    const baseDuration = 10; // الوقت الأساسي للحركة
+    const duration = Math.max(baseDuration, contentLength / 10); // ضبط المدة
+    scrollContent.style.animationDuration = `${duration}s`;
+}
+
+// قم باستدعاء هذه الوظيفة بعد تغيير النص
+updateMarqueeDuration();
+
+function resetMarqueeAnimation() {
+    const scrollContent = document.getElementById('scroll-content');
+    scrollContent.style.animation = 'none';
+    void scrollContent.offsetWidth; // إجبار إعادة التحديث
+    scrollContent.style.animation = 'marquee 15s linear infinite'; // استئناف الحركة
+}
+
+// استخدم هذه الوظيفة بعد تغيير النص
+resetMarqueeAnimation();
+function displayResults(sections) {
+    const sectionsContainer = document.getElementById('sections-container');
+    sectionsContainer.innerHTML = '';
+
+    for (const [sectionName, sectionData] of Object.entries(sections)) {
+        if (!sectionName || sectionName.trim() === '') continue;
+
+        const totalBooks = Object.values(sectionData.branches)
+            .reduce((total, branch) => total + branch.books.length, 0);
+
+        const sectionCard = document.createElement('div');
+        sectionCard.className = 'section-card';
+        sectionCard.style.backgroundColor = sectionData.color;
+
+        sectionCard.innerHTML = `
+            <img src="${sectionData.image || 'placeholder-image-url'}" alt="Image de la section" style="width: 60px; height: 60px;">
+            <div class="section-name">${sectionName}</div>
+            <div class="book-count" style="color: red; font-size: 12px; font-weight: bold; margin-top: 8px;">
+                ${totalBooks}
+            </div>
+        `;
+
+        sectionCard.onclick = () => {
+            showBranchAndBooks(sectionData);
+        };
+
+        sectionsContainer.appendChild(sectionCard);
+    }
+
+    setTimeout(setUniformCardDimensions, 100);
+}
+function setUniformCardDimensions() {
+            const allCards = document.querySelectorAll('.book-card, .section-card');
+
+            // Reset heights to auto before calculating
+            allCards.forEach(card => {
+                card.style.height = 'auto';
+            });
+
+            // Get all card heights
+            const cardHeights = Array.from(allCards).map(card => card.scrollHeight);
+
+            // Find the maximum height
+            const maxHeight = Math.max(...cardHeights, 140); // Minimum height of 140px
+
+            // Apply the maximum height to all cards
+            allCards.forEach(card => {
+                card.style.height = `${maxHeight}px`;
+            });
+        }
+        // ... (rest of the JavaScript)
+        window.addEventListener('load', setUniformCardDimensions);
+        window.addEventListener('resize', setUniformCardDimensions)
+
+// تحميل الصفحة عند التشغيل
+loadPage();
+ document.addEventListener('DOMContentLoaded', function() {
+            const openBtn = document.getElementById('open-contact-btn');
+            const closeBtn = document.getElementById('close-popup');
+            const popup = document.getElementById('contact-popup');
+            const contactForm = document.getElementById('contact-form');
+            const emailInput = document.getElementById('email-input');
+            const emailError = document.getElementById('email-error');
+
+            // Open popup
+            openBtn.addEventListener('click', function() {
+                popup.style.display = 'flex';
+                emailError.style.display = 'none';
+            });
+
+            // Close popup
+            closeBtn.addEventListener('click', function() {
+                popup.style.display = 'none';
+            });
+
+            // Form submission
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name-input').value;
+                const email = emailInput.value;
+
+                // First, validate the email
+                fetch(`https://script.google.com/macros/s/AKfycby-HG4Sk0z5uD7VlJThhWJa4RVMRndBHAyjwbGeZzt-wMDi0WeRfi9ak0RdhbDOnQxwzw/exec?action=checkEmail&email=${encodeURIComponent(email)}`, {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // If email exists, show error
+                    if (data.exists) {
+                        emailError.style.display = 'block';
+                        return;
+                    }
+
+                    // If email doesn't exist, proceed with submission
+                    return fetch('https://script.google.com/macros/s/AKfycby-HG4Sk0z5uD7VlJThhWJa4RVMRndBHAyjwbGeZzt-wMDi0WeRfi9ak0RdhbDOnQxwzw/exec', {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`
+                    });
+                })
+                .then(response => {
+                    if (response) {
+                        alert('Merci ! Votre message a été envoyé.');
+                        popup.style.display = 'none';
+                        contactForm.reset();
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Une erreur s est produite ou adresse e-mail est déjà utilisée');
+                });
+            });
+        });
+</script>
+</body>
+</html> 
