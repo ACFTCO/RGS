@@ -3,46 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACFTC OUJDA</title>
-	<link rel="icon" type="image/png" href="https://i.postimg.cc/Y0HqKXKf/Photoleap-15-12-2024-16-43-15-v-Y663-copy-512x512.png">
-  <!-- OneSignal SDK -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "4103db19-8ea6-476f-b4a0-392f67d176e9",
-    });
-  });
-</script>
-	<style>
+  <title>ACFTC OUJDA</title>
+    <link rel="icon" type="image/png" href="https://tinypic.host/images/2024/12/30/1000024600.png">
+    <style>
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            
-    background-image: url('https://i.postimg.cc/BvDYTBQr/Photoleap-15-12-2024-16-43-15-v-Y663.png');
-    background-size: 500px 500px; /* حجم صغير للصورة */
-    background-repeat: no-repeat; /* تكرار الصورة */
-    background-position: center; /* بداية التكرار من الأعلى يسار */
-    background-attachment: fixed; /* تثبيت الخلفية عند التمرير */
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.96); /* طبقة شفافة فوق الخلفية */
-    pointer-events: none; /* السماح بالتفاعل مع العناصر الأخرى */
-    z-index: -1; /* لضمان بقاء الطبقة في الخلف */
-
+            background-image: url('https://tinypic.host/images/2024/12/30/1000024600.png');
+            background-size: 500px 500px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
         }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            pointer-events: none;
+            z-index: -1;
+        }
+
         body.night-mode {
-            background-color: #121212; /* لون داكن */
-            color: #ffffff; /* لون النص */
+            background-color: #121212;
+            color: #ffffff;
         }
 
         body.night-mode::before {
@@ -57,17 +46,13 @@ body::before {
             z-index: -1;
         }
 
-        /* زر التبديل */
-       
-
         #mode-toggle:hover {
             background-color: #0056b3;
         }
-  /* Add new date display style */
    #date-display {
             color: red;
             font-weight: bold;
-            font-size: 10px; /* Smaller font size */
+            font-size: 10px;
             margin: 10px 0;
             padding: 5px 10px;
             background-color: #f8f8f8;
@@ -75,7 +60,7 @@ body::before {
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
-            gap: 5px; /* Adjusted gap */
+            gap: 5px;
         }
         .date-time-container {
             display: flex;
@@ -83,7 +68,7 @@ body::before {
             gap: 5px;
         }
         .icon {
-            width: 16px; /* Smaller icon size */
+            width: 16px;
             height: 16px;
             vertical-align: middle;
         }
@@ -112,10 +97,10 @@ body::before {
             letter-spacing: 1px;
         }
    .header-logo {
-    width: 40px; /* تحديد عرض الصورة */
-    height: 40px; /* تحديد ارتفاع الصورة */
-    vertical-align: middle; /* محاذاة الصورة مع النص */
-    margin: 0 5px; /* إضافة مسافة بين الصورة والكلمات */
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin: 0 5px;
 }
 
         .documentations {
@@ -144,7 +129,6 @@ body::before {
 
             header h1 {
                 font-size: 1.4rem;
-                
             }
 
             .documentations{
@@ -152,10 +136,7 @@ body::before {
                 padding: 4px 12px;
             }
         }
-        /* Header styles */
-        
 
-        /* Container for the title and images */
         .title-container {
             display: flex;
             align-items: center;
@@ -165,7 +146,6 @@ body::before {
             width: 100%;
         }
 
-        /* Image styling */
         .title-image {
             width: 70px;
             height: 70px;
@@ -173,16 +153,12 @@ body::before {
             position: absolute;
             top: 0;
         }
-
-     
-        /* News bar styles */
-    /* News bar styles */
 #news-bar {
     background-color: #ffff00;
     color: #000000;
     font-weight: bold;
     border-radius: 20px;
-    text-align: left; /* تغيير إلى اليسار لتأكد من البدء من اليمين */
+    text-align: left;
     overflow: hidden;
     white-space: nowrap;
     display: inline-block;
@@ -198,25 +174,23 @@ body::before {
 .scroll-text {
     display: inline-block;
     animation: marquee 30s linear infinite;
-    padding-left: 150%; /* إضافة */
+    padding-left: 150%;
 }
-
 
 @keyframes marquee {
     0% {
         transform: translateX(0%);
     }
     100% {
-        transform: translateX(-100%); /* استخدام 100% بدلاً من 150% للتأكد من عدم وجود فجوة */
+        transform: translateX(-100%);
     }
 }
 
-        /* Book card styles */
 .book-card ,.section-card ,.branch-button {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    padding: 2px; /* تقليل padding حول المحتوى */
+    padding: 2px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -225,7 +199,7 @@ body::before {
     cursor: pointer;
     text-align: center;
     border: 3px solid #ccc;
-    margin: 3px; /* تقليل margin حول البطاقة */
+    margin: 3px;
     font-weight: bold;
 }
 
@@ -233,7 +207,7 @@ body::before {
     font-size: 8px;
     font-weight: bold;
     color: #333;
-    margin: 10px 0; /* تقليل المسافة حول العنوان */
+    margin: 10px 0;
 }
 
 .book-note {
@@ -257,7 +231,7 @@ body::before {
     width: 60px;
     height: 60px;
     border-radius: 10px;
-    margin-bottom: 10px; /* تقليل المسافة أسفل الصورة */
+    margin-bottom: 10px;
     
 }
 .section-card .section-name{
@@ -272,9 +246,6 @@ body::before {
             display: block;
             
         }
-
-      /* Update book-note style to show below book */
-
 
         #sections-container {
             text-align: center;
@@ -379,18 +350,18 @@ body::before {
     background-color: #e74c3c;
 }
 .book-count {
-            background-color: rgba(255, 0, 0, 0.1); /* خلفية حمراء خفيفة */
+            background-color: rgba(255, 0, 0, 0.1);
             color: red;
             font-size: 12px;
             font-weight: bold;
             width: 24px;
             height: 24px;
-            border-radius: 50%; /* يجعل الشكل دائرياً */
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 8px auto 0;
-            border: 1px solid rgba(255, 0, 0, 0.2); /* إطار خفيف */
+            border: 1px solid rgba(255, 0, 0, 0.2);
         }
 #popup-modal {
     display: none;
@@ -435,7 +406,6 @@ body::before {
     position : flex; 
 }
 
-
 .popup-content .countdown {
     background-color: #2d3436;
     color: white;
@@ -459,7 +429,7 @@ body::before {
     transition: all 0.3s ease;
     cursor: pointer;
     margin: 4px 0;
-    width: 300px; /* Fixed width for all book titles */
+    width: 300px;
     justify-content: flex-start;
     font-size: 12px;
     
@@ -504,8 +474,8 @@ body::before {
     align-items: center;
     gap: 12px;
     width: 100%;
-    justify-content: flex-start; /* Align to the left */
-    padding-left: 20px; /* Add some padding from the left edge */
+    justify-content: flex-start;
+    padding-left: 20px;
     border: 1.5px solid #ccc;
     border-color: 4B0082;
     border-radius: 25px;
@@ -526,7 +496,7 @@ body::before {
     
 }
       .whatsapp-button {
-      	font-size: 10px; /* Smaller font size */
+      	font-size: 10px;
       margin: 10px 0;
             padding: 5px 10px;
             display: inline-block;
@@ -550,11 +520,11 @@ body::before {
             gap: 10px;
         }
         #open-contact-btn ,#mode-toggle {
-            background-color: #3498db; /* Vibrant blue */
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 6px 14px;
-            border-radius: 25px; /* Fully rounded corners */
+            border-radius: 25px;
             font-size: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -566,7 +536,7 @@ body::before {
         }
 
         #open-contact-btn:hover {
-            background-color: #2980b9; /* Slightly darker blue on hover */
+            background-color: #2980b9;
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0,0,0,0.15);
         }
@@ -576,7 +546,6 @@ body::before {
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Popup styles */
         #contact-popup,   #password-popup, #form-popup, #messages-popup {
             display: none;
             position: fixed;
@@ -624,7 +593,7 @@ body::before {
             background-color: #3498db;
             color: white;
             padding: 6px 14px;
-            border-radius: 25px; /* Fully rounded corners */
+            border-radius: 25px;
             width: auto;
             font-weight: bold;
         }
@@ -632,7 +601,7 @@ body::before {
             background-color: #e74c3c;
             color: white;
             padding: 6px 14px;
-            border-radius: 25px; /* Fully rounded corners */
+            border-radius: 25px;
             width: auto;
             font-weight: bold;
         }
@@ -682,6 +651,16 @@ body::before {
     border-radius: 5px;
     
 }
+.message-item strong {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.message-item span {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #777;
+}
     </style>
 </head>
 <body>
@@ -693,12 +672,11 @@ body::before {
         </div>
     </div>
 
-
    <header>
   
     <h1>
         ACFTC 
-        <img src="https://i.postimg.cc/BvDYTBQr/Photoleap-15-12-2024-16-43-15-v-Y663.png" alt="Logo" class="header-logo">
+        <img src="https://tinypic.host/images/2024/12/30/1000024600.png" alt="Logo" class="header-logo">
         OUJDA
     </h1>
 
@@ -786,15 +764,10 @@ body::before {
         const body = document.body;
 
         toggleButton.addEventListener('click', () => {
-            body.classList.toggle('night-mode'); // Active/Désactive le mode nuit
-
-            // Met à jour le texte du bouton selon le mode
-            if (body.classList.contains('night-mode')) {
-                toggleButton.textContent = 'Mode Jour ☀️';
-            } else {
-                toggleButton.textContent = 'Mode Nuit 🌙';
-            }
+            body.classList.toggle('night-mode');
+            toggleButton.textContent = body.classList.contains('night-mode') ? 'Mode Jour ☀️' : 'Mode Nuit 🌙';
         });
+
         	
 async function showScheduledMessages() {
     const sheetId = "1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c";
@@ -802,7 +775,6 @@ async function showScheduledMessages() {
     const apiKey = "AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw";
 
     try {
-        // Récupération des données depuis Google Sheets
         const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`);
         const data = await response.json();
 
@@ -812,48 +784,49 @@ async function showScheduledMessages() {
         }
 
         const now = new Date();
+        const oneMonthAgo = new Date(now);
+        oneMonthAgo.setMonth(now.getMonth() - 1);
+
         const messages = data.values.slice(1)
             .filter(row => {
                 const message = row[0];
-                const scheduleTime = row[1];
-                
-                if (!message || !scheduleTime) return false;
+                const scheduleTimeStr = row[1];
 
-                const [datePart, timePart] = scheduleTime.split(' ');
+                if (!message || !scheduleTimeStr) return false;
+
+                const [datePart, timePart] = scheduleTimeStr.split(' ');
                 const [day, month, year] = datePart.split('/');
                 const [hour, minute] = timePart ? timePart.split(':') : [0, 0];
                 const scheduleDate = new Date(year, month - 1, day, hour, minute);
 
-                return scheduleDate > now;
+                return scheduleDate >= oneMonthAgo;
             })
             .map(row => ({
                 message: row[0],
                 scheduleTime: row[1],
-            }));
+                originalDate: new Date(row[1].split(' ')[0].split('/').reverse().join('-') + 'T' + (row[1].split(' ')[1] || '00:00') + ':00')
+            }))
+            .sort((a, b) => b.originalDate - a.originalDate);
 
-        // Afficher les messages dans la popup
         const messagesPopup = document.getElementById('messages-popup');
         const messagesList = document.getElementById('messages-list');
-        messagesList.innerHTML = ''; // Vider la liste précédente
+        messagesList.innerHTML = ''; 
 
         if (messages.length === 0) {
-            messagesList.innerHTML = '<p>Aucun message programmé à venir.</p>';
+            messagesList.innerHTML = '<p>Aucun message envoyé au cours du dernier mois.</p>';
         } else {
             messages.forEach(({ message, scheduleTime }) => {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = 'message-item';
                 messageDiv.innerHTML = `
-                    <strong></strong> ${message}<br>
-                    <strong>Date :</strong> ${scheduleTime}
+                    <strong>Message:</strong> ${message}<br>
+                    <span>Envoyé le: ${scheduleTime}</span>
                 `;
                 messagesList.appendChild(messageDiv);
             });
         }
 
-        // Afficher la popup des messages
         messagesPopup.style.display = 'flex';
-
-        // Fermer la popup de formulaire si elle est ouverte
         const formPopup = document.getElementById('form-popup');
         if (formPopup) {
             formPopup.style.display = 'none';
@@ -864,9 +837,7 @@ async function showScheduledMessages() {
         alert("Une erreur est survenue lors de la récupération des données.");
     }
 }
-
-// Ajouter un écouteur d'événement pour fermer la popup
-document.getElementById('close-messages-popup').addEventListener('click', function() {
+document.getElementById('close-messages-popup').addEventListener('click', () => {
     document.getElementById('messages-popup').style.display = 'none';
 });
         
@@ -887,14 +858,12 @@ document.getElementById('close-messages-popup').addEventListener('click', functi
         const linkInput = document.getElementById('link-input');
         const messagesList = document.getElementById('messages-list');
 
-        const PASSWORD = 'Mf@740704wris'; // الرقم السري
+        const PASSWORD = 'Mf@740704wris';
 
-        // فتح شاشة إدخال الرقم السري
         openDocumentationsButton.addEventListener('click', () => {
             passwordPopup.style.display = 'flex';
         });
 
-        // التحقق من الرقم السري
         submitPasswordButton.addEventListener('click', () => {
             if (passwordInput.value === PASSWORD) {
                 passwordPopup.style.display = 'none';
@@ -904,7 +873,6 @@ document.getElementById('close-messages-popup').addEventListener('click', functi
             }
         });
 
-        // إغلاق الشاشة المنبثقة
         closePasswordPopupButton.addEventListener('click', () => {
             passwordPopup.style.display = 'none';
         });
@@ -916,8 +884,6 @@ document.getElementById('close-messages-popup').addEventListener('click', functi
         closeMessagesPopupButton.addEventListener('click', () => {
             messagesPopup.style.display = 'none';
         });
-
-        // إرسال البيانات إلى Google Sheets
         submitFormButton.addEventListener('click', () => {
             const message = messageInput.value;
             const datetime = datetimeInput.value;
@@ -947,7 +913,6 @@ document.getElementById('close-messages-popup').addEventListener('click', functi
             });
         });
 
-        // فتح شاشة عرض الرسائل
         document.getElementById('open-messages').addEventListener('click', () => {
             fetch('https://script.google.com/macros/s/AKfycbzk0dEIDFncj20HyiLxO-9JwDFqrYyZER5zLOIUtV-3oE5oAq4EeeO7nK1ayfzQc4zX6A/exec')
                 .then((response) => response.json())
@@ -961,40 +926,20 @@ document.getElementById('close-messages-popup').addEventListener('click', functi
                     messagesPopup.style.display = 'flex';
                 });
         });
-    </script>
+            </script>
    
     <script>
-    
-  // تسجيل الـ Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then((registration) => {
-                    console.log('Service Worker Registered:', registration);
-                })
-                .catch((error) => {
-                    console.error('Service Worker Registration Failed:', error);
-                });
-        } else {
-            console.log('Service Workers are not supported in this browser.');
-	}
-
-
-
-let cachedNotifications = null;  // تخزين بيانات الإشعارات (شريط الأخبار)
-
+    let cachedNotifications = null;
       let cachedData = null;
 let cachedSections = null;
 let hasShownPopup = false;
 
-function closePopup() {
-    document.getElementById('popup-modal').style.display = 'none';
+function closePopup() {        document.getElementById('popup-modal').style.display = 'none';
 }
 
 document.querySelector('.close-button').addEventListener('click', () => {
     const bookViewerContainer = document.getElementById('book-viewer-container');
     bookViewerContainer.style.display = 'none';
-
-    // إعادة الحالة إلى الرئيسية دون تحميل الصفحة
     history.replaceState({ view: 'main' }, '', '#main');
 });
 
@@ -1076,7 +1021,7 @@ function showPopup(messages) {
         bookCard.style.backgroundColor = book[12];
     }
 
-    const imageUrl = book[2]; // استخدم دائمًا صورة الكتاب الأصلية
+    const imageUrl = book[2];
 
     bookCard.innerHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -1145,7 +1090,6 @@ const apiKey = 'AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw';
 const sheetId = '1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c';
 const sheetName = 'RGS';
 
-// تعديل العد التنازلي ليظهر النص فقط إذا لم يوجد تاريخ/وقت
 function calculateTimeLeft(targetDateStr) {
     if (!targetDateStr) return { textOnly: true };
 
@@ -1156,7 +1100,6 @@ function calculateTimeLeft(targetDateStr) {
 
     if (!isValidDateFormat(datePart)) return { textOnly: true };
 
-    // إذا كان التاريخ صالحاً ولكن بدون وقت
     const [day, month, year] = datePart.split('/');
     const [hours, minutes] = timePart ? timePart.split(':') : [0, 0];
     const targetDate = new Date(year, month - 1, day, hours, minutes);
@@ -1177,7 +1120,6 @@ function calculateTimeLeft(targetDateStr) {
     };
 }
 
-// تحديث لعرض النصوص
 function updateAllCountdowns() {
     const countdownElements = document.querySelectorAll('.countdown');
     countdownElements.forEach(element => {
@@ -1186,8 +1128,8 @@ function updateAllCountdowns() {
 
         const timeLeft = calculateTimeLeft(deadline);
         if (!timeLeft || timeLeft.textOnly) {
-            element.textContent = deadline; // عرض النص فقط
-            element.style.backgroundColor = '#2d3436'; // نفس خلفية العد التنازلي
+            element.textContent = deadline;
+            element.style.backgroundColor = '#2d3436';
         } else {
             element.textContent = formatCountdown(timeLeft);
         }
@@ -1210,15 +1152,10 @@ function isValidDateFormat(dateStr) {
     if (!dateStr) return false;
     
     dateStr = dateStr.trim();
-    
-    // Match these formats:
-    // DD/MM/YYYY
-    // DD/MM/YYYY HH:mm
     const formatRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})(\s\d{1,2}:\d{1,2})?$/;
     
     return formatRegex.test(dateStr);
 }
-
 
 setInterval(updateAllCountdowns, 1000);
 
@@ -1234,7 +1171,7 @@ async function processPopupMessages(data) {
                 const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
                     const [date, time] = dateTime.split(' ');
                     const [day, month, year] = date.split('/');
-                    const [hours, minutes] = time ? time.split(':') : ['00', '00'];
+                    const [hours, minutes] = time ? time.split(':') : [0, 0];
                     return new Date(year, month - 1, day, hours, minutes);
                 });
                 
@@ -1282,8 +1219,6 @@ async function fetchData(forceRefresh = false) {
         }
         const data = await response.json();
         cachedData = data.values;
-        
-        // Process popup messages after updating cache
         const popupMessages = await processPopupMessages(cachedData);
         if (popupMessages.length > 0 && !hasShownPopup) {
             showPopup(popupMessages);
@@ -1331,7 +1266,6 @@ function showSections() {
 
         console.log("Processing row: ", row);
 
-        // تعديل منطق التحقق من تاريخ العرض
         let shouldDisplay = true;
 
         if (dateRangeStr && dateRangeStr.includes('au')) {
@@ -1395,7 +1329,6 @@ function showSections() {
     console.log("Filtered books: ", filteredBooks);
     return filteredBooks;
 }
-
 function processPopupMessages(data) {
     const popupMessages = [];
     
@@ -1406,9 +1339,9 @@ function processPopupMessages(data) {
             
             if (dateRange) {
                 const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
-                    const [date, time] = dateTime.trim().split(' ');  // استخدم .trim() هنا
+                    const [date, time] = dateTime.trim().split(' ');
                     const [day, month, year] = date.trim().split('/');
-                    const [hours, minutes] = time ? time.trim().split(':') : ['00', '00'];  // استخدم .trim() هنا
+                    const [hours, minutes] = time ? time.trim().split(':') : ['00', '00'];
 
                     return new Date(year, month - 1, day, hours, minutes);
                 });
@@ -1443,10 +1376,7 @@ function processPopupMessages(data) {
     return popupMessages;
 }
 
-
-
     function displayFilteredResults(filteredBooks) {
-    // إضافة حالة البحث إلى التاريخ
     history.pushState({ view: 'search', searchResults: filteredBooks }, '', '#search');
 
     const sectionsContainer = document.getElementById('sections-container');
@@ -1482,7 +1412,6 @@ function processPopupMessages(data) {
         sectionsContainer.appendChild(bookCard);
     });
 
-    // إضافة زر العودة
     const backButton = createBackButton();
     sectionsContainer.appendChild(backButton);
 
@@ -1490,25 +1419,19 @@ function processPopupMessages(data) {
     setTimeout(setUniformCardDimensions, 100);
 }
 
-// تحديث معالج حدث popstate ليشمل حالة البحث
-// تحديث عند فتح الكتاب
 function showBookViewer(url) {
     const viewerUrl = url.replace('view?usp=drivesdk', 'preview');
     document.getElementById('book-viewer').src = viewerUrl;
     document.getElementById('book-viewer-container').style.display = 'flex';
     history.pushState({ view: 'book' }, '', '#book');
 }
-
-// تعديل وظيفة onpopstate
 window.onpopstate = function (event) {
     const bookViewerContainer = document.getElementById('book-viewer-container');
 
     if (bookViewerContainer.style.display === 'flex') {
-        // إذا كان الكتاب مفتوحًا، قم بمحاكاة النقر على زر الإغلاق
         document.querySelector('.close-button').click();
     } else if (event.state) {
         if (event.state.view === 'main') {
-            // العودة إلى الصفحة الرئيسية
             document.getElementById('sections-container').innerHTML = '';
             document.getElementById('book-viewer-container').style.display = 'none';
             if (cachedSections) {
@@ -1517,11 +1440,9 @@ window.onpopstate = function (event) {
                 loadPage();
             }
         } else if (event.state.view === 'section' && event.state.sectionData) {
-            // العودة إلى عرض القسم
             showBranchAndBooks(event.state.sectionData);
         }
     } else {
-        // العودة الافتراضية إلى الصفحة الرئيسية
         document.getElementById('sections-container').innerHTML = '';
         document.getElementById('book-viewer-container').style.display = 'none';
         if (cachedSections) {
@@ -1531,6 +1452,7 @@ window.onpopstate = function (event) {
         }
     }
 };
+
     function setupNewsBar(notifications) {
     if (notifications.length > 0) {
         const scrollContent = document.getElementById('scroll-content');
@@ -1543,37 +1465,35 @@ window.onpopstate = function (event) {
         });
 
         scrollContent.innerHTML = newsText;
-        scrollContent.setAttribute('data-text', newsText); // إضافة النص كخاصية data
+        scrollContent.setAttribute('data-text', newsText);
         document.getElementById('news-bar').style.display = 'block';
     }
 }
     function showBranchAndBooks(sectionData) {
-    // أضف حالة جديدة إلى سجل التصفح
     history.pushState({ view: 'section', sectionData: sectionData }, '', '#section');
 
     const sectionsContainer = document.getElementById('sections-container');
     sectionsContainer.innerHTML = '';
 
-    // إضافة عنوان القسم في المنتصف
-    const sectionTitleContainer = document.createElement('div');
+  const sectionTitleContainer = document.createElement('div');
 sectionTitleContainer.style.textAlign = 'center';
 sectionTitleContainer.style.width = '100%';
 sectionTitleContainer.style.marginBottom = '6px';
 sectionTitleContainer.style.fontWeight = 'bold';
 sectionTitleContainer.style.fontSize = '0.8em';
-sectionTitleContainer.style.color = '#4B0082'; // لون النص أبيض للتباين
-sectionTitleContainer.style.backgroundColor = 'rgb(230, 240, 250)'; // أزرق سماوي خفيف
-sectionTitleContainer.style.padding = '4px 7px'; // مساحة داخلية
-sectionTitleContainer.style.borderRadius = '25px'; // زوايا دائرية
-sectionTitleContainer.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'; // ظل خفيف
-sectionTitleContainer.style.display = 'inline-block'; // لتناسب العرض مع المحتوى
-sectionTitleContainer.style.maxWidth = '90%'; // لمنع الامتداد الكامل
-sectionTitleContainer.style.margin = '0 auto 20px'; // توسيط العنصر
-    
-    // العثور على اسم القسم (أول مفتاح في كائن الفروع)
-    const sectionName = Object.keys(sectionData.branches)[0];
+sectionTitleContainer.style.color = '#4B0082';
+sectionTitleContainer.style.backgroundColor = 'rgb(230, 240, 250)';
+sectionTitleContainer.style.padding = '4px 7px';
+sectionTitleContainer.style.borderRadius = '25px';
+sectionTitleContainer.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+sectionTitleContainer.style.display = 'inline-block';
+sectionTitleContainer.style.maxWidth = '90%';
+sectionTitleContainer.style.margin = '0 auto 20px';
+
+    const sectionName = sectionData.sectionName || Object.keys(sectionData.branches)[0];
     sectionTitleContainer.textContent = sectionName;
     sectionsContainer.appendChild(sectionTitleContainer);
+
 
      const booksContainer = document.createElement('div');
     booksContainer.style.marginBottom = '20px';
@@ -1605,8 +1525,7 @@ sectionTitleContainer.style.margin = '0 auto 20px'; // توسيط العنصر
         bookCard.style.backgroundColor = book[4];
     }
 
-    // استخدم دائمًا صورة الكتاب بدون التحقق من العد التنازلي
-    const imageUrl = book[2]; 
+    const imageUrl = book[2];
 
     bookCard.innerHTML = `
         <img src="${imageUrl}" alt="Image du livre" style="width: 50px; height: 60px;">
@@ -1686,8 +1605,6 @@ sectionTitleContainer.style.margin = '0 auto 20px'; // توسيط العنصر
                 booksContainer.innerHTML = '';
                 booksContainer.appendChild(bookContainer);
                 bookContainer.style.display = 'block';
-                
-                // Apply uniform dimensions after making container visible
                 setTimeout(() => {
                     updateAllCountdowns();
                     setUniformCardDimensions();
@@ -1701,17 +1618,17 @@ sectionTitleContainer.style.margin = '0 auto 20px'; // توسيط العنصر
     }
 
     sectionsContainer.appendChild(createBackButton());
-
-    // استدعاء تحديث العد التنازلي وأبعاد البطاقات
     updateAllCountdowns();
     setTimeout(() => setUniformCardDimensions(), 100);
 }
 
-// الاستماع لأحداث الرجوع باستخدام زر العودة في المتصفح أو الهاتف
-window.onpopstate = function(event) {
-    if (event.state) {
+window.onpopstate = function (event) {
+    const bookViewerContainer = document.getElementById('book-viewer-container');
+
+    if (bookViewerContainer.style.display === 'flex') {
+        document.querySelector('.close-button').click();
+    } else if (event.state) {
         if (event.state.view === 'main') {
-            // العودة إلى الصفحة الرئيسية
             document.getElementById('sections-container').innerHTML = '';
             document.getElementById('book-viewer-container').style.display = 'none';
             if (cachedSections) {
@@ -1720,11 +1637,9 @@ window.onpopstate = function(event) {
                 loadPage();
             }
         } else if (event.state.view === 'section' && event.state.sectionData) {
-            // العودة إلى عرض القسم
             showBranchAndBooks(event.state.sectionData);
         }
     } else {
-        // إذا لم تكن هناك حالة محفوظة، نعود إلى الصفحة الرئيسية
         document.getElementById('sections-container').innerHTML = '';
         document.getElementById('book-viewer-container').style.display = 'none';
         if (cachedSections) {
@@ -1735,20 +1650,18 @@ window.onpopstate = function(event) {
     }
 };
 
-// تعديل زر العودة ليتصرف مثل زر العودة في المتصفح
+
 function createBackButton() {
     const backButton = document.createElement('button');
     backButton.className = 'back-button';
     backButton.innerText = 'Retour';
     backButton.onclick = () => {
-        history.back(); // استخدام history.back() بدلاً من showSections مباشرة
+        history.back();
     };
     return backButton;
 }
 
-// إضافة حدث الضغط على زر العودة في الهاتف
 window.addEventListener('popstate', (event) => {
-    // Trigger back button behavior
     const backButton = document.querySelector('.back-button');
     if (backButton) {
         backButton.click();
@@ -1762,7 +1675,6 @@ window.addEventListener('popstate', (event) => {
     const notifications = [];
     const sections = {};
 
-    // تهيئة الأقسام
     data.slice(1).forEach(row => {
         if (!row || row.length === 0) return;
         
@@ -1771,6 +1683,7 @@ window.addEventListener('popstate', (event) => {
         sectionNames.forEach(section => {
             if (section && !sections[section]) {
                 sections[section] = { 
+                     sectionName : section,
                     color: row[4] || '#f5f5f5', 
                     image: row[5] || '', 
                     branches: {} 
@@ -1781,7 +1694,6 @@ window.addEventListener('popstate', (event) => {
         if (row[9]) notifications.push(row);
     });
 
-    // إضافة الكتب إلى الأقسام
     data.slice(1).forEach(row => {
         if (!row || row.length === 0) return;
 
@@ -1791,7 +1703,6 @@ window.addEventListener('popstate', (event) => {
             const dateRangeStr = row[17] ? row[17].trim() : '';
             let shouldDisplay = true;
 
-            // تعديل منطق التحقق من تاريخ العرض
             if (dateRangeStr && dateRangeStr.includes('au') && dateRangeStr.includes('&')) {
                 const [startDateStr, endDateStr] = dateRangeStr.split('au').map(str => str.trim());
                 
@@ -1857,29 +1768,26 @@ window.addEventListener('popstate', (event) => {
 }
 function updateMarqueeDuration() {
     const scrollContent = document.getElementById('scroll-content');
-    const contentLength = scrollContent.textContent.length; // طول النص
-    const baseDuration = 10; // الوقت الأساسي للحركة
-    const duration = Math.max(baseDuration, contentLength / 10); // ضبط المدة
+    const contentLength = scrollContent.textContent.length;
+    const baseDuration = 10;
+    const duration = Math.max(baseDuration, contentLength / 10);
     scrollContent.style.animationDuration = `${duration}s`;
 }
 
-// قم باستدعاء هذه الوظيفة بعد تغيير النص
 updateMarqueeDuration();
 
 function resetMarqueeAnimation() {
     const scrollContent = document.getElementById('scroll-content');
     scrollContent.style.animation = 'none';
-    void scrollContent.offsetWidth; // إجبار إعادة التحديث
-    scrollContent.style.animation = 'marquee 15s linear infinite'; // استئناف الحركة
+    void scrollContent.offsetWidth;
+    scrollContent.style.animation = 'marquee 15s linear infinite';
 }
 
-// استخدم هذه الوظيفة بعد تغيير النص
 resetMarqueeAnimation();
 function displayResults(sections) {
     const sectionsContainer = document.getElementById('sections-container');
-    sectionsContainer.innerHTML = '';
-
-    for (const [sectionName, sectionData] of Object.entries(sections)) {
+    sectionsContainer.innerHTML = '';    
+for (const [sectionName, sectionData] of Object.entries(sections)) {
         if (!sectionName || sectionName.trim() === '') continue;
 
         const totalBooks = Object.values(sectionData.branches)
@@ -1909,27 +1817,20 @@ function displayResults(sections) {
 function setUniformCardDimensions() {
             const allCards = document.querySelectorAll('.book-card, .section-card');
 
-            // Reset heights to auto before calculating
             allCards.forEach(card => {
                 card.style.height = 'auto';
             });
 
-            // Get all card heights
             const cardHeights = Array.from(allCards).map(card => card.scrollHeight);
+            const maxHeight = Math.max(...cardHeights, 140);
 
-            // Find the maximum height
-            const maxHeight = Math.max(...cardHeights, 140); // Minimum height of 140px
-
-            // Apply the maximum height to all cards
             allCards.forEach(card => {
                 card.style.height = `${maxHeight}px`;
             });
         }
-        // ... (rest of the JavaScript)
         window.addEventListener('load', setUniformCardDimensions);
         window.addEventListener('resize', setUniformCardDimensions)
 
-// تحميل الصفحة عند التشغيل
 loadPage();
  document.addEventListener('DOMContentLoaded', function() {
             const openBtn = document.getElementById('open-contact-btn');
@@ -1939,37 +1840,30 @@ loadPage();
             const emailInput = document.getElementById('email-input');
             const emailError = document.getElementById('email-error');
 
-            // Open popup
             openBtn.addEventListener('click', function() {
                 popup.style.display = 'flex';
                 emailError.style.display = 'none';
             });
 
-            // Close popup
             closeBtn.addEventListener('click', function() {
                 popup.style.display = 'none';
             });
 
-            // Form submission
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 const name = document.getElementById('name-input').value;
                 const email = emailInput.value;
 
-                // First, validate the email
                 fetch(`https://script.google.com/macros/s/AKfycby-HG4Sk0z5uD7VlJThhWJa4RVMRndBHAyjwbGeZzt-wMDi0WeRfi9ak0RdhbDOnQxwzw/exec?action=checkEmail&email=${encodeURIComponent(email)}`, {
                     method: 'GET'
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // If email exists, show error
                     if (data.exists) {
                         emailError.style.display = 'block';
                         return;
                     }
-
-                    // If email doesn't exist, proceed with submission
                     return fetch('https://script.google.com/macros/s/AKfycby-HG4Sk0z5uD7VlJThhWJa4RVMRndBHAyjwbGeZzt-wMDi0WeRfi9ak0RdhbDOnQxwzw/exec', {
                         method: 'POST',
                         mode: 'no-cors',
@@ -1994,4 +1888,4 @@ loadPage();
         });
 </script>
 </body>
-</html> 
+</html>
