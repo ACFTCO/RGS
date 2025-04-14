@@ -251,13 +251,13 @@
     padding: 2px;
     background-color: #ffffff;
     border-radius: 18px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     width: 80px;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     text-align: center;
 
-    margin: 4px;
+    margin: 8px;
     font-weight: bold;
 }
 
@@ -403,6 +403,7 @@
     font-weight: bold;
     width: auto;
     text-align: center;
+    
 }
 
 .countdown-expired {
@@ -1801,13 +1802,29 @@ window.onpopstate = function (event) {
 
         // Function to create the back button
         // Function to create the back button
+                // Function to create the back button
         function createBackButton() {
             const backButton = document.createElement('button');
             backButton.className = 'back-button';
-            backButton.innerText = 'Retour'; // أو 'العودة' إذا أردت تغيير النص
+            backButton.innerText = 'Retour'; // Text for the button
+
             backButton.onclick = () => {
-                history.back(); // فقط نطلب العودة في سجل التصفح
-                // location.reload(); // <-- السطر الذي تم حذفه
+                // --- NEW LOGIC ---
+                // 1. Directly call the function that shows the main sections view
+                showSections();
+
+                // 2. Clear the search input field, as we are returning to the main view
+                document.getElementById('search-input').value = '';
+
+                // 3. (Optional but recommended) Update the history state to reflect the main view
+                //    Using replaceState avoids adding a new entry to the history stack
+                //    when clicking the custom back button.
+                history.replaceState({ view: 'main' }, '', '#main'); 
+                // --- END OF NEW LOGIC ---
+
+                // The old problematic line is removed:
+                // history.back(); 
+                // location.reload(); // Also removed/kept commented
             };
             return backButton;
         }
