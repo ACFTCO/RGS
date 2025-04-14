@@ -1,10 +1,68 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	<link rel="manifest" href="/manifest.json">
+
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "97c87344-2862-45d3-acc4-5f7689aa4483",
+      safari_web_id: "YOUR_ONESIGNAL_SAFARI_WEB_ID",
+      promptOptions: {
+        /* Change the title, subtitle, and description of the notification permission prompt. */
+        slidedown: {
+          enabled: true,
+          autoPrompt: true,
+          timeDelay: 2,
+          pageViews: 1,
+          prompter: {
+            title: "Restez informé avec ACFTC OUJDA",
+            subtitle: "Recevez les dernières mises à jour et annonces directement.",
+            description: "Cliquez sur Autoriser pour ne rien manquer !"
+          }
+        }
+      }, 
+    });
+
+    OneSignal.on('subscriptionChange', function (isSubscribed) {
+        console.log("The user's subscription state is now:", isSubscribed);
+    });
+
+     OneSignal.getUserId().then(function(userId) {
+      console.log("OneSignal User ID:", userId);
+     });
+
+  });
+</script>
+	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "97c87344-2862-45d3-acc4-5f7689aa4483",
+    });
+  });
+  
+  
+</script>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HH93Q8EREF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HH93Q8EREF');
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-messaging.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ACFTC OUJDA</title>
     <link rel="icon" type="image/png" href="https://tinypic.host/images/2024/12/30/1000024600.png">
+    
     <style>
         body {
             display: flex;
@@ -192,13 +250,13 @@
     align-items: center;
     padding: 2px;
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     width: 80px;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     text-align: center;
-    border: 3px solid #ccc;
+    
     margin: 3px;
     font-weight: bold;
 }
@@ -220,6 +278,7 @@
     font-weight: bold;
     width: auto;
     text-align: center;
+    margin:  5px;
 }
 
 .section-card:hover {
@@ -351,7 +410,7 @@
 }
 .book-count {
             background-color: rgba(255, 0, 0, 0.1);
-            color: red;
+            
             font-size: 12px;
             font-weight: bold;
             width: 24px;
@@ -361,7 +420,7 @@
             align-items: center;
             justify-content: center;
             margin: 8px auto 0;
-            border: 1px solid rgba(255, 0, 0, 0.2);
+            border: 1px solid #000;
         }
 #popup-modal {
     display: none;
@@ -663,6 +722,7 @@
 }
     </style>
 </head>
+
 <body>
 	
 <div id="popup-modal">
@@ -682,7 +742,7 @@
 
            <button id="open-documentations" class="documentations">DOCUMENTATIONS</button>
        <Button id="open-contact-btn">notifications par gmail</button>
-   <button id="mode-toggle">Mode Nuit 🌙</button>
+
     <!-- Popup Modal -->
     <div id="contact-popup">
         <div class="popup-content1">
@@ -730,7 +790,7 @@
     </div>
     
 <div class="contact-container">
-    <a href="whatsapp://send?text=SALAM MOHAMMED&phone=0641434629" class="whatsapp-button">📱 Contactez-moi</a>
+    <a href="mailto:w43172@oncf.ma,med740704@gmail.com?subject=Contact%20depuis%20le%20site&body=Bonjour,"" class="whatsapp-button">📧 Contactez-moi</a>
     <div id="date-display">
         <span class="date-time-container">
             <img src="https://img.icons8.com/ios/50/calendar--v1.png" alt="calendar" class="icon">
@@ -758,17 +818,60 @@
         </div>
     </div>
     <div id="messages-list"></div>
-    
-        <script>
-        	 const toggleButton = document.getElementById('mode-toggle');
-        const body = document.body;
+ <script type="module">
+// Import the functions you need from the SDKs you need
+// استيراد التهيئة والمكتبات
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-        toggleButton.addEventListener('click', () => {
-            body.classList.toggle('night-mode');
-            toggleButton.textContent = body.classList.contains('night-mode') ? 'Mode Jour ☀️' : 'Mode Nuit 🌙';
+// تهيئة إعدادات Firebase
+const firebaseConfig = {
+      apiKey: "AIzaSyBrV6jXxPkbiSbodHsAk5z4jqv4HygKzFI",
+      authDomain: "acftco.firebaseapp.com",
+      projectId: "acftco",
+      storageBucket: "acftco.firebasestorage.app",
+      messagingSenderId: "553140279594",
+      appId: "1:553140279594:web:af23cbc89c921e949aa653",
+      measurementId: "G-HH93Q8EREF"
+    };
+
+    // تهيئة Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+
+    // طلب الإذن للإشعارات عند الضغط على الزر
+    document.getElementById("request-permission").addEventListener("click", () => {
+      messaging
+        .getToken({ vapidKey: "BIo2I9qBnOSMcitGmJOlrVQ5j_4RCf-xxpDYrzbd0VnkKEwNLGRyniYSGkrL7vIVh9YfPdunhFDRLd0v7BNERDQ" })
+        .then((currentToken) => {
+          if (currentToken) {
+            console.log("تم الحصول على FCM Token:", currentToken);
+            alert("تم منح الإذن بنجاح! تحقق من Console لرؤية الـ Token.");
+            // احفظ الـ Token في قاعدة البيانات لإرسال الإشعارات لاحقًا
+          } else {
+            console.log("لم يتم منح الإذن. الرجاء المحاولة مرة أخرى.");
+          }
+        })
+        .catch((err) => {
+          console.error("حدث خطأ أثناء طلب الإذن:", err);
         });
+    });
 
+    // التعامل مع الإشعارات الواردة
+    messaging.onMessage((payload) => {
+      console.log("رسالة واردة:", payload);
+      alert(`إشعار جديد: ${payload.notification.title} - ${payload.notification.body}`);
+    });
+</script>
+
+
+
+
+        <script>
         	
+        
+        
+        	 
 async function showScheduledMessages() {
     const sheetId = "1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c";
     const sheetName = "NOTIFICATIONS";
@@ -825,7 +928,7 @@ async function showScheduledMessages() {
                 messagesList.appendChild(messageDiv);
             });
         }
-
+ 
         messagesPopup.style.display = 'flex';
         const formPopup = document.getElementById('form-popup');
         if (formPopup) {
@@ -1469,197 +1572,208 @@ window.onpopstate = function (event) {
         document.getElementById('news-bar').style.display = 'block';
     }
 }
-    function showBranchAndBooks(sectionData) {
-    history.pushState({ view: 'section', sectionData: sectionData }, '', '#section');
+            function showBranchAndBooks(sectionData, pushState = true) {
+            // console.log("Showing branches/books for:", sectionData.sectionName);
+            if (pushState) {
+                history.pushState({ view: 'section', sectionData: sectionData }, '', `#section-${sectionData.sectionName || 'default'}`);
+            }
 
-    const sectionsContainer = document.getElementById('sections-container');
-    sectionsContainer.innerHTML = '';
+            const sectionsContainer = document.getElementById('sections-container');
+            sectionsContainer.innerHTML = ''; // Clear the main container
 
-  const sectionTitleContainer = document.createElement('div');
-sectionTitleContainer.style.textAlign = 'center';
-sectionTitleContainer.style.width = '100%';
-sectionTitleContainer.style.marginBottom = '6px';
-sectionTitleContainer.style.fontWeight = 'bold';
-sectionTitleContainer.style.fontSize = '0.8em';
-sectionTitleContainer.style.color = '#4B0082';
-sectionTitleContainer.style.backgroundColor = 'rgb(230, 240, 250)';
-sectionTitleContainer.style.padding = '4px 7px';
-sectionTitleContainer.style.borderRadius = '25px';
-sectionTitleContainer.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-sectionTitleContainer.style.display = 'inline-block';
-sectionTitleContainer.style.maxWidth = '90%';
-sectionTitleContainer.style.margin = '0 auto 20px';
+            // 1. Add Section Title Header
+            const sectionTitleContainer = document.createElement('div');
+            sectionTitleContainer.className = 'section-title-header'; // Use the new class for styling
+            sectionTitleContainer.textContent = sectionData.sectionName || 'Détails'; // Use section name
+            sectionsContainer.appendChild(sectionTitleContainer);
 
-    const sectionName = sectionData.sectionName || Object.keys(sectionData.branches)[0];
-    sectionTitleContainer.textContent = sectionName;
-    sectionsContainer.appendChild(sectionTitleContainer);
+            // 2. Create containers for branches (if any) and books
+            const branchCardsContainer = document.createElement('div');
+            branchCardsContainer.id = 'branch-cards-container'; // For branch cards/buttons
+            sectionsContainer.appendChild(branchCardsContainer);
+
+            const booksDisplayContainer = document.createElement('div');
+            booksDisplayContainer.id = 'branch-books-display-container'; // For displaying books of a selected branch
+            sectionsContainer.appendChild(booksDisplayContainer);
 
 
-     const booksContainer = document.createElement('div');
-    booksContainer.style.marginBottom = '20px';
+            const branches = Object.entries(sectionData.branches || {});
+            const hasMultipleBranches = branches.length > 1; // Check if there's more than one branch entry
 
-    const branches = Object.keys(sectionData.branches);
-    const hasBranches = branches.length > 0 && 
-        branches.some(branch => branch !== branches[0]);
+            if (!branches.length || branches.every(([_, data]) => !data.books || data.books.length === 0)) {
+                // If no branches or all branches are empty
+                const emptyMessage = document.createElement('p');
+                emptyMessage.style.textAlign = 'center';
+                emptyMessage.style.margin = '20px';
+                emptyMessage.style.color = '#666';
+                emptyMessage.innerText = 'Aucun document trouvé dans cette section';
+                booksDisplayContainer.appendChild(emptyMessage); // Show message in the book display area
+            } else if (!hasMultipleBranches) {
+                // Single branch (or treated as single) - display its books directly
+                const [branchName, branchData] = branches[0]; // Get the single branch data
 
-    if (!hasBranches && (!sectionData.branches[branches[0]] || !sectionData.branches[branches[0]].books.length)) {
-        const emptyMessage = document.createElement('p');
-        emptyMessage.style.textAlign = 'center';
-        emptyMessage.style.margin = '20px';
-        emptyMessage.style.color = '#666';
-        emptyMessage.innerText = 'Aucun livre dans cette section';
-        sectionsContainer.appendChild(emptyMessage);
-    } 
-    else if (!hasBranches) {
-        const sortedBooks = [...sectionData.branches[branches[0]].books].sort((a, b) => {
-            const hasCountdownA = a[5] && calculateTimeLeft(a[5]);
-            const hasCountdownB = b[5] && calculateTimeLeft(b[5]);
-            return hasCountdownB - hasCountdownA;
-        });
+                if (branchData.books && branchData.books.length > 0) {
+                    const sortedBooks = [...branchData.books].sort((a, b) => {
+                        // Sort logic (e.g., by countdown presence) - adjust if needed
+                        const timeLeftA = calculateTimeLeft(a[5]); // Deadline is at index 5
+                        const timeLeftB = calculateTimeLeft(b[5]);
+                        const hasCountdownA = timeLeftA && !timeLeftA.expired && !timeLeftA.textOnly;
+                        const hasCountdownB = timeLeftB && !timeLeftB.expired && !timeLeftB.textOnly;
+                        if (hasCountdownB !== hasCountdownA) return hasCountdownB - hasCountdownA; // Active countdowns first
+                        // Add secondary sort if needed (e.g., alphabetically by title a[0])
+                        return (a[0] || '').localeCompare(b[0] || '');
+                    });
 
-        sortedBooks.forEach(book => {
-    const bookCard = document.createElement('div');
-    bookCard.className = 'book-card';
-
-    if (book[4]) {
-        bookCard.style.backgroundColor = book[4];
-    }
-
-    const imageUrl = book[2];
-
-    bookCard.innerHTML = `
-        <img src="${imageUrl}" alt="Image du livre" style="width: 50px; height: 60px;">
-        <h4 class="book-title">${book[0]}</h4>
-        ${book[3] ? `<div class="book-note">${book[3]}</div>` : ''}
-        ${book[5] ? `<div class="countdown" data-deadline="${book[5]}">جاري حساب الوقت المتبقي...</div>` : ''}
-    `;
-
-    bookCard.onclick = () => {
-        document.getElementById('book-viewer').src = book[1].replace('view?usp=drivesdk', 'preview');
-        document.getElementById('book-viewer-container').style.display = 'flex';
-    };
-
-    booksContainer.appendChild(bookCard);
-});
-
-        sectionsContainer.appendChild(booksContainer);
-        setTimeout(() => setUniformCardDimensions(), 100);
-    }
-    else {
-        const allBookContainers = [];
-        
-        for (const [branchName, branchData] of Object.entries(sectionData.branches)) {
-            const branchButton = document.createElement('button');
-            branchButton.className = 'branch-button';
-            branchButton.style.backgroundColor = branchData.color;
-            branchButton.innerText = branchName;
-
-            const bookContainer = document.createElement('div');
-            bookContainer.className = 'branch-books-container';
-            bookContainer.style.display = 'none';
-            allBookContainers.push(bookContainer);
-
-            if (branchData.books.length === 0) {
-                const emptyBranchMessage = document.createElement('p');
-                emptyBranchMessage.style.textAlign = 'center';
-                emptyBranchMessage.style.margin = '20px';
-                emptyBranchMessage.style.color = '#666';
-                emptyBranchMessage.innerText = 'Aucun livre dans cette section';
-                bookContainer.appendChild(emptyBranchMessage);
+                    sortedBooks.forEach(book => {
+                        const bookCard = createBookCardElement(book); // Use helper function
+                        booksDisplayContainer.appendChild(bookCard);
+                    });
+                } else {
+                    // Should be caught by the initial check, but as a fallback
+                    const emptyMessage = document.createElement('p');
+                    emptyMessage.style.textAlign = 'center';
+                    emptyMessage.style.margin = '20px';
+                    emptyMessage.style.color = '#666';
+                    emptyMessage.innerText = 'Aucun document trouvé dans cette section';
+                    booksDisplayContainer.appendChild(emptyMessage);
+                }
+                setTimeout(setUniformCardDimensions, 50); // Adjust dimensions
             } else {
-                const sortedBooks = [...branchData.books].sort((a, b) => {
-                    const hasCountdownA = a[5] && calculateTimeLeft(a[5]);
-                    const hasCountdownB = b[5] && calculateTimeLeft(b[5]);
-                    return hasCountdownB - hasCountdownA;
-                });
+                // Multiple branches - display branch cards first
+                const allBranchCards = []; // To keep track of branch card elements
 
-                sortedBooks.forEach(book => {
-                    const bookCard = document.createElement('div');
-                    bookCard.className = 'book-card';
-                    if (book[4]) {
-                        bookCard.style.backgroundColor = book[4];
-                    }
+                branches.forEach(([branchName, branchData]) => {
+                    const branchCard = document.createElement('div');
+                    branchCard.className = 'section-card'; // Use section card styling for branches
+                    branchCard.style.backgroundColor = branchData.color || sectionData.color || '#f8f9fa'; // Use branch, section, or default color
 
-                    const hasActiveCountdown = book[5] && calculateTimeLeft(book[5]);
-                    const imageUrl = hasActiveCountdown ? 
-                        'https://img.icons8.com/?size=100&id=uVPVzPo-AQyA&format=png&color=000000' : 
-                        book[2];
+                    const totalBranchBooks = branchData.books ? branchData.books.length : 0;
+                    const branchImage = branchData.image || sectionData.image || 'https://via.placeholder.com/50/eee/ccc?text=Branche'; // Branch, section, or placeholder image
 
-                    bookCard.innerHTML = `
-                        <img src="${imageUrl}" alt="Image du livre" style="width: 50px; height: 60px;">
-                        <h4 class="book-title">${book[0]}</h4>
-                        ${book[3] ? `<div class="book-note">${book[3]}</div>` : ''}
-                        ${book[5] ? `<div class="countdown" data-deadline="${book[5]}">جاري حساب الوقت المتبقي...</div>` : ''}
+                    branchCard.innerHTML = `
+                        <img src="${branchImage}" alt="Icône ${branchName}" style="width: 50px; height: 50px; object-fit: contain;">
+                        <div class="section-name">${branchName}</div>
+                        ${totalBranchBooks > 0 ? `
+                        <div class="book-count" style="color: #000; font-size: 10px; font-weight: bold; margin-top: 5px;">
+                            ${totalBranchBooks}
+                        </div>` : ''}
                     `;
 
-                    bookCard.onclick = () => {
-                        document.getElementById('book-viewer').src = book[1].replace('view?usp=drivesdk', 'preview');
-                        document.getElementById('book-viewer-container').style.display = 'flex';
+
+                    branchCard.onclick = () => {
+                        // 1. Hide all other branch cards
+                        allBranchCards.forEach(card => card.style.display = 'none');
+
+                        // 2. Optionally hide the main section title (or keep it?)
+                        // sectionTitleContainer.style.display = 'none';
+
+                        // 3. Clear the book display container and show books for this branch
+                        booksDisplayContainer.innerHTML = ''; // Clear previous books
+
+                        if (branchData.books && branchData.books.length > 0) {
+                            const sortedBooks = [...branchData.books].sort((a, b) => { /* Same sort logic as above */
+                                const timeLeftA = calculateTimeLeft(a[5]); const timeLeftB = calculateTimeLeft(b[5]);
+                                const hasCountdownA = timeLeftA && !timeLeftA.expired && !timeLeftA.textOnly;
+                                const hasCountdownB = timeLeftB && !timeLeftB.expired && !timeLeftB.textOnly;
+                                if (hasCountdownB !== hasCountdownA) return hasCountdownB - hasCountdownA;
+                                return (a[0] || '').localeCompare(b[0] || '');
+                            });
+                            sortedBooks.forEach(book => {
+                                const bookCard = createBookCardElement(book);
+                                booksDisplayContainer.appendChild(bookCard);
+                            });
+                        } else {
+                            const emptyBranchMessage = document.createElement('p');
+                            emptyBranchMessage.style.textAlign = 'center';
+                            emptyBranchMessage.style.margin = '20px';
+                            emptyBranchMessage.style.color = '#666';
+                            emptyBranchMessage.innerText = `Aucun document dans la branche "${branchName}"`;
+                            booksDisplayContainer.appendChild(emptyBranchMessage);
+                        }
+
+
+                        // 4. Update countdowns and dimensions
+                        updateAllCountdowns();
+                        setTimeout(setUniformCardDimensions, 50);
                     };
-                    bookContainer.appendChild(bookCard);
+
+                    branchCardsContainer.appendChild(branchCard);
+                    allBranchCards.push(branchCard); // Add to list for hiding later
                 });
+                setTimeout(setUniformCardDimensions, 50); // Adjust branch card dimensions
             }
 
-            branchButton.onclick = () => {
-                allBookContainers.forEach(container => container.style.display = 'none');
-                booksContainer.innerHTML = '';
-                booksContainer.appendChild(bookContainer);
-                bookContainer.style.display = 'block';
-                setTimeout(() => {
-                    updateAllCountdowns();
-                    setUniformCardDimensions();
-                }, 100);
+            // 4. Add Back Button (always add it at the end of the main container)
+            sectionsContainer.appendChild(createBackButton());
+
+            // 5. Update Countdowns (initial update for direct book display)
+            updateAllCountdowns();
+        }
+
+        // Helper function to create a book card element
+        function createBookCardElement(book) {
+            if (!book || !Array.isArray(book)) return document.createDocumentFragment(); // Return empty element if invalid
+
+            // Indices based on `loadPage` structure for bookData pushed to branches:
+            // 0: title, 1: url, 2: image, 3: note (col L), 4: bgColor (col M), 5: deadline (col N)
+            const title = book[0] || 'Titre inconnu';
+            const url = book[1];
+            const image = book[2] || 'https://via.placeholder.com/50x60/eee/ccc?text=Doc'; // Placeholder
+            const note = book[3] || '';
+            const backgroundColor = book[4] || '';
+            const deadline = book[5] || '';
+
+            const bookCard = document.createElement('div');
+            bookCard.className = 'book-card';
+
+            if (backgroundColor) {
+                bookCard.style.backgroundColor = backgroundColor;
+            }
+
+            // Determine image based on countdown status - uncomment if needed
+            // const timeLeft = calculateTimeLeft(deadline);
+            // const hasActiveCountdown = timeLeft && !timeLeft.expired && !timeLeft.textOnly;
+            // const imageUrl = hasActiveCountdown ?
+            //      'https://img.icons8.com/?size=100&id=uVPVzPo-AQyA&format=png&color=000000' : // Countdown icon
+            //      image; // Normal book image
+            const imageUrl = image; // Using normal image for now
+
+
+            bookCard.innerHTML = `
+                <img src="${imageUrl}" alt="Couverture ${title}" style="width: 50px; height: 60px; object-fit: contain;">
+                <h4 class="book-title">${title}</h4>
+                ${note ? `<div class="book-note">${note}</div>` : ''}
+                ${deadline ? `<div class="countdown" data-deadline="${deadline}">Calcul...</div>` : ''}
+            `;
+
+            bookCard.onclick = () => {
+                if (url) {
+                    showBookViewer(url); // Use the dedicated function
+                } else {
+                    console.warn("No URL found for book:", title);
+                    // Optionally provide feedback to the user
+                    // alert("Ce document n'a pas de lien associé.");
+                }
             };
 
-            sectionsContainer.appendChild(branchButton);
+            return bookCard;
         }
 
-        sectionsContainer.appendChild(booksContainer);
-    }
-
-    sectionsContainer.appendChild(createBackButton());
-    updateAllCountdowns();
-    setTimeout(() => setUniformCardDimensions(), 100);
-}
-
-window.onpopstate = function (event) {
-    const bookViewerContainer = document.getElementById('book-viewer-container');
-
-    if (bookViewerContainer.style.display === 'flex') {
-        document.querySelector('.close-button').click();
-    } else if (event.state) {
-        if (event.state.view === 'main') {
-            document.getElementById('sections-container').innerHTML = '';
-            document.getElementById('book-viewer-container').style.display = 'none';
-            if (cachedSections) {
-                displayResults(cachedSections);
-            } else {
-                loadPage();
-            }
-        } else if (event.state.view === 'section' && event.state.sectionData) {
-            showBranchAndBooks(event.state.sectionData);
-        }
-    } else {
-        document.getElementById('sections-container').innerHTML = '';
-        document.getElementById('book-viewer-container').style.display = 'none';
-        if (cachedSections) {
-            displayResults(cachedSections);
-        } else {
-            loadPage();
-        }
-    }
-};
 
 
+        // Function to create the back button
 function createBackButton() {
     const backButton = document.createElement('button');
     backButton.className = 'back-button';
     backButton.innerText = 'Retour';
     backButton.onclick = () => {
         history.back();
+        location.reload(); // <---  إضافة إعادة تحميل الصفحة هنا
     };
     return backButton;
 }
+
+// ... (باقي الكود بدون تغيير) ...
 
 window.addEventListener('popstate', (event) => {
     const backButton = document.querySelector('.back-button');
@@ -1680,16 +1794,26 @@ window.addEventListener('popstate', (event) => {
         
         const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
         
-        sectionNames.forEach(section => {
-            if (section && !sections[section]) {
-                sections[section] = { 
-                     sectionName : section,
-                    color: row[4] || '#f5f5f5', 
-                    image: row[5] || '', 
-                    branches: {} 
-                };
-            }
-        });
+        // الشرح: نضيف خاصية sortKey إلى كل قسم عند إنشائه لأول مرة.
+// نستخدم parseInt لتحويل القيمة في العمود S (row[18]) إلى رقم.
+// إذا فشل التحويل (كانت الخلية فارغة أو نصية)، نستخدم Infinity كقيمة افتراضية.
+// هذا يضمن أن الأقسام التي ليس لها رقم في العمود S ستظهر في النهاية.
+sectionNames.forEach(section => {
+    if (section && !sections[section]) {
+        // حاول قراءة القيمة الرقمية من العمود S (الفهرس 18)
+        const sortValue = parseInt(row[18], 10);
+        sections[section] = {
+            sectionName : section,
+            color: row[4] || '#f5f5f5',
+            image: row[5] || '',
+            branches: {},
+            // تخزين مفتاح الترتيب، استخدم Infinity إذا لم يكن رقمًا صالحًا
+            sortKey: !isNaN(sortValue) ? sortValue : Infinity
+        };
+    }
+    // ملاحظة اختيارية: إذا أردت تحديث المفتاح إذا وجدت قيمة أصغر لاحقًا لنفس القسم،
+    // يمكنك إضافة منطق هنا، لكن استخدام القيمة الأولى هو الأبسط غالبًا.
+});
 
         if (row[9]) notifications.push(row);
     });
@@ -1763,7 +1887,31 @@ window.addEventListener('popstate', (event) => {
             displayResults(sections);
         }
     });
-    
+    // --- بداية الكود المضاف للفرز ---
+// الشرح: نقوم بفرز أسماء الأقسام قبل عرضها.
+
+// 1. الحصول على مصفوفة بأسماء الأقسام (المفاتيح)
+const sortedSectionNames = Object.keys(sections);
+
+// 2. فرز مصفوفة الأسماء
+sortedSectionNames.sort((a, b) => {
+    // الحصول على مفاتيح الترتيب للقسمين a و b
+    const keyA = sections[a].sortKey;
+    const keyB = sections[b].sortKey;
+
+    // الفرز الأساسي: رقمي بناءً على sortKey (تصاعدي)
+    if (keyA !== keyB) {
+        return keyA - keyB;
+    }
+
+    // الفرز الثانوي: أبجدي إذا كانت مفاتيح الترتيب متساوية (مثل كلاهما Infinity)
+    return a.localeCompare(b);
+});
+// --- نهاية الكود المضاف للفرز ---
+
+// 3. قم بتعديل استدعاء displayResults لتمرير الأسماء المرتبة
+// استبدل displayResults(sections); بهذا السطر:
+displayResults(sections, sortedSectionNames); // تمرير الكائن الأصلي وقائمة المفاتيح المرتبة
     displayResults(sections);
 }
 function updateMarqueeDuration() {
@@ -1800,7 +1948,7 @@ for (const [sectionName, sectionData] of Object.entries(sections)) {
         sectionCard.innerHTML = `
             <img src="${sectionData.image || 'placeholder-image-url'}" alt="Image de la section" style="width: 60px; height: 60px;">
             <div class="section-name">${sectionName}</div>
-            <div class="book-count" style="color: red; font-size: 12px; font-weight: bold; margin-top: 8px;">
+            <div class="book-count" style="color: purple; font-size: 12px; font-weight: bold; margin-top: 8px;">
                 ${totalBooks}
             </div>
         `;
