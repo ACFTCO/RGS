@@ -250,14 +250,14 @@
     align-items: center;
     padding: 2px;
     background-color: #ffffff;
-    border-radius: 20px;
+    border-radius: 18px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     width: 80px;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     text-align: center;
-    
-    margin: 3px;
+
+    margin: 4px;
     font-weight: bold;
 }
 
@@ -1794,26 +1794,16 @@ window.addEventListener('popstate', (event) => {
         
         const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
         
-        // الشرح: نضيف خاصية sortKey إلى كل قسم عند إنشائه لأول مرة.
-// نستخدم parseInt لتحويل القيمة في العمود S (row[18]) إلى رقم.
-// إذا فشل التحويل (كانت الخلية فارغة أو نصية)، نستخدم Infinity كقيمة افتراضية.
-// هذا يضمن أن الأقسام التي ليس لها رقم في العمود S ستظهر في النهاية.
-sectionNames.forEach(section => {
-    if (section && !sections[section]) {
-        // حاول قراءة القيمة الرقمية من العمود S (الفهرس 18)
-        const sortValue = parseInt(row[18], 10);
-        sections[section] = {
-            sectionName : section,
-            color: row[4] || '#f5f5f5',
-            image: row[5] || '',
-            branches: {},
-            // تخزين مفتاح الترتيب، استخدم Infinity إذا لم يكن رقمًا صالحًا
-            sortKey: !isNaN(sortValue) ? sortValue : Infinity
-        };
-    }
-    // ملاحظة اختيارية: إذا أردت تحديث المفتاح إذا وجدت قيمة أصغر لاحقًا لنفس القسم،
-    // يمكنك إضافة منطق هنا، لكن استخدام القيمة الأولى هو الأبسط غالبًا.
-});
+        sectionNames.forEach(section => {
+            if (section && !sections[section]) {
+                sections[section] = { 
+                     sectionName : section,
+                    color: row[4] || '#f5f5f5', 
+                    image: row[5] || '', 
+                    branches: {} 
+                };
+            }
+        });
 
         if (row[9]) notifications.push(row);
     });
@@ -1887,31 +1877,7 @@ sectionNames.forEach(section => {
             displayResults(sections);
         }
     });
-    // --- بداية الكود المضاف للفرز ---
-// الشرح: نقوم بفرز أسماء الأقسام قبل عرضها.
-
-// 1. الحصول على مصفوفة بأسماء الأقسام (المفاتيح)
-const sortedSectionNames = Object.keys(sections);
-
-// 2. فرز مصفوفة الأسماء
-sortedSectionNames.sort((a, b) => {
-    // الحصول على مفاتيح الترتيب للقسمين a و b
-    const keyA = sections[a].sortKey;
-    const keyB = sections[b].sortKey;
-
-    // الفرز الأساسي: رقمي بناءً على sortKey (تصاعدي)
-    if (keyA !== keyB) {
-        return keyA - keyB;
-    }
-
-    // الفرز الثانوي: أبجدي إذا كانت مفاتيح الترتيب متساوية (مثل كلاهما Infinity)
-    return a.localeCompare(b);
-});
-// --- نهاية الكود المضاف للفرز ---
-
-// 3. قم بتعديل استدعاء displayResults لتمرير الأسماء المرتبة
-// استبدل displayResults(sections); بهذا السطر:
-displayResults(sections, sortedSectionNames); // تمرير الكائن الأصلي وقائمة المفاتيح المرتبة
+    
     displayResults(sections);
 }
 function updateMarqueeDuration() {
