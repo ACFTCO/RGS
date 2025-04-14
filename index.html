@@ -720,6 +720,25 @@
     font-size: 0.9em;
     color: #777;
 }
+
+/* START OF ADDED CSS */
+
+.section-title-header {
+    background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); /* Gradient background (purple tones) */
+    color: white; /* White text color for contrast */
+    padding: 10px 15px; /* Padding around the text */
+    margin: 5px auto 10px auto; /* Top margin, auto left/right for centering, bottom margin */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center the text */
+    font-weight: bold; /* Make the text bold */
+    font-size: 0.7em; /* Slightly larger font size */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    width: 70%; /* Set a width less than full */
+    max-width: 600px; /* Optional: Maximum width for larger screens */
+    display: block; /* Ensure it behaves like a block for centering */
+}
+
+/* END OF ADDED CSS */
     </style>
 </head>
 
@@ -1572,7 +1591,7 @@ window.onpopstate = function (event) {
         document.getElementById('news-bar').style.display = 'block';
     }
 }
-            function showBranchAndBooks(sectionData, pushState = true) {
+                    function showBranchAndBooks(sectionData, pushState = true) {
             // console.log("Showing branches/books for:", sectionData.sectionName);
             if (pushState) {
                 history.pushState({ view: 'section', sectionData: sectionData }, '', `#section-${sectionData.sectionName || 'default'}`);
@@ -1590,6 +1609,7 @@ window.onpopstate = function (event) {
             // 2. Create containers for branches (if any) and books
             const branchCardsContainer = document.createElement('div');
             branchCardsContainer.id = 'branch-cards-container'; // For branch cards/buttons
+            branchCardsContainer.style.textAlign = 'center'; // Center branch cards if needed
             sectionsContainer.appendChild(branchCardsContainer);
 
             const booksDisplayContainer = document.createElement('div');
@@ -1613,14 +1633,11 @@ window.onpopstate = function (event) {
                 const [branchName, branchData] = branches[0]; // Get the single branch data
 
                 if (branchData.books && branchData.books.length > 0) {
-                    const sortedBooks = [...branchData.books].sort((a, b) => {
-                        // Sort logic (e.g., by countdown presence) - adjust if needed
-                        const timeLeftA = calculateTimeLeft(a[5]); // Deadline is at index 5
-                        const timeLeftB = calculateTimeLeft(b[5]);
+                     const sortedBooks = [...branchData.books].sort((a, b) => { /* Sort logic */
+                        const timeLeftA = calculateTimeLeft(a[5]); const timeLeftB = calculateTimeLeft(b[5]);
                         const hasCountdownA = timeLeftA && !timeLeftA.expired && !timeLeftA.textOnly;
                         const hasCountdownB = timeLeftB && !timeLeftB.expired && !timeLeftB.textOnly;
-                        if (hasCountdownB !== hasCountdownA) return hasCountdownB - hasCountdownA; // Active countdowns first
-                        // Add secondary sort if needed (e.g., alphabetically by title a[0])
+                        if (hasCountdownB !== hasCountdownA) return hasCountdownB - hasCountdownA;
                         return (a[0] || '').localeCompare(b[0] || '');
                     });
 
@@ -1629,7 +1646,6 @@ window.onpopstate = function (event) {
                         booksDisplayContainer.appendChild(bookCard);
                     });
                 } else {
-                    // Should be caught by the initial check, but as a fallback
                     const emptyMessage = document.createElement('p');
                     emptyMessage.style.textAlign = 'center';
                     emptyMessage.style.margin = '20px';
@@ -1646,6 +1662,7 @@ window.onpopstate = function (event) {
                     const branchCard = document.createElement('div');
                     branchCard.className = 'section-card'; // Use section card styling for branches
                     branchCard.style.backgroundColor = branchData.color || sectionData.color || '#f8f9fa'; // Use branch, section, or default color
+                    branchCard.style.display = 'inline-flex'; // Ensure they display correctly initially
 
                     const totalBranchBooks = branchData.books ? branchData.books.length : 0;
                     const branchImage = branchData.image || sectionData.image || 'https://via.placeholder.com/50/eee/ccc?text=Branche'; // Branch, section, or placeholder image
@@ -1661,8 +1678,8 @@ window.onpopstate = function (event) {
 
 
                     branchCard.onclick = () => {
-                        // 1. Hide all other branch cards
-                        allBranchCards.forEach(card => card.style.display = 'none');
+                        // 1. Hide all branch cards (from the branch container)
+                        branchCardsContainer.style.display = 'none'; // Hide the container holding branch cards
 
                         // 2. Optionally hide the main section title (or keep it?)
                         // sectionTitleContainer.style.display = 'none';
@@ -1691,20 +1708,41 @@ window.onpopstate = function (event) {
                             booksDisplayContainer.appendChild(emptyBranchMessage);
                         }
 
+                        // --- START: إضافة زر "العودة إلى الفروع" ---
+                        const backToBranchesButton = document.createElement('button');
+                        backToBranchesButton.className = 'back-button'; // Re-use existing style
+                        backToBranchesButton.innerText = 'Retour aux Branches'; // Text for the new button
+                        backToBranchesButton.style.marginTop = '15px'; // Add some top margin for spacing
+                        backToBranchesButton.style.marginBottom = '10px'; // Add some bottom margin
+
+                        backToBranchesButton.onclick = () => {
+                            // Action: Show branch cards again and hide books
+                            booksDisplayContainer.innerHTML = ''; // Clear the books
+                            branchCardsContainer.style.display = 'block'; // Show the container with branch cards again
+                            // Optional: Re-run setUniformCardDimensions for branch cards if needed
+                            setTimeout(setUniformCardDimensions, 50);
+                        };
+
+                        // Add the new button AFTER the book cards within their container
+                        booksDisplayContainer.appendChild(backToBranchesButton);
+                        // --- END: إضافة زر "العودة إلى الفروع" ---
+
 
                         // 4. Update countdowns and dimensions
                         updateAllCountdowns();
                         setTimeout(setUniformCardDimensions, 50);
                     };
 
-                    branchCardsContainer.appendChild(branchCard);
-                    allBranchCards.push(branchCard); // Add to list for hiding later
+                    branchCardsContainer.appendChild(branchCard); // Add branch card to its container
+                    allBranchCards.push(branchCard); // Add to list (though maybe not needed if hiding container)
                 });
                 setTimeout(setUniformCardDimensions, 50); // Adjust branch card dimensions
             }
 
             // 4. Add Back Button (always add it at the end of the main container)
-            sectionsContainer.appendChild(createBackButton());
+            // This original button remains unchanged and handles going back in history
+             sectionsContainer.appendChild(createBackButton());
+
 
             // 5. Update Countdowns (initial update for direct book display)
             updateAllCountdowns();
@@ -1762,25 +1800,19 @@ window.onpopstate = function (event) {
 
 
         // Function to create the back button
-function createBackButton() {
-    const backButton = document.createElement('button');
-    backButton.className = 'back-button';
-    backButton.innerText = 'Retour';
-    backButton.onclick = () => {
-        history.back();
-        location.reload(); // <---  إضافة إعادة تحميل الصفحة هنا
-    };
-    return backButton;
-}
+        // Function to create the back button
+        function createBackButton() {
+            const backButton = document.createElement('button');
+            backButton.className = 'back-button';
+            backButton.innerText = 'Retour'; // أو 'العودة' إذا أردت تغيير النص
+            backButton.onclick = () => {
+                history.back(); // فقط نطلب العودة في سجل التصفح
+                // location.reload(); // <-- السطر الذي تم حذفه
+            };
+            return backButton;
+        }
 
-// ... (باقي الكود بدون تغيير) ...
 
-window.addEventListener('popstate', (event) => {
-    const backButton = document.querySelector('.back-button');
-    if (backButton) {
-        backButton.click();
-    }
-});
 
     async function loadPage() {
     const data = await fetchData();
@@ -2002,4 +2034,4 @@ loadPage();
         });
 </script>
 </body>
-</html>
+</html> 
