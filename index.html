@@ -262,7 +262,7 @@
 }
 
 .book-title {
-    font-size: 8px;
+    font-size: 10px;
     font-weight: bold;
     color: #333;
     margin: 10px 0;
@@ -396,14 +396,14 @@
         .countdown {
     background-color: #2d3436;
     color: white;
-    padding: 4px 8px;
+    padding: 5px 8px;
     border-radius: 4px;
     font-size: 5px;
     margin-top: 5px;
     font-weight: bold;
     width: auto;
     text-align: center;
-    
+    margin : 5px;    
 }
 
 .countdown-expired {
@@ -2049,6 +2049,23 @@ loadPage();
                 });
             });
         });
+                <!-- ... existing scripts ... -->
+
+     
+            // Check if a flag exists in sessionStorage indicating a previous load in this session
+            if (!sessionStorage.getItem('pageLoadedOnce')) {
+                // If the flag doesn't exist, this is the first load in the session
+                // Set the flag so it doesn't refresh again
+                sessionStorage.setItem('pageLoadedOnce', 'true');
+                // Reload the page
+                console.log('First load in session detected. Refreshing page...'); // Optional console log
+                location.reload();
+            } else {
+                // The flag exists, meaning the page was already loaded (and refreshed) once in this session
+                console.log('Page already loaded in this session. No refresh needed.'); // Optional console log
+            }
+   
+
 </script>
 </body>
 </html> 
