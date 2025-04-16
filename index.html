@@ -1,68 +1,65 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json">
 
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "97c87344-2862-45d3-acc4-5f7689aa4483",
-      safari_web_id: "YOUR_ONESIGNAL_SAFARI_WEB_ID",
-      promptOptions: {
-        /* Change the title, subtitle, and description of the notification permission prompt. */
-        slidedown: {
-          enabled: true,
-          autoPrompt: true,
-          timeDelay: 2,
-          pageViews: 1,
-          prompter: {
-            title: "Restez informé avec ACFTC OUJDA",
-            subtitle: "Recevez les dernières mises à jour et annonces directement.",
-            description: "Cliquez sur Autoriser pour ne rien manquer !"
-          }
-        }
-      }, 
-    });
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "97c87344-2862-45d3-acc4-5f7689aa4483",
+                safari_web_id: "YOUR_ONESIGNAL_SAFARI_WEB_ID",
+                promptOptions: {
+                    slidedown: {
+                        enabled: true,
+                        autoPrompt: true,
+                        timeDelay: 2,
+                        pageViews: 1,
+                        prompter: {
+                            title: "Restez informé avec ACFTC OUJDA",
+                            subtitle: "Recevez les dernières mises à jour et annonces directement.",
+                            description: "Cliquez sur Autoriser pour ne rien manquer !"
+                        }
+                    }
+                },
+            });
 
-    OneSignal.on('subscriptionChange', function (isSubscribed) {
-        console.log("The user's subscription state is now:", isSubscribed);
-    });
+            OneSignal.on('subscriptionChange', function (isSubscribed) {
+                console.log("The user's subscription state is now:", isSubscribed);
+            });
 
-     OneSignal.getUserId().then(function(userId) {
-      console.log("OneSignal User ID:", userId);
-     });
+            OneSignal.getUserId().then(function(userId) {
+                console.log("OneSignal User ID:", userId);
+            });
 
-  });
-</script>
-	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "97c87344-2862-45d3-acc4-5f7689aa4483",
-    });
-  });
-  
-  
-</script>
-	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HH93Q8EREF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        });
+    </script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+                appId: "97c87344-2862-45d3-acc4-5f7689aa4483",
+            });
+        });
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH93Q8EREF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'G-HH93Q8EREF');
-</script>
-<script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-messaging.js"></script>
+        gtag('config', 'G-HH93Q8EREF');
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-messaging.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACFTC OUJDA</title>
+    <title>ACFTC OUJDA</title>
     <link rel="icon" type="image/png" href="https://tinypic.host/images/2024/12/30/1000024600.png">
-    
+
     <style>
         body {
             display: flex;
@@ -107,7 +104,7 @@
         #mode-toggle:hover {
             background-color: #0056b3;
         }
-   #date-display {
+        #date-display {
             color: red;
             font-weight: bold;
             font-size: 10px;
@@ -145,6 +142,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
         }
 
         header h1 {
@@ -154,12 +153,12 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             letter-spacing: 1px;
         }
-   .header-logo {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-    margin: 0 5px;
-}
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
 
         .documentations {
             font-size: 1.2rem;
@@ -172,7 +171,7 @@
             backdrop-filter: blur(5px);
             transition: all 0.3s ease;
             color : white ;
-       }
+        }
 
         .documentations:hover {
             background: rgba(255, 255, 255, 0.2);
@@ -211,162 +210,165 @@
             position: absolute;
             top: 0;
         }
-#news-bar {
-    background-color: #ffff00;
-    color: #000000;
-    font-weight: bold;
-    border-radius: 20px;
-    text-align: left;
-    overflow: hidden;
-    white-space: nowrap;
-    display: inline-block;
-    width: 98%;
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-    margin: 10px;
-    position: relative;
-}
+        #news-bar {
+            background-color: #ffff00;
+            color: #000000;
+            font-weight: bold;
+            border-radius: 20px;
+            text-align: left;
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+            width: 98%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            margin: 10px;
+            position: relative;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
 
-.scroll-text {
-    display: inline-block;
-    animation: marquee 30s linear infinite;
-    padding-left: 150%;
-}
+        .scroll-text {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+            padding-left: 150%;
+        }
 
-@keyframes marquee {
-    0% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
+        @keyframes marquee {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
 
-.book-card ,.section-card ,.branch-button {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2px;
-    background-color: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    width: 80px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-    text-align: center;
+        .book-card ,.section-card ,.branch-button {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            padding: auto;
+            background-color: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 85px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-align: center;
 
-    margin: 8px;
-    font-weight: bold;
-}
+            margin: 8px;
+            font-weight: bold;
+        }
 
-.book-title {
-    font-size: 10px;
-    font-weight: bold;
-    color: #333;
-    margin: 10px 0;
-}
+        .book-title {
+            font-size: 55%;
+            font-weight: bold;
+            color: #333;
+            margin: 4px 10;
+        }
 
-.book-note {
-	background-color : red;
-	color: white;
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-size: 8px;
-    margin-top: 5px;
-    font-weight: bold;
-    width: auto;
-    text-align: center;
-    margin:  5px;
-    margin-bottom:  5px;
-}
+        .book-note {
+            background-color : red;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 8px;
+            margin-top: 5px;
+            font-weight: bold;
+            width: auto;
+            text-align: center;
+            margin:  5px;
+            margin-bottom:  5px;
+        }
 
-.section-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    
-}
-.section-card img ,.book-card img {
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    
-}
-.section-card .section-name{
-    font-size: 9px;
-    font-weight: bold;
-    color: #333;
-    
-}
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+        }
+        .section-card img ,.book-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+
+        }
+        .section-card .section-name{
+            font-size: 9px;
+            font-weight: bold;
+            color: #333;
+
+        }
         .book-link {
             text-decoration: none;
             color: inherit;
             display: block;
-            
+
         }
 
         #sections-container {
             text-align: center;
             padding: 20px;
-            
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
         }
 
-    #book-viewer-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 999;
-    }
+        #book-viewer-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
 
-    #book-viewer {
-        width: 100%;
-        height: 100%;
-        border: none;
-        background-color: white;
-    }
+        #book-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: white;
+        }
 
-    .viewer-buttons {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        gap: 10px;
-        padding: 8px;
-        z-index: 1000;
-        justify-content: center;
-    }
+        .viewer-buttons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            padding: 8px;
+            z-index: 1000;
+            justify-content: center;
+        }
 
-    .close-button, .open-button {
-        padding: 8px 15px;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 0.9em;
-        font-weight: bold;
-        text-align: center;
-        border-radius: 25px;
-    }
+        .close-button, .open-button {
+            padding: 8px 15px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 25px;
+        }
 
-    .close-button {
-        background-color: #0000FF;
-    }
+        .close-button {
+            background-color: #0000FF;
+        }
 
-    .open-button {
-        background-color: #008000;
-        font-size: 0.6em;
-    }
+        .open-button {
+            background-color: #008000;
+            font-size: 0.6em;
+        }
 
         .back-button ,   .skip-button {
-            
+
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
@@ -376,9 +378,9 @@
             width: 100%;
             position: relative;
             align-items: center;
-            font-weight : bold ;             
+            font-weight : bold ;
         }
-            .skip-button:hover {
+        .skip-button:hover {
             background-color: #0056b3;
         }
 
@@ -395,25 +397,25 @@
             background-color: #F5F5F5;
         }
         .countdown {
-    background-color: #2d3436;
-    color: white;
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-size: 8px;
-    margin-top: 3px;
-    font-weight: bold;
-    width: auto;
-    text-align: center;
-    margin : 5px;    
-    margin-bottom:  3px;
-}
+            background-color: #2d3436;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 8px;
+            margin-top: 3px;
+            font-weight: bold;
+            width: auto;
+            text-align: center;
+            margin : 5px;
+            margin-bottom:  5px;
+        }
 
-.countdown-expired {
-    background-color: #e74c3c;
-}
-.book-count {
+        .countdown-expired {
+            background-color: #e74c3c;
+        }
+        .book-count {
             background-color: rgba(255, 0, 0, 0.1);
-            
+
             font-size: 12px;
             font-weight: bold;
             width: 24px;
@@ -425,150 +427,162 @@
             margin: 8px auto 0;
             border: 1px solid #000;
         }
-#popup-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-}
+        #popup-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 
-.popup-content {
-    font-weight: bold;
-    background: #f8f9fa;
-    padding: 8px;
-    border-radius: 20px;
-    max-width: 90%;
-    text-align: center;
-    position: relative;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    border: 3px solid #ccc;
-    border-color: 4B0082;
-     font-size: 16px;
-}
+        }
 
-.popup-content .book-note {
-    background-color : red;
-	color: white;
-    padding: 2px 3px;
-    border-radius: 4px;
-    font-size: 8px;
-    margin-top: 5px;
-    font-weight: bold;
-    width: auto;
-    text-align: center;
-    justify-content: center;
-    position : flex; 
-}
+        .popup-content {
+            font-weight: bold;
+            background: #f8f9fa;
+            padding: 3px 4px;
+            border-radius: 20px;
+            margin : 5px;
+            width: auto;
+            max-width: 100%;
+            text-align: center;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 3px solid #ccc;
+            border-color: 4B0082;
+            font-size: 16px;
+        }
+          .popup-content .book-title {
+            font-size: 55%;
+            font-weight: bold;
+            color: #333;
+            margin: 4px;
+            padding: 2px 3px;
+            }
 
-.popup-content .countdown {
-    background-color: #2d3436;
-    color: white;
-    padding: 2px 3px;
-    border-radius: 4px;
-    font-size: 5px;
-    margin-top: 7px;
-    font-weight: bold;
-    width: auto;
-    text-align: center;
-    margin: 1px;
-    position : flex; 
-}
+        .popup-content .book-note {
+            background-color : red;
+            color: white;
+            padding: 2px 3px;
+            border-radius: 4px;
+            font-size: 10px;
+            margin-top: 5px;
+            font-weight: bold;
+            width: auto;
+            text-align: center;
+            justify-content: center;
+            position : flex;
+        }
 
-.book-title-clickable {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 8px;
-    border-radius: 20px;
-    gap: 8px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    margin: 4px 0;
-    width: 300px;
-    justify-content: flex-start;
-    font-size: 12px;
-    
-}
+        .popup-content .countdown {
+            background-color: #2d3436;
+            color: white;
+            padding: 8px 2px;
+            border-radius: 4px;
+            font-size: 9px;
+            margin-top: 7px;
+            font-weight: bold;
+            width: auto;
+            text-align: center;
+            margin: 4px;
+            position : flex;
+            margin-bottom : 10px ;
+       }
 
-.book-title-clickable img {
-    width: 20px;
-    height: 20px;
-    padding: 5px 10px;
-    border-radius: 4px;
-    background-color: #f8f9fa;
-    
-}
+        .book-title-clickable {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 20px;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 4px 0;
+            width: 300px;
+            justify-content: flex-start;
+            font-size: 12px;
 
-.book-title-clickable:hover {
-    
-    transform: translateY(-1px);
-    
-}
+        }
 
-.popup-message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    text-align: center;
-    
-}
+        .book-title-clickable img {
+            width: 20px;
+            height: 20px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
 
-.book-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-    width: 100%;
-    
-}
+        }
 
-.book-title-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    justify-content: flex-start;
-    padding-left: 20px;
-    border: 1.5px solid #ccc;
-    border-color: 4B0082;
-    border-radius: 25px;
-}
+        .book-title-clickable:hover {
 
-.book-image-container {
-    flex-shrink: 0;
-    
-}
+            transform: translateY(-1px);
 
-.book-additional-info {
-    font-size: 11px;
-    margin-top: 2px;
-    text-align: center;
-    width: 100%;
-    color: #900C3F;
-    font-weight: bold;
-    
-}
-      .whatsapp-button {
-      	font-size: 10px;
-      margin: 10px 0;
+        }
+
+        .popup-message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            text-align: center;
+
+        }
+
+        .book-info-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            width: 100%;
+
+        }
+
+        .book-title-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            justify-content: flex-start;
+            padding-left: 20px;
+            border: 1.5px solid #ccc;
+            border-color: 4B0082;
+            border-radius: 25px;
+        }
+
+        .book-image-container {
+            flex-shrink: 0;
+
+        }
+
+        .book-additional-info {
+            font-size: 11px;
+            margin-top: 2px;
+            text-align: center;
+            width: 100%;
+            color: #900C3F;
+            font-weight: bold;
+
+        }
+        .whatsapp-button {
+            font-size: 10px;
+            margin: 10px 0;
             padding: 5px 10px;
             display: inline-block;
-            
+
             color: white;
             background-color: #25D366;
             text-decoration: none;
             border-radius: 25px;
             font-weight: bold;
-            
+
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s, box-shadow 0.3s;
         }
@@ -620,18 +634,18 @@
             justify-content: center;
             align-items: center;
             color: #4B0082;
-        
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
         .popup-content1, .popup-content2{
-    	margin: 10px 0;
+            margin: 10px 0;
             padding: 10px;
             width: 90%;
             border: 1px solid #ccc;
             border-radius: 5px;
-                
-        background: white ; 
+
+            background: white ;
             font-size : 10px;
-            
+
         }
         .popup-form {
             display: flex;
@@ -671,11 +685,11 @@
             color: red;
             margin-bottom: 10px;
             display: none;
-            }
-            
-               
+        }
 
-    
+
+
+
 
         .popup-content input {
             margin: 10px 0;
@@ -683,7 +697,7 @@
             width: 90%;
             border: 1px solid #ccc;
             border-radius: 5px;
-            
+
         }
 
         .popup-content button {
@@ -706,155 +720,219 @@
             color: white;
         }
 
-.message-item {
-    background-color: #f4f4f4;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 5px;
-    
-}
-.message-item strong {
-    font-weight: bold;
-    margin-right: 5px;
-}
-.message-item span {
-    display: block;
-    margin-top: 5px;
-    font-size: 0.9em;
-    color: #777;
-}
+        .message-item {
+            background-color: #f4f4f4;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
 
-/* START OF ADDED CSS */
+        }
+        .message-item strong {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .message-item span {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #777;
+        }
 
-.section-title-header {
-    background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); /* Gradient background (purple tones) */
-    color: white; /* White text color for contrast */
-    padding: 10px 15px; /* Padding around the text */
-    margin: 5px auto 10px auto; /* Top margin, auto left/right for centering, bottom margin */
-    border-radius: 10px; /* Rounded corners */
-    text-align: center; /* Center the text */
-    font-weight: bold; /* Make the text bold */
-    font-size: 0.7em; /* Slightly larger font size */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-    width: 70%; /* Set a width less than full */
-    max-width: 600px; /* Optional: Maximum width for larger screens */
-    display: block; /* Ensure it behaves like a block for centering */
-}
+        /* START OF ADDED CSS */
 
-/* END OF ADDED CSS */
+        .section-title-header {
+            background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); /* Gradient background (purple tones) */
+            color: white; /* White text color for contrast */
+            padding: 10px 15px; /* Padding around the text */
+            margin: 5px auto 10px auto; /* Top margin, auto left/right for centering, bottom margin */
+            border-radius: 10px; /* Rounded corners */
+            text-align: center; /* Center the text */
+            font-weight: bold; /* Make the text bold */
+            font-size: 0.7em; /* Slightly larger font size */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+            width: 70%; /* Set a width less than full */
+            max-width: 600px; /* Optional: Maximum width for larger screens */
+            display: block; /* Ensure it behaves like a block for centering */
+        }
+
+        /* END OF ADDED CSS */
+
+        /*TRANSITIONS*/
+        #sections-container,
+        #book-viewer-container,
+        header,
+        #news-bar,
+        #contact-popup,
+        #password-popup,
+        #form-popup,
+        #messages-popup,
+        #popup-modal {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            opacity: 1; /* Make sure elements are visible initially */
+            transform: translateY(0);
+        }
+
+        #sections-container.fade-out,
+        #book-viewer-container.fade-out,
+        header.fade-out,
+        #news-bar.fade-out,
+        #contact-popup.fade-out,
+        #password-popup.fade-out,
+        #form-popup.fade-out,
+        #messages-popup.fade-out,
+        #popup-modal.fade-out{
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        #sections-container.fade-in,
+        #book-viewer-container.fade-in,
+        header.fade-in,
+        #news-bar.fade-in,
+        #contact-popup.fade-in,
+        #password-popup.fade-in,
+        #form-popup.fade-in,
+        #messages-popup.fade-in,
+        #popup-modal.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* NEW CSS FOR BRANCH ANIMATION */
+        .branch-transition {
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+        .branch-enter {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .branch-enter-active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .branch-exit {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .branch-exit-active {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        /* NEW CSS FOR SEARCH RESULTS */
+        #search-results-count {
+            text-align: center;
+            margin-bottom: 10px;
+            font-style: italic;
+            color: #777;
+        }
     </style>
 </head>
 
 <body>
-	
-<div id="popup-modal">
-        <div class="popup-content">
-            <div id="popup-messages"></div>
-            <button class="skip-button" onclick="closePopup()">Ignorer</button>
-        </div>
-    </div>
 
-   <header>
-  
+<div id="popup-modal">
+    <div class="popup-content">
+        <div id="popup-messages"></div>
+        <button class="skip-button" onclick="closePopup()">Ignorer</button>
+    </div>
+</div>
+
+<header>
+
     <h1>
-        ACFTC 
+        ACFTC
         <img src="https://tinypic.host/images/2024/12/30/1000024600.png" alt="Logo" class="header-logo">
         OUJDA
     </h1>
 
-           <button id="open-documentations" class="documentations">DOCUMENTATIONS</button>
-       <Button id="open-contact-btn">notifications par gmail</button>
-
-    <!-- Popup Modal -->
-    <div id="contact-popup">
-        <div class="popup-content1">
-            <form id="contact-form" class="popup-form">
-                <h2>Pour recevoir des notifications par GMAIL</h2>
-                <input type="text" id="name-input" placeholder="Votre nom" required>
-                <input type="email" id="email-input" placeholder="Votre email" required>
-                <button type="submit">Envoyer</button>
-                <button type="button" id="close-popup">Fermer</button>
-            </form>
-        </div>
-    </div>
-    </header>
-        <!-- Password Popup -->
-    <div id="password-popup">
-        <div class="popup-content">
-            <h3>    Page réservée à l'administrateur</h3>
-            <input type="password" id="password-input" placeholder="Mot de passe">
-            <button type="submit" id="submit-password" class="skip-button" >Confirmer</button>
-            <button type="button" id="close-password-popup">Fermer</button>
-        </div>
-    </div>
-
-    <!-- Form Popup -->
-    <div id="form-popup">
-        <div class="popup-content">
-            <h2>Ajouter une Notification</h2>
-            <textarea id="message-input" class="popup-content2" placeholder="Message"></textarea>
-            <input type="datetime-local" id="datetime-input" placeholder="Date et Heure">
-            <input type="url" id="link-input" placeholder="Lien (optionnel)">
-            <button type="submit" id="submit-form">Envoyer</button>
-                 <button class="skip-button" onclick="showScheduledMessages()">Affichage des messages</button>
-            <button type="button" id="close-form-popup">Fermer</button>
-       
-        </div>
-    </div>
-
-    <!-- Messages Popup -->
-    <div id="messages-popup">
-        <div class="popup-content">
-            <h2>Messages</h2>
-            <div id="messages-list"></div>
-            <button type="button" id="close-messages-popup">Fermer</button>
-        </div>
-    </div>
+    <button id="open-documentations" class="documentations">DOCUMENTATIONS</button>
     
+</header>
+<!-- Password Popup -->
+<div id="password-popup">
+    <div class="popup-content">
+        <h3>    Page réservée à l'administrateur</h3>
+        <input type="password" id="password-input" placeholder="Mot de passe">
+        <button type="submit" id="submit-password" class="skip-button" >Confirmer</button>
+        <button type="button" id="close-password-popup">Fermer</button>
+    </div>
+</div>
+
+<!-- Form Popup -->
+<div id="form-popup">
+    <div class="popup-content">
+        <h2>Ajouter une Notification</h2>
+        <textarea id="message-input" class="popup-content2" placeholder="Message"></textarea>
+        <input type="datetime-local" id="datetime-input" placeholder="Date et Heure">
+        <input type="url" id="link-input" placeholder="Lien (optionnel)">
+        <button type="submit" id="submit-form">Envoyer</button>
+        <button class="skip-button" onclick="showScheduledMessages()">Affichage des messages</button>
+        <button type="button" id="close-form-popup">Fermer</button>
+
+    </div>
+</div>
+
+<!-- Messages Popup -->
+<div id="messages-popup">
+    <div class="popup-content">
+        <h2>Messages</h2>
+        <div id="messages-list"></div>
+        <button type="button" id="close-messages-popup">Fermer</button>
+    </div>
+</div>
+
 <div class="contact-container">
     <a href="mailto:w43172@oncf.ma,med740704@gmail.com?subject=Contact%20depuis%20le%20site&body=Bonjour,"" class="whatsapp-button">📧 Contactez-moi</a>
     <div id="date-display">
+            <span class="date-time-container">
+                <img src="https://img.icons8.com/ios/50/calendar--v1.png" alt="calendar" class="icon">
+                <span id="date-text"></span>
+            </span>
         <span class="date-time-container">
-            <img src="https://img.icons8.com/ios/50/calendar--v1.png" alt="calendar" class="icon">
-            <span id="date-text"></span>
-        </span>
-        <span class="date-time-container">
-            <img src="https://img.icons8.com/ios/50/clock--v1.png" alt="clock" class="icon">
-            <span id="time-text"></span>
-        </span>
+                <img src="https://img.icons8.com/ios/50/clock--v1.png" alt="clock" class="icon">
+                <span id="time-text"></span>
+            </span>
     </div>
 </div>
-    	    <div id="news-bar">
-        <div class="scroll-text" id="scroll-content"></div>
+<div id="news-bar">
+    <div class="scroll-text" id="scroll-content"></div>
+</div>
+
+<input type="text" id="search-input" placeholder="Rechercher un livre ou une section">
+
+<!-- Element to display the search results count -->
+<div id="search-results-count"></div>
+
+<div id="sections-container"></div>
+
+<div id="book-viewer-container">
+    <iframe id="book-viewer"></iframe>
+    <div class="viewer-buttons">
+        <button class="close-button">Fermer</button>
+        <button class="open-button">Ouvrir dans un nouvel onglet</button>
     </div>
+</div>
+<div id="messages-list"></div>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    // استيراد التهيئة والمكتبات
+    import { initializeApp } from "firebase/app";
+    import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-    <input type="text" id="search-input" placeholder="Rechercher un livre ou une section">
-
-    <div id="sections-container"></div>
-
- <div id="book-viewer-container">
-        <iframe id="book-viewer"></iframe>
-        <div class="viewer-buttons">
-            <button class="close-button">Fermer</button>
-            <button class="open-button">Ouvrir dans un nouvel onglet</button>
-        </div>
-    </div>
-    <div id="messages-list"></div>
- <script type="module">
-// Import the functions you need from the SDKs you need
-// استيراد التهيئة والمكتبات
-import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
-
-// تهيئة إعدادات Firebase
-const firebaseConfig = {
-      apiKey: "AIzaSyBrV6jXxPkbiSbodHsAk5z4jqv4HygKzFI",
-      authDomain: "acftco.firebaseapp.com",
-      projectId: "acftco",
-      storageBucket: "acftco.firebasestorage.app",
-      messagingSenderId: "553140279594",
-      appId: "1:553140279594:web:af23cbc89c921e949aa653",
-      measurementId: "G-HH93Q8EREF"
+    // تهيئة إعدادات Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBrV6jXxPkbiSbodHsAk5z4jqv4HygKzFI",
+        authDomain: "acftco.firebaseapp.com",
+        projectId: "acftco",
+        storageBucket: "acftco.firebasestorage.app",
+        messagingSenderId: "553140279594",
+        appId: "1:553140279594:web:af23cbc89c921e949aa653",
+        measurementId: "G-HH93Q8EREF"
     };
 
     // تهيئة Firebase
@@ -863,237 +941,294 @@ const firebaseConfig = {
 
     // طلب الإذن للإشعارات عند الضغط على الزر
     document.getElementById("request-permission").addEventListener("click", () => {
-      messaging
-        .getToken({ vapidKey: "BIo2I9qBnOSMcitGmJOlrVQ5j_4RCf-xxpDYrzbd0VnkKEwNLGRyniYSGkrL7vIVh9YfPdunhFDRLd0v7BNERDQ" })
-        .then((currentToken) => {
-          if (currentToken) {
-            console.log("تم الحصول على FCM Token:", currentToken);
-            alert("تم منح الإذن بنجاح! تحقق من Console لرؤية الـ Token.");
-            // احفظ الـ Token في قاعدة البيانات لإرسال الإشعارات لاحقًا
-          } else {
-            console.log("لم يتم منح الإذن. الرجاء المحاولة مرة أخرى.");
-          }
-        })
-        .catch((err) => {
-          console.error("حدث خطأ أثناء طلب الإذن:", err);
-        });
+        messaging
+            .getToken({ vapidKey: "BIo2I9qBnOSMcitGmJOlrVQ5j_4RCf-xxpDYrzbd0VnkKEwNLGRyniYSRkKEwNLGRyniYSGkrL7vIVh9YfPdunhFDRLd0v7BNERDQ" })
+            .then((currentToken) => {
+                if (currentToken) {
+                    console.log("تم الحصول على FCM Token:", currentToken);
+                    alert("تم منح الإذن بنجاح! تحقق من Console لرؤية الـ Token.");
+                    // احفظ الـ Token في قاعدة البيانات لإرسال الإشعارات لاحقًا
+                } else {
+                    console.log("لم يتم منح الإذن. الرجاء المحاولة مرة أخرى.");
+                }
+            })
+            .catch((err) => {
+                console.error("حدث خطأ أثناء طلب الإذن:", err);
+            });
     });
 
     // التعامل مع الإشعارات الواردة
     messaging.onMessage((payload) => {
-      console.log("رسالة واردة:", payload);
-      alert(`إشعار جديد: ${payload.notification.title} - ${payload.notification.body}`);
+        console.log("رسالة واردة:", payload);
+        alert(`إشعار جديد: ${payload.notification.title} - ${payload.notification.body}`);
     });
 </script>
 
 
 
+<script>
 
-        <script>
-        	
-        
-        
-        	 
-async function showScheduledMessages() {
-    const sheetId = "1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c";
-    const sheetName = "NOTIFICATIONS";
-    const apiKey = "AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw";
-
-    try {
-        const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`);
-        const data = await response.json();
-
-        if (!data.values || data.values.length < 2) {
-            alert("Aucune donnée à afficher.");
-            return;
+    // الدوال المساعدة للانتقالات
+    function addTransitionClass(elementId, className) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.classList.add(className);
         }
-
-        const now = new Date();
-        const oneMonthAgo = new Date(now);
-        oneMonthAgo.setMonth(now.getMonth() - 1);
-
-        const messages = data.values.slice(1)
-            .filter(row => {
-                const message = row[0];
-                const scheduleTimeStr = row[1];
-
-                if (!message || !scheduleTimeStr) return false;
-
-                const [datePart, timePart] = scheduleTimeStr.split(' ');
-                const [day, month, year] = datePart.split('/');
-                const [hour, minute] = timePart ? timePart.split(':') : [0, 0];
-                const scheduleDate = new Date(year, month - 1, day, hour, minute);
-
-                return scheduleDate >= oneMonthAgo;
-            })
-            .map(row => ({
-                message: row[0],
-                scheduleTime: row[1],
-                originalDate: new Date(row[1].split(' ')[0].split('/').reverse().join('-') + 'T' + (row[1].split(' ')[1] || '00:00') + ':00')
-            }))
-            .sort((a, b) => b.originalDate - a.originalDate);
-
-        const messagesPopup = document.getElementById('messages-popup');
-        const messagesList = document.getElementById('messages-list');
-        messagesList.innerHTML = ''; 
-
-        if (messages.length === 0) {
-            messagesList.innerHTML = '<p>Aucun message envoyé au cours du dernier mois.</p>';
-        } else {
-            messages.forEach(({ message, scheduleTime }) => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message-item';
-                messageDiv.innerHTML = `
-                    <strong>Message:</strong> ${message}<br>
-                    <span>Envoyé le: ${scheduleTime}</span>
-                `;
-                messagesList.appendChild(messageDiv);
-            });
-        }
- 
-        messagesPopup.style.display = 'flex';
-        const formPopup = document.getElementById('form-popup');
-        if (formPopup) {
-            formPopup.style.display = 'none';
-        }
-
-    } catch (error) {
-        console.error("Erreur lors de la récupération des données :", error);
-        alert("Une erreur est survenue lors de la récupération des données.");
     }
-}
-document.getElementById('close-messages-popup').addEventListener('click', () => {
-    document.getElementById('messages-popup').style.display = 'none';
-});
-        
-        
-        // Password verification
-        const passwordPopup = document.getElementById('password-popup');
-        const formPopup = document.getElementById('form-popup');
-        const messagesPopup = document.getElementById('messages-popup');
-        const openDocumentationsButton = document.getElementById('open-documentations');
-        const submitPasswordButton = document.getElementById('submit-password');
-        const closePasswordPopupButton = document.getElementById('close-password-popup');
-        const closeFormPopupButton = document.getElementById('close-form-popup');
-        const closeMessagesPopupButton = document.getElementById('close-messages-popup');
-        const submitFormButton = document.getElementById('submit-form');
-        const passwordInput = document.getElementById('password-input');
-        const messageInput = document.getElementById('message-input');
-        const datetimeInput = document.getElementById('datetime-input');
-        const linkInput = document.getElementById('link-input');
-        const messagesList = document.getElementById('messages-list');
 
-        const PASSWORD = 'Mf@740704wris';
+    function removeTransitionClass(elementId, className) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.classList.remove(className);
+        }
+    }
 
-        openDocumentationsButton.addEventListener('click', () => {
-            passwordPopup.style.display = 'flex';
-        });
 
-        submitPasswordButton.addEventListener('click', () => {
-            if (passwordInput.value === PASSWORD) {
-                passwordPopup.style.display = 'none';
-                formPopup.style.display = 'flex';
-            } else {
-                alert('Mot de passe incorrect');
-            }
-        });
+    async function showScheduledMessages() {
+        const sheetId = "1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c";
+        const sheetName = "NOTIFICATIONS";
+        const apiKey = "AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw";
 
-        closePasswordPopupButton.addEventListener('click', () => {
-            passwordPopup.style.display = 'none';
-        });
+        try {
+            const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`);
+            const data = await response.json();
 
-        closeFormPopupButton.addEventListener('click', () => {
-            formPopup.style.display = 'none';
-        });
-
-        closeMessagesPopupButton.addEventListener('click', () => {
-            messagesPopup.style.display = 'none';
-        });
-        submitFormButton.addEventListener('click', () => {
-            const message = messageInput.value;
-            const datetime = datetimeInput.value;
-            const link = linkInput.value;
-
-            if (!message || !datetime) {
-                alert('Veuillez remplir tous les champs obligatoires.');
+            if (!data.values || data.values.length < 2) {
+                alert("Aucune donnée à afficher.");
                 return;
             }
 
-            const payload = {
-                message,
-                datetime,
-                link,
-            };
+            const now = new Date();
+            const oneMonthAgo = new Date(now);
+            oneMonthAgo.setMonth(now.getMonth() - 1);
 
-            fetch('https://script.google.com/macros/s/AKfycbzk0dEIDFncj20HyiLxO-9JwDFqrYyZER5zLOIUtV-3oE5oAq4EeeO7nK1ayfzQc4zX6A/exec', {
-                method: 'POST',
-                body: JSON.stringify(payload),
-            }).then((response) => {
-                if (response.ok) {
-                    alert('Notification envoyée avec succès !');
-                    formPopup.style.display = 'none';
-                } else {
-                    alert('Erreur lors de l envoi de la notification.');
-                }
-            });
-        });
+            const messages = data.values.slice(1)
+                .filter(row => {
+                    const message = row[0];
+                    const scheduleTimeStr = row[1];
 
-        document.getElementById('open-messages').addEventListener('click', () => {
-            fetch('https://script.google.com/macros/s/AKfycbzk0dEIDFncj20HyiLxO-9JwDFqrYyZER5zLOIUtV-3oE5oAq4EeeO7nK1ayfzQc4zX6A/exec')
-                .then((response) => response.json())
-                .then((data) => {
-                    messagesList.innerHTML = '';
-                    data.forEach((item) => {
-                        const messageElement = document.createElement('div');
-                        messageElement.textContent = `${item.datetime}: ${item.message}`;
-                        messagesList.appendChild(messageElement);
-                    });
-                    messagesPopup.style.display = 'flex';
+                    if (!message || !scheduleTimeStr) return false;
+
+                    const [datePart, timePart] = scheduleTimeStr.split(' ');
+                    const [day, month, year] = datePart.split('/');
+                    const [hour, minute] = timePart ? timePart.split(':') : [0, 0];
+                    const scheduleDate = new Date(year, month - 1, day, hour, minute);
+
+                    return scheduleDate >= oneMonthAgo;
+                })
+                .map(row => ({
+                    message: row[0],
+                    scheduleTime: row[1],
+                    originalDate: new Date(row[1].split(' ')[0].split('/').reverse().join('-') + 'T' + (row[1].split(' ')[1] || '00:00') + ':00')
+                }))
+                .sort((a, b) => b.originalDate - a.originalDate);
+
+            const messagesPopup = document.getElementById('messages-popup');
+            const messagesList = document.getElementById('messages-list');
+            messagesList.innerHTML = '';
+
+            if (messages.length === 0) {
+                messagesList.innerHTML = '<p>Aucun message envoyé au cours du dernier mois.</p>';
+            } else {
+                messages.forEach(({ message, scheduleTime }) => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message-item';
+                    messageDiv.innerHTML = `
+                    <strong>Message:</strong> ${message}<br>
+                    <span>Envoyé le: ${scheduleTime}</span>
+                `;
+                    messagesList.appendChild(messageDiv);
                 });
-        });
-            </script>
-   
-    <script>
-    let cachedNotifications = null;
-      let cachedData = null;
-let cachedSections = null;
-let hasShownPopup = false;
+            }
 
-function closePopup() {        document.getElementById('popup-modal').style.display = 'none';
-}
+            // Show the popup with transition
+            addTransitionClass('messages-popup', 'fade-in');
+            messagesPopup.style.display = 'flex';
 
-document.querySelector('.close-button').addEventListener('click', () => {
-    const bookViewerContainer = document.getElementById('book-viewer-container');
-    bookViewerContainer.style.display = 'none';
-    history.replaceState({ view: 'main' }, '', '#main');
-});
+            const formPopup = document.getElementById('form-popup');
+            if (formPopup) {
+                formPopup.style.display = 'none';
+            }
 
-document.querySelector('.open-button').addEventListener('click', () => {
-    const viewerUrl = document.getElementById('book-viewer').src;
-    window.open(viewerUrl, '_blank');
-});
-
-
-
-function showPopup(messages) {
-    if (sessionStorage.getItem('popupShown')) {
-        return;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des données :", error);
+            alert("Une erreur est survenue lors de la récupération des données.");
+        }
     }
-    
-    const popupModal = document.getElementById('popup-modal');
-    const popupMessages = document.getElementById('popup-messages');
-    
-    if (messages.length > 0) {
-        popupMessages.innerHTML = '';
-        messages.forEach(msg => {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'popup-message';
-            
-            const cleanText = msg.columnP.text.replace(/&/g, '');
-            let messageContent = `<div style="color: ${msg.columnP.color};">${cleanText}</div>`;
-            
-            if (msg.additionalInfo) {
-                messageContent += `
+    document.getElementById('close-messages-popup').addEventListener('click', () => {
+        // Hide the popup with transition
+        addTransitionClass('messages-popup', 'fade-out');
+        setTimeout(() => {
+            document.getElementById('messages-popup').style.display = 'none';
+            removeTransitionClass('messages-popup', 'fade-out');
+        }, 300);
+    });
+
+    // Password verification
+    const passwordPopup = document.getElementById('password-popup');
+    const formPopup = document.getElementById('form-popup');
+    const messagesPopup = document.getElementById('messages-popup');
+    const openDocumentationsButton = document.getElementById('open-documentations');
+    const submitPasswordButton = document.getElementById('submit-password');
+    const closePasswordPopupButton = document.getElementById('close-password-popup');
+    const closeFormPopupButton = document.getElementById('close-form-popup');
+    const closeMessagesPopupButton = document.getElementById('close-messages-popup');
+    const submitFormButton = document.getElementById('submit-form');
+    const passwordInput = document.getElementById('password-input');
+    const messageInput = document.getElementById('message-input');
+    const datetimeInput = document.getElementById('datetime-input');
+    const linkInput = document.getElementById('link-input');
+    const messagesList = document.getElementById('messages-list');
+
+    const PASSWORD = 'Mf@740704wris';
+
+    openDocumentationsButton.addEventListener('click', () => {
+        addTransitionClass('password-popup', 'fade-in');
+        passwordPopup.style.display = 'flex';
+    });
+
+    submitPasswordButton.addEventListener('click', () => {
+        if (passwordInput.value === PASSWORD) {
+            // Hide password popup with transition
+            addTransitionClass('password-popup', 'fade-out');
+            setTimeout(() => {
+                passwordPopup.style.display = 'none';
+                removeTransitionClass('password-popup', 'fade-out');
+
+                // Show form popup with transition
+                addTransitionClass('form-popup', 'fade-in');
+                formPopup.style.display = 'flex';
+            }, 300);
+        } else {
+            alert('Mot de passe incorrect');
+        }
+    });
+
+    closePasswordPopupButton.addEventListener('click', () => {
+        addTransitionClass('password-popup', 'fade-out');
+        setTimeout(() => {
+            passwordPopup.style.display = 'none';
+            removeTransitionClass('password-popup', 'fade-out');
+        }, 300);
+    });
+
+    closeFormPopupButton.addEventListener('click', () => {
+        addTransitionClass('form-popup', 'fade-out');
+        setTimeout(() => {
+            formPopup.style.display = 'none';
+            removeTransitionClass('form-popup', 'fade-out');
+        }, 300);
+    });
+
+    closeMessagesPopupButton.addEventListener('click', () => {
+        addTransitionClass('messages-popup', 'fade-out');
+        setTimeout(() => {
+            messagesPopup.style.display = 'none';
+            removeTransitionClass('messages-popup', 'fade-out');
+        }, 300);
+    });
+
+    submitFormButton.addEventListener('click', () => {
+        const message = messageInput.value;
+        const datetime = datetimeInput.value;
+        const link = linkInput.value;
+
+        if (!message || !datetime) {
+            alert('Veuillez remplir tous les champs obligatoires.');
+            return;
+        }
+
+        const payload = {
+            message,
+            datetime,
+            link,
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbzk0dEIDFncj20HyiLxO-9JwDFqrYyZER5zLOIUtV-3oE5oAq4EeeO7nK1ayfzQc4zX6A/exec', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+        }).then((response) => {
+            if (response.ok) {
+                alert('Notification envoyée avec succès !');
+                // Hide form popup with transition
+                addTransitionClass('form-popup', 'fade-out');
+                setTimeout(() => {
+                    formPopup.style.display = 'none';
+                    removeTransitionClass('form-popup', 'fade-out');
+                }, 300);
+            } else {
+                alert('Erreur lors de l envoi de la notification.');
+            }
+        });
+    });
+
+    document.getElementById('open-messages').addEventListener('click', () => {
+        fetch('https://script.google.com/macros/s/AKfycbzk0dEIDFncj20HyiLxO-9JwDFqrYyZER5zLOIUtV-3oE5oAq4EeeO7nK1ayfzQc4zX6A/exec')
+            .then((response) => response.json())
+            .then((data) => {
+                messagesList.innerHTML = '';
+                data.forEach((item) => {
+                    const messageElement = document.createElement('div');
+                    messageElement.textContent = `${item.datetime}: ${item.message}`;
+                    messagesList.appendChild(messageElement);
+                });
+                // Show messages popup with transition
+                addTransitionClass('messages-popup', 'fade-in');
+                messagesPopup.style.display = 'flex';
+            });
+    });
+</script>
+
+<script>
+    let cachedNotifications = null;
+    let cachedData = null;
+    let cachedSections = null;
+    let hasShownPopup = false;
+
+    function closePopup() {
+        addTransitionClass('popup-modal', 'fade-out');
+        setTimeout(() => {
+            document.getElementById('popup-modal').style.display = 'none';
+            removeTransitionClass('popup-modal', 'fade-out');
+        }, 300);
+    }
+
+    document.querySelector('.close-button').addEventListener('click', () => {
+        addTransitionClass('book-viewer-container', 'fade-out');
+        setTimeout(() => {
+            const bookViewerContainer = document.getElementById('book-viewer-container');
+            bookViewerContainer.style.display = 'none';
+            removeTransitionClass('book-viewer-container', 'fade-out');
+            history.replaceState({ view: 'main' }, '', '#main');
+        }, 300);
+    });
+
+    document.querySelector('.open-button').addEventListener('click', () => {
+        const viewerUrl = document.getElementById('book-viewer').src;
+        window.open(viewerUrl, '_blank');
+    });
+
+
+
+    function showPopup(messages) {
+        if (sessionStorage.getItem('popupShown')) {
+            return;
+        }
+
+        const popupModal = document.getElementById('popup-modal');
+        const popupMessages = document.getElementById('popup-messages');
+
+        if (messages.length > 0) {
+            popupMessages.innerHTML = '';
+            messages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'popup-message';
+
+                const cleanText = msg.columnP.text.replace(/&/g, '');
+                let messageContent = `<div style="color: ${msg.columnP.color};">${cleanText}</div>`;
+
+                if (msg.additionalInfo) {
+                    messageContent += `
                     <div class="book-info-container">
                         ${msg.additionalInfo.columnA?.trim() ? `
                             <div class="book-title-container">
@@ -1111,44 +1246,44 @@ function showPopup(messages) {
                             </div>
                         ` : ''}
                     </div>`;
-            }
-            
-            messageDiv.innerHTML = messageContent;
-            
-            if (msg.additionalInfo && msg.additionalInfo.columnA?.trim()) {
-                const bookImageContainer = messageDiv.querySelector('.book-image-container');
-                if (bookImageContainer) {
-                    const book = cachedData.slice(1).find(row => row[0] === msg.additionalInfo.columnA);
-                    if (book) {
-                        if (book[2]) {
-                            const imgElement = bookImageContainer.querySelector('img');
-                            imgElement.src = book[2];
-                            imgElement.style.display = 'block';
-                        }
-                        const backgroundColor = book[14] || 'transparent';
-                        const titleContainer = messageDiv.querySelector('.book-title-container');
-                        if (titleContainer) {
-                            titleContainer.style.backgroundColor = backgroundColor;
-                        }
-                    }
                 }
 
-                const handleBookClick = () => {
-                    if (!cachedData) return;
-                    
-                    const book = cachedData.slice(1).find(row => row[0] === msg.additionalInfo.columnA);
-                    
-                 if (book) {
-    const bookCard = document.createElement('div');
-    bookCard.className = 'book-card';
+                messageDiv.innerHTML = messageContent;
 
-    if (book[12]) {
-        bookCard.style.backgroundColor = book[12];
-    }
+                if (msg.additionalInfo && msg.additionalInfo.columnA?.trim()) {
+                    const bookImageContainer = messageDiv.querySelector('.book-image-container');
+                    if (bookImageContainer) {
+                        const book = cachedData.slice(1).find(row => row[0] === msg.additionalInfo.columnA);
+                        if (book) {
+                            if (book[2]) {
+                                const imgElement = bookImageContainer.querySelector('img');
+                                imgElement.src = book[2];
+                                imgElement.style.display = 'block';
+                            }
+                            const backgroundColor = book[14] || 'transparent';
+                            const titleContainer = messageDiv.querySelector('.book-title-container');
+                            if (titleContainer) {
+                                titleContainer.style.backgroundColor = backgroundColor;
+                            }
+                        }
+                    }
 
-    const imageUrl = book[2];
+                    const handleBookClick = () => {
+                        if (!cachedData) return;
 
-    bookCard.innerHTML = `
+                        const book = cachedData.slice(1).find(row => row[0] === msg.additionalInfo.columnA);
+
+                        if (book) {
+                            const bookCard = document.createElement('div');
+                            bookCard.className = 'book-card';
+
+                            if (book[12]) {
+                                bookCard.style.backgroundColor = book[12];
+                            }
+
+                            const imageUrl = book[2];
+
+                            bookCard.innerHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
             <img src="${imageUrl}" alt="Image du livre" style="width: 50px; height: 60px; margin-bottom: 8px;">
             <div>
@@ -1159,368 +1294,393 @@ function showPopup(messages) {
         </div>
     `;
 
-    bookCard.onclick = () => {
-        const viewerUrl = book[1].replace('view?usp=drivesdk', 'preview');
-        document.getElementById('book-viewer').src = viewerUrl;
-        document.getElementById('book-viewer-container').style.display = 'flex';
-        popupModal.style.display = 'none';
-    };
+                            bookCard.onclick = () => {
+                                const viewerUrl = book[1].replace('view?usp=drivesdk', 'preview');
+                                document.getElementById('book-viewer').src = viewerUrl;
+                                document.getElementById('book-viewer-container').style.display = 'flex';
+                                closePopup(); // Close popup after selecting book
+                            };
 
-    const existingBookCards = popupMessages.querySelectorAll('.book-card');
-    existingBookCards.forEach(card => card.remove());
+                            const existingBookCards = popupMessages.querySelectorAll('.book-card');
+                            existingBookCards.forEach(card => card.remove());
 
-    messageDiv.appendChild(bookCard);
-    updateAllCountdowns();
-}
-                };
-
-                const bookTitleElement = messageDiv.querySelector('.book-title-clickable');
-                if (bookTitleElement) {
-                    bookTitleElement.onclick = handleBookClick;
-                }
-
-                if (bookImageContainer) {
-                    bookImageContainer.onclick = handleBookClick;
-                }
-            }
-            
-            popupMessages.appendChild(messageDiv);
-        });
-        
-        popupModal.style.display = 'flex';
-        sessionStorage.setItem('popupShown', 'true');
-    }
-}
-
-function updateDateTime() {
-    const now = new Date();
-    const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-    
-    const dayName = days[now.getDay()];
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year = now.getFullYear();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-
-    document.getElementById('date-text').textContent = `${dayName} : ${day}/${month}/${year}`;
-    document.getElementById('time-text').textContent = `${hours}:${minutes}:${seconds}`;
-}
-
-setInterval(updateDateTime, 1000);
-updateDateTime();
-
-const apiKey = 'AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw';
-const sheetId = '1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c';
-const sheetName = 'RGS';
-
-function calculateTimeLeft(targetDateStr) {
-    if (!targetDateStr) return { textOnly: true };
-
-    targetDateStr = targetDateStr.trim();
-    const parts = targetDateStr.split(' ');
-    const datePart = parts[0];
-    const timePart = parts[1];
-
-    if (!isValidDateFormat(datePart)) return { textOnly: true };
-
-    const [day, month, year] = datePart.split('/');
-    const [hours, minutes] = timePart ? timePart.split(':') : [0, 0];
-    const targetDate = new Date(year, month - 1, day, hours, minutes);
-
-    if (isNaN(targetDate.getTime())) return { textOnly: true };
-
-    const now = new Date().getTime();
-    const difference = targetDate.getTime() - now;
-
-    if (difference <= 0) return null;
-
-    return {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        textOnly: false
-    };
-}
-
-function updateAllCountdowns() {
-    const countdownElements = document.querySelectorAll('.countdown');
-    countdownElements.forEach(element => {
-        const deadline = element.dataset.deadline;
-        if (!deadline) return;
-
-        const timeLeft = calculateTimeLeft(deadline);
-        if (!timeLeft || timeLeft.textOnly) {
-            element.textContent = deadline;
-            element.style.backgroundColor = '#2d3436';
-        } else {
-            element.textContent = formatCountdown(timeLeft);
-        }
-    });
-}
-
-function formatCountdown(timeLeft) {
-    if (!timeLeft) return '';
-    
-    const parts = [];
-    if (timeLeft.days > 0) parts.push(`${timeLeft.days} jr${timeLeft.days > 1 ? 's' : ''}`);
-    if (timeLeft.hours > 0) parts.push(`${timeLeft.hours} hr${timeLeft.hours > 1 ? 's' : ''}`);
-    if (timeLeft.minutes > 0) parts.push(`${timeLeft.minutes} min${timeLeft.minutes > 1 ? 's' : ''}`);
-    if (timeLeft.seconds > 0) parts.push(`${timeLeft.seconds} sec${timeLeft.seconds > 1 ? 's' : ''}`);
-    
-    return parts.join(' ');
-}
-
-function isValidDateFormat(dateStr) {
-    if (!dateStr) return false;
-    
-    dateStr = dateStr.trim();
-    const formatRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})(\s\d{1,2}:\d{1,2})?$/;
-    
-    return formatRegex.test(dateStr);
-}
-
-setInterval(updateAllCountdowns, 1000);
-
-async function processPopupMessages(data) {
-    const popupMessages = [];
-    
-    data.slice(1).forEach(row => {
-        if (row[15] && row[15].trim() !== '') {
-            const dateRange = row[17] ? row[17].trim() : '';
-            let isValid = true;
-            
-            if (dateRange) {
-                const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
-                    const [date, time] = dateTime.split(' ');
-                    const [day, month, year] = date.split('/');
-                    const [hours, minutes] = time ? time.split(':') : [0, 0];
-                    return new Date(year, month - 1, day, hours, minutes);
-                });
-                
-                const now = new Date();
-                isValid = now >= startDateTime && now <= endDateTime;
-            } else {
-                isValid = row[15].includes('&');
-            }
-            
-            if (isValid) {
-                const message = {
-                    columnP: {
-                        text: row[15],
-                        color: row[16] || '#000000'
-                    }
-                };
-                
-                if (row[15].includes('&')) {
-                    message.additionalInfo = {
-                        columnL: row[11] || '',
-                        columnA: row[0] || '',
-                        color: row[16] || '#000000'
+                            messageDiv.appendChild(bookCard);
+                            updateAllCountdowns();
+                        }
                     };
-                }
-                
-                popupMessages.push(message);
-            }
-        }
-    });
-    
-    return popupMessages;
-}
 
-async function fetchData(forceRefresh = false) {
-    if (cachedData && !forceRefresh) {
-        return cachedData;
+                    const bookTitleElement = messageDiv.querySelector('.book-title-clickable');
+                    if (bookTitleElement) {
+                        bookTitleElement.onclick = handleBookClick;
+                    }
+
+                    if (bookImageContainer) {
+                        bookImageContainer.onclick = handleBookClick;
+                    }
+                }
+
+                popupMessages.appendChild(messageDiv);
+            });
+
+            addTransitionClass('popup-modal', 'fade-in');
+            popupModal.style.display = 'flex'; // Show the modal
+            sessionStorage.setItem('popupShown', 'true');
+        }
     }
 
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            console.error('Erreur de récupération des données:', response.status, response.statusText);
+    function updateDateTime() {
+        const now = new Date();
+        const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+
+        const dayName = days[now.getDay()];
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        document.getElementById('date-text').textContent = `${dayName} : ${day}/${month}/${year}`;
+        document.getElementById('time-text').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    const apiKey = 'AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw';
+    const sheetId = '1j6vV2HkCWbcmPKtUivh2xeXsmaY3ab_1KMG-XTvZT_c';
+    const sheetName = 'RGS';
+
+    function calculateTimeLeft(targetDateStr) {
+        if (!targetDateStr) return { textOnly: true };
+
+        targetDateStr = targetDateStr.trim();
+        const parts = targetDateStr.split(' ');
+        const datePart = parts[0];
+        const timePart = parts[1];
+
+        if (!isValidDateFormat(datePart)) return { textOnly: true };
+
+        const [day, month, year] = datePart.split('/');
+        const [hours, minutes] = timePart ? timePart.split(':') : [0, 0];
+        const targetDate = new Date(year, month - 1, day, hours, minutes);
+
+        if (isNaN(targetDate.getTime())) return { textOnly: true };
+
+        const now = new Date().getTime();
+        const difference = targetDate.getTime() - now;
+
+        if (difference <= 0) return null;
+
+        return {
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+            seconds: Math.floor((difference % (1000 * 60)) / 1000),
+            textOnly: false
+        };
+    }
+
+    function updateAllCountdowns() {
+        const countdownElements = document.querySelectorAll('.countdown');
+        countdownElements.forEach(element => {
+            const deadline = element.dataset.deadline;
+            if (!deadline) return;
+
+            const timeLeft = calculateTimeLeft(deadline);
+            if (!timeLeft || timeLeft.textOnly) {
+                element.textContent = deadline;
+                element.style.backgroundColor = '#2d3436';
+            } else {
+                element.textContent = formatCountdown(timeLeft);
+            }
+        });
+    }
+
+    function formatCountdown(timeLeft) {
+        if (!timeLeft) return '';
+
+        const parts = [];
+        if (timeLeft.days > 0) parts.push(`${timeLeft.days} jr${timeLeft.days > 1 ? 's' : ''}`);
+        if (timeLeft.hours > 0) parts.push(`${timeLeft.hours} hr${timeLeft.hours > 1 ? 's' : ''}`);
+        if (timeLeft.minutes > 0) parts.push(`${timeLeft.minutes} min${timeLeft.minutes > 1 ? 's' : ''}`);
+        if (timeLeft.seconds > 0) parts.push(`${timeLeft.seconds} sec${timeLeft.seconds > 1 ? 's' : ''}`);
+
+        return parts.join(' ');
+    }
+
+    function isValidDateFormat(dateStr) {
+        if (!dateStr) return false;
+
+        dateStr = dateStr.trim();
+        const formatRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})(\s\d{1,2}:\d{1,2})?$/;
+
+        return formatRegex.test(dateStr);
+    }
+
+    setInterval(updateAllCountdowns, 1000);
+
+    async function processPopupMessages(data) {
+        const popupMessages = [];
+
+        data.slice(1).forEach(row => {
+            if (row[15] && row[15].trim() !== '') {
+                const dateRange = row[17] ? row[17].trim() : '';
+                let isValid = true;
+
+                if (dateRange) {
+                    const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
+                        const [date, time] = dateTime.split(' ');
+                        const [day, month, year] = date.split('/');
+                        const [hours, minutes] = time ? time.split(':') : [0, 0];
+                        return new Date(year, month - 1, day, hours, minutes);
+                    });
+
+                    const now = new Date();
+                    isValid = now >= startDateTime && now <= endDateTime;
+                } else {
+                    isValid = row[15].includes('&');
+                }
+
+                if (isValid) {
+                    const message = {
+                        columnP: {
+                            text: row[15],
+                            color: row[16] || '#000000'
+                        }
+                    };
+
+                    if (row[15].includes('&')) {
+                        message.additionalInfo = {
+                            columnL: row[11] || '',
+                            columnA: row[0] || '',
+                            color: row[16] || '#000000'
+                        };
+                    }
+
+                    popupMessages.push(message);
+                }
+            }
+        });
+
+        return popupMessages;
+    }
+
+    async function fetchData(forceRefresh = false) {
+        if (cachedData && !forceRefresh) {
+            return cachedData;
+        }
+
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                console.error('Erreur de récupération des données:', response.status, response.statusText);
+                return null;
+            }
+            const data = await response.json();
+            cachedData = data.values;
+            const popupMessages = await processPopupMessages(cachedData);
+            if (popupMessages.length > 0 && !hasShownPopup) {
+                showPopup(popupMessages);
+                hasShownPopup = true;
+            }
+
+            return cachedData;
+        } catch (error) {
+            console.error('Erreur de requête:', error);
             return null;
         }
-        const data = await response.json();
-        cachedData = data.values;
-        const popupMessages = await processPopupMessages(cachedData);
-        if (popupMessages.length > 0 && !hasShownPopup) {
-            showPopup(popupMessages);
-            hasShownPopup = true;
-        }
-        
-        return cachedData;
-    } catch (error) {
-        console.error('Erreur de requête:', error);
-        return null;
     }
-}
 
-function showSections() {
-    document.getElementById('sections-container').innerHTML = '';
-    document.getElementById('book-viewer-container').style.display = 'none';
-    
-    if (cachedSections) {
-        displayResults(cachedSections);
-    } else {
-        loadPage();
-    }
-}
-    
- function filterResults(data, searchTerm) {
-    const filteredBooks = [];
-    console.log("Started filtering...");
-    
-    const lowercaseSearchTerm = searchTerm.toLowerCase();
-    
-    data.slice(1).forEach(row => {
-        if (!row || row.length === 0) {
-            console.log("Empty row, skipping...");
-            return;
-        }
+    function showSections() {
+        // Hide book viewer with transition
+        addTransitionClass('book-viewer-container', 'fade-out');
+        setTimeout(() => {
+            document.getElementById('book-viewer-container').style.display = 'none';
+            removeTransitionClass('book-viewer-container', 'fade-out');
 
-        const bookTitle = (row[0] || '').toLowerCase();
-        const bookUrl = row[1] || '';
-        const bookImage = row[2] || '';
-        const section = row[3] || '';
-        const branch = row[6] || section || '';
-        const deadline = row[13] || '';
-        const bookContent = (row[18] || '').toLowerCase();
-        const dateRangeStr = row[17] ? row[17].trim() : '';
+            // Show sections with transition
+            const sectionsContainer = document.getElementById('sections-container');
+            sectionsContainer.innerHTML = '';
+            addTransitionClass('sections-container', 'fade-in');
+            sectionsContainer.style.display = 'block';
 
-        console.log("Processing row: ", row);
-
-        let shouldDisplay = true;
-
-        if (dateRangeStr && dateRangeStr.includes('au')) {
-            console.log("Date range found: ", dateRangeStr);
-            const [startDateStr, endDateStr] = dateRangeStr.split('au').map(str => str.trim());
-            
-            if (startDateStr && endDateStr && dateRangeStr.includes('&')) {
-                const parseDate = (dateStr) => {
-                    const [date, time = '00:00'] = dateStr.trim().split(' ');
-                    const [day, month, year] = date.split('/');
-                    const [hours, minutes] = time.split(':');
-                    return new Date(year, month - 1, day, hours || 0, minutes || 0);
-                };
-
-                const startDateTime = parseDate(startDateStr);
-                const endDateTime = parseDate(endDateStr);
-                const now = new Date();
-
-                shouldDisplay = now >= startDateTime && now <= endDateTime;
-            }
-        }
-
-        const matchesSearch = bookTitle.includes(lowercaseSearchTerm) || 
-                            bookContent.includes(lowercaseSearchTerm);
-
-        if (shouldDisplay && bookTitle && bookUrl && matchesSearch) {
-            console.log("Adding book to filtered list: ", bookTitle);
-            
-            let highlightedTitle = row[0];
-            if (bookTitle.includes(lowercaseSearchTerm)) {
-                const regex = new RegExp(`(${searchTerm})`, 'gi');
-                highlightedTitle = row[0].replace(regex, '<mark>$1</mark>');
-            }
-
-            let contentExcerpt = '';
-            if (bookContent.includes(lowercaseSearchTerm)) {
-                const index = bookContent.indexOf(lowercaseSearchTerm);
-                const start = Math.max(0, index - 50);
-                const end = Math.min(bookContent.length, index + searchTerm.length + 50);
-                contentExcerpt = '...' + row[18].substring(start, end).replace(
-                    new RegExp(`(${searchTerm})`, 'gi'),
-                    '<mark>$1</mark>'
-                ) + '...';
-            }
-
-            filteredBooks.push({
-                title: highlightedTitle,
-                url: bookUrl,
-                image: bookImage,
-                section: section,
-                branch: branch,
-                color: row[10] || '',
-                note: row[11] || '',
-                backgroundColor: row[12] || '',
-                deadline: deadline,
-                excerpt: contentExcerpt
-            });
-        }
-    });
-
-    console.log("Filtered books: ", filteredBooks);
-    return filteredBooks;
-}
-function processPopupMessages(data) {
-    const popupMessages = [];
-    
-    data.slice(1).forEach(row => {
-        if (row[15] && row[15].trim() !== '') {
-            const dateRange = row[17] ? row[17].trim() : '';
-            let isValid = true;
-            
-            if (dateRange) {
-                const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
-                    const [date, time] = dateTime.trim().split(' ');
-                    const [day, month, year] = date.trim().split('/');
-                    const [hours, minutes] = time ? time.trim().split(':') : ['00', '00'];
-
-                    return new Date(year, month - 1, day, hours, minutes);
-                });
-                
-                const now = new Date();
-                isValid = now >= startDateTime && now <= endDateTime;
+            if (cachedSections) {
+                displayResults(cachedSections);
             } else {
-                isValid = row[15].includes('&');
+                loadPage();
             }
-            
-            if (isValid) {
-                const message = {
-                    columnP: {
-                        text: row[15],
-                        color: row[16] || '#000000'
-                    }
-                };
-                
-                if (row[15].includes('&')) {
-                    message.additionalInfo = {
-                        columnL: row[11] || '',
-                        columnA: row[0] || '',
-                        color: row[16] || '#000000'
+
+            setTimeout(() => {
+                removeTransitionClass('sections-container', 'fade-in');
+            }, 300);
+
+        }, 300); // Match the CSS transition duration
+
+    }
+
+    function filterResults(data, searchTerm) {
+        const filteredBooks = [];
+        console.log("Started filtering...");
+
+        const lowercaseSearchTerm = searchTerm.toLowerCase();
+
+        data.slice(1).forEach(row => {
+            if (!row || row.length === 0) {
+                console.log("Empty row, skipping...");
+                return;
+            }
+
+            const bookTitle = (row[0] || '').toLowerCase();
+            const bookUrl = row[1] || '';
+            const bookImage = row[2] || '';
+            const section = row[3] || '';
+            const branch = row[6] || section || '';
+            const deadline = row[13] || '';
+            const bookContent = (row[18] || '').toLowerCase();
+            const dateRangeStr = row[17] ? row[17].trim() : '';
+
+            console.log("Processing row: ", row);
+
+            let shouldDisplay = true;
+
+            if (dateRangeStr && dateRangeStr.includes('au')) {
+                console.log("Date range found: ", dateRangeStr);
+                const [startDateStr, endDateStr] = dateRangeStr.split('au').map(str => str.trim());
+
+                if (startDateStr && endDateStr && dateRangeStr.includes('&')) {
+                    const parseDate = (dateStr) => {
+                        const [date, time = '00:00'] = dateStr.trim().split(' ');
+                        const [day, month, year] = date.split('/');
+                        const [hours, minutes] = time.split(':');
+                        return new Date(year, month - 1, day, hours || 0, minutes || 0);
                     };
+
+                    const startDateTime = parseDate(startDateStr);
+                    const endDateTime = parseDate(endDateStr);
+                    const now = new Date();
+
+                    shouldDisplay = now >= startDateTime && now <= endDateTime;
                 }
-                
-                popupMessages.push(message);
             }
-        }
-    });
-    
-    return popupMessages;
-}
+
+            const matchesSearch = bookTitle.includes(lowercaseSearchTerm) ||
+                bookContent.includes(lowercaseSearchTerm);
+
+            if (shouldDisplay && bookTitle && bookUrl && matchesSearch) {
+                console.log("Adding book to filtered list: ", bookTitle);
+
+                let highlightedTitle = row[0];
+                if (bookTitle.includes(lowercaseSearchTerm)) {
+                    const regex = new RegExp(`(${searchTerm})`, 'gi');
+                    highlightedTitle = row[0].replace(regex, '<mark>$1</mark>');
+                }
+
+                let contentExcerpt = '';
+                if (bookContent.includes(lowercaseSearchTerm)) {
+                    const index = bookContent.indexOf(lowercaseSearchTerm);
+                    const start = Math.max(0, index - 50);
+                    const end = Math.min(bookContent.length, index + searchTerm.length + 50);
+                    contentExcerpt = '...' + row[18].substring(start, end).replace(
+                        new RegExp(`(${searchTerm})`, 'gi'),
+                        '<mark>$1</mark>'                    ) + '...';
+                }
+
+                filteredBooks.push({
+                    title: highlightedTitle,
+                    url: bookUrl,
+                    image: bookImage,
+                    section: section,
+                    branch: branch,
+                    color: row[10] || '',
+                    note: row[11] || '',
+                    backgroundColor: row[12] || '',
+                    deadline: deadline,
+                    excerpt: contentExcerpt
+                });
+            }
+        });
+
+        console.log("Filtered books: ", filteredBooks);
+        return filteredBooks;
+    }
+    function processPopupMessages(data) {
+        const popupMessages = [];
+
+        data.slice(1).forEach(row => {
+            if (row[15] && row[15].trim() !== '') {
+                const dateRange = row[17] ? row[17].trim() : '';
+                let isValid = true;
+
+                if (dateRange) {
+                    const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
+                        const [date, time] = dateTime.trim().split(' ');
+                        const [day, month, year] = date.trim().split('/');
+                        const [hours, minutes] = time ? time.trim().split(':') : ['00', '00'];
+
+                        return new Date(year, month - 1, day, hours, minutes);
+                    });
+
+                    const now = new Date();
+                    isValid = now >= startDateTime && now <= endDateTime;
+                } else {
+                    isValid = row[15].includes('&');
+                }
+
+                if (isValid) {
+                    const message = {
+                        columnP: {
+                            text: row[15],
+                            color: row[16] || '#000000'
+                        }
+                    };
+
+                    if (row[15].includes('&')) {
+                        message.additionalInfo = {
+                            columnL: row[11] || '',
+                            columnA: row[0] || '',
+                            color: row[16] || '#000000'
+                        };
+                    }
+
+                    popupMessages.push(message);
+                }
+            }
+        });
+
+        return popupMessages;
+    }
 
     function displayFilteredResults(filteredBooks) {
-    history.pushState({ view: 'search', searchResults: filteredBooks }, '', '#search');
+      const searchResultsCount = filteredBooks.length;
+      const searchResultsCountElement = document.getElementById('search-results-count');
+      searchResultsCountElement.textContent = `Nombre de résultats : ${searchResultsCount}`;
 
-    const sectionsContainer = document.getElementById('sections-container');
-    sectionsContainer.innerHTML = '';
+        history.pushState({ view: 'search', searchResults: filteredBooks }, '', '#search');
 
-    if (filteredBooks.length === 0) {
-        sectionsContainer.innerHTML = '<p style="text-align: center;">Il n y a pas de résultats</p>';
-        return;
-    }
+        const sectionsContainer = document.getElementById('sections-container');
 
-    filteredBooks.forEach(book => {
-        const bookCard = document.createElement('div');
-        bookCard.className = 'book-card';
-        
-        if (book.backgroundColor) {
-            bookCard.style.backgroundColor = book.backgroundColor;
-        }
+        // Hide the sections container with a fade-out transition
+        addTransitionClass('sections-container', 'fade-out');
 
-        bookCard.innerHTML = `
+        setTimeout(() => {
+            sectionsContainer.innerHTML = ''; // Clear only after fadeOut
+            sectionsContainer.style.display = 'none';//Hide the sections container
+
+            // Display filtered results *after* hiding main sections
+            if (filteredBooks.length === 0) {
+                sectionsContainer.innerHTML = '<p style="text-align: center;">Il n y a pas de résultats</p>';
+            } else {
+                filteredBooks.forEach(book => {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'book-card';
+
+                    if (book.backgroundColor) {
+                        bookCard.style.backgroundColor = book.backgroundColor;
+                    }
+
+                    bookCard.innerHTML = `
             <img class="book-image" src="${book.image}" alt="${book.title}" style="width: 50px; height: auto; margin-bottom: 5px;">
             <div class="book-title">${book.title}</div>
             ${book.excerpt ? `<div class="book-excerpt">${book.excerpt}</div>` : ''}
@@ -1528,80 +1688,112 @@ function processPopupMessages(data) {
             ${book.deadline ? `<div class="countdown" data-deadline="${book.deadline}">جاري حساب الوقت المتبقي...</div>` : ''}
         `;
 
-        bookCard.onclick = () => {
-            const viewerUrl = book.url.replace('view?usp=drivesdk', 'preview');
-            document.getElementById('book-viewer').src = viewerUrl;
-            document.getElementById('book-viewer-container').style.display = 'flex';
-        };
+                    bookCard.onclick = () => {
+                        const viewerUrl = book.url.replace('view?usp=drivesdk', 'preview');
+                        showBookViewer(viewerUrl);  // Display the book in the viewer
+                    };
 
-        sectionsContainer.appendChild(bookCard);
-    });
+                    sectionsContainer.appendChild(bookCard);
+                });
+            }
+            const backButton = createBackButton();
+            sectionsContainer.appendChild(backButton);
 
-    const backButton = createBackButton();
-    sectionsContainer.appendChild(backButton);
+            updateAllCountdowns();
+            setTimeout(setUniformCardDimensions, 100);
 
-    updateAllCountdowns();
-    setTimeout(setUniformCardDimensions, 100);
-}
+            sectionsContainer.style.display = 'block'; // Show sections container after adding cards
+            removeTransitionClass('sections-container', 'fade-out');
 
-function showBookViewer(url) {
-    const viewerUrl = url.replace('view?usp=drivesdk', 'preview');
-    document.getElementById('book-viewer').src = viewerUrl;
-    document.getElementById('book-viewer-container').style.display = 'flex';
-    history.pushState({ view: 'book' }, '', '#book');
-}
-window.onpopstate = function (event) {
-    const bookViewerContainer = document.getElementById('book-viewer-container');
+        }, 300);
 
-    if (bookViewerContainer.style.display === 'flex') {
-        document.querySelector('.close-button').click();
-    } else if (event.state) {
-        if (event.state.view === 'main') {
+    }
+
+    function showBookViewer(url) {
+        const bookViewerContainer = document.getElementById('book-viewer-container');
+        const bookViewer = document.getElementById('book-viewer');
+        bookViewer.src = url.replace('view?usp=drivesdk', 'preview'); // Set URL first
+
+        addTransitionClass('book-viewer-container', 'fade-in');
+        bookViewerContainer.style.display = 'flex';
+        history.pushState({ view: 'book' }, '', '#book');
+    }
+
+    window.onpopstate = function (event) {
+        const bookViewerContainer = document.getElementById('book-viewer-container');
+
+        if (bookViewerContainer.style.display === 'flex') {
+            addTransitionClass('book-viewer-container', 'fade-out');
+            setTimeout(() => {
+                bookViewerContainer.style.display = 'none';
+                removeTransitionClass('book-viewer-container', 'fade-out');
+                document.querySelector('.close-button').click();
+
+            },300);
+
+
+        } else if (event.state) {
+            if (event.state.view === 'main') {
+                document.getElementById('sections-container').innerHTML = '';
+                addTransitionClass('sections-container', 'fade-in');
+                setTimeout(() => {
+                    document.getElementById('sections-container').style.display = 'none'; // Clear content
+                      document.getElementById('search-results-count').textContent = ``;
+                    if (cachedSections) {
+                        displayResults(cachedSections);
+                    } else {
+                        loadPage();
+                    }
+
+                },300);
+
+
+            } else if (event.state.view === 'section' && event.state.sectionData) {
+                showBranchAndBooks(event.state.sectionData);
+            }
+        } else {
             document.getElementById('sections-container').innerHTML = '';
             document.getElementById('book-viewer-container').style.display = 'none';
+             document.getElementById('search-results-count').textContent = ``;
             if (cachedSections) {
                 displayResults(cachedSections);
             } else {
                 loadPage();
             }
-        } else if (event.state.view === 'section' && event.state.sectionData) {
-            showBranchAndBooks(event.state.sectionData);
         }
-    } else {
-        document.getElementById('sections-container').innerHTML = '';
-        document.getElementById('book-viewer-container').style.display = 'none';
-        if (cachedSections) {
-            displayResults(cachedSections);
-        } else {
-            loadPage();
-        }
-    }
-};
+    };
 
     function setupNewsBar(notifications) {
-    if (notifications.length > 0) {
-        const scrollContent = document.getElementById('scroll-content');
-        let newsText = '';
+        if (notifications.length > 0) {
+            const scrollContent = document.getElementById('scroll-content');
+            let newsText = '';
 
-        notifications.forEach(notification => {
-            const notificationText = `${notification[9]} | `;
-            const notificationColor = notification[10];
-            newsText += `<span style="color: ${notificationColor};">${notificationText}</span>`;
-        });
+            notifications.forEach(notification => {
+                const notificationText = `${notification[9]} | `;
+                const notificationColor = notification[10];
+                newsText += `<span style="color: ${notificationColor};">${notificationText}</span>`;
+            });
 
-        scrollContent.innerHTML = newsText;
-        scrollContent.setAttribute('data-text', newsText);
-        document.getElementById('news-bar').style.display = 'block';
+            scrollContent.innerHTML = newsText;
+            scrollContent.setAttribute('data-text', newsText);
+            document.getElementById('news-bar').style.display = 'block';
+        }
     }
-}
-                    function showBranchAndBooks(sectionData, pushState = true) {
-            // console.log("Showing branches/books for:", sectionData.sectionName);
-            if (pushState) {
-                history.pushState({ view: 'section', sectionData: sectionData }, '', `#section-${sectionData.sectionName || 'default'}`);
-            }
 
-            const sectionsContainer = document.getElementById('sections-container');
-            sectionsContainer.innerHTML = ''; // Clear the main container
+  function showBranchAndBooks(sectionData, pushState = true) {
+        // console.log("Showing branches/books for:", sectionData.sectionName);
+        if (pushState) {
+            history.pushState({ view: 'section', sectionData: sectionData }, '', `#section-${sectionData.sectionName || 'default'}`);
+        }
+
+        const sectionsContainer = document.getElementById('sections-container');
+
+        // Clear sections with fade-out
+        addTransitionClass('sections-container', 'fade-out');
+
+        setTimeout(() => {
+            sectionsContainer.innerHTML = ''; // Clear after transition
+            removeTransitionClass('sections-container', 'fade-out');
 
             // 1. Add Section Title Header
             const sectionTitleContainer = document.createElement('div');
@@ -1619,7 +1811,6 @@ window.onpopstate = function (event) {
             booksDisplayContainer.id = 'branch-books-display-container'; // For displaying books of a selected branch
             sectionsContainer.appendChild(booksDisplayContainer);
 
-
             const branches = Object.entries(sectionData.branches || {});
             const hasMultipleBranches = branches.length > 1; // Check if there's more than one branch entry
 
@@ -1636,8 +1827,9 @@ window.onpopstate = function (event) {
                 const [branchName, branchData] = branches[0]; // Get the single branch data
 
                 if (branchData.books && branchData.books.length > 0) {
-                     const sortedBooks = [...branchData.books].sort((a, b) => { /* Sort logic */
-                        const timeLeftA = calculateTimeLeft(a[5]); const timeLeftB = calculateTimeLeft(b[5]);
+                    const sortedBooks = [...branchData.books].sort((a, b) => { /* Sort logic */
+                        const timeLeftA = calculateTimeLeft(a[5]);
+                        const timeLeftB = calculateTimeLeft(b[5]);
                         const hasCountdownA = timeLeftA && !timeLeftA.expired && !timeLeftA.textOnly;
                         const hasCountdownB = timeLeftB && !timeLeftB.expired && !timeLeftB.textOnly;
                         if (hasCountdownB !== hasCountdownA) return hasCountdownB - hasCountdownA;
@@ -1671,20 +1863,22 @@ window.onpopstate = function (event) {
                     const branchImage = branchData.image || sectionData.image || 'https://via.placeholder.com/50/eee/ccc?text=Branche'; // Branch, section, or placeholder image
 
                     branchCard.innerHTML = `
-                        <img src="${branchImage}" alt="Icône ${branchName}" style="width: 50px; height: 50px; object-fit: contain;">
-                        <div class="section-name">${branchName}</div>
-                        ${totalBranchBooks > 0 ? `
-                        <div class="book-count" style="color: #000; font-size: 10px; font-weight: bold; margin-top: 5px;">
-                            ${totalBranchBooks}
-                        </div>` : ''}
-                    `;
-
+                <img src="${branchImage}" alt="Icône ${branchName}" style="width: 50px; height: 50px; object-fit: contain;">
+                <div class="section-name">${branchName}</div>
+                ${totalBranchBooks > 0 ? `
+                <div class="book-count" style="color: #000; font-size: 10px; font-weight: bold; margin-top: 5px;">
+                    ${totalBranchBooks}
+                </div>` : ''}
+            `;
 
                     branchCard.onclick = () => {
-                        // 1. Hide all branch cards (from the branch container)
+                        // Remove existing books and add the "branch-transition" class
+                        booksDisplayContainer.classList.add('branch-transition');
+                        //1. Hide all branch cards (from the branch container)
+
                         branchCardsContainer.style.display = 'none'; // Hide the container holding branch cards
 
-                        // 2. Optionally hide the main section title (or keep it?)
+                        //  2.Optionally hide the main section title (or keep it?)
                         // sectionTitleContainer.style.display = 'none';
 
                         // 3. Clear the book display container and show books for this branch
@@ -1692,7 +1886,8 @@ window.onpopstate = function (event) {
 
                         if (branchData.books && branchData.books.length > 0) {
                             const sortedBooks = [...branchData.books].sort((a, b) => { /* Same sort logic as above */
-                                const timeLeftA = calculateTimeLeft(a[5]); const timeLeftB = calculateTimeLeft(b[5]);
+                                const timeLeftA = calculateTimeLeft(a[5]);
+                                const timeLeftB = calculateTimeLeft(b[5]);
                                 const hasCountdownA = timeLeftA && !timeLeftA.expired && !timeLeftA.textOnly;
                                 const hasCountdownB = timeLeftB && !timeLeftB.expired && !timeLeftB.textOnly;
                                 if (hasCountdownB !== hasCountdownA) return hasCountdownB - hasCountdownA;
@@ -1722,16 +1917,16 @@ window.onpopstate = function (event) {
                             // Action: Show branch cards again and hide books
                             booksDisplayContainer.innerHTML = ''; // Clear the books
                             branchCardsContainer.style.display = 'block'; // Show the container with branch cards again
-                            // Optional: Re-run setUniformCardDimensions for branch cards if needed
+                            //  Optional: Re-run setUniformCardDimensions for branch cards if needed
                             setTimeout(setUniformCardDimensions, 50);
+
                         };
 
                         // Add the new button AFTER the book cards within their container
                         booksDisplayContainer.appendChild(backToBranchesButton);
                         // --- END: إضافة زر "العودة إلى الفروع" ---
 
-
-                        // 4. Update countdowns and dimensions
+                        //4. Update countdowns and dimensions
                         updateAllCountdowns();
                         setTimeout(setUniformCardDimensions, 50);
                     };
@@ -1739,19 +1934,24 @@ window.onpopstate = function (event) {
                     branchCardsContainer.appendChild(branchCard); // Add branch card to its container
                     allBranchCards.push(branchCard); // Add to list (though maybe not needed if hiding container)
                 });
+
                 setTimeout(setUniformCardDimensions, 50); // Adjust branch card dimensions
             }
 
-            // 4. Add Back Button (always add it at the end of the main container)
-            // This original button remains unchanged and handles going back in history
-             sectionsContainer.appendChild(createBackButton());
-
+            //4. Add Back Button (always add it at the end of the main container)
+            //This original button remains unchanged and handles going back in history
+            sectionsContainer.appendChild(createBackButton());
+            sectionsContainer.style.display = 'block';
 
             // 5. Update Countdowns (initial update for direct book display)
             updateAllCountdowns();
-        }
 
-        // Helper function to create a book card element
+        }, 300);
+    }
+
+      // Function to create abook card element
+        // Function to create the back button
+        // Function to create the back button
         function createBookCardElement(book) {
             if (!book || !Array.isArray(book)) return document.createDocumentFragment(); // Return empty element if invalid
 
@@ -1801,168 +2001,166 @@ window.onpopstate = function (event) {
         }
 
 
-
-        // Function to create the back button
-        // Function to create the back button
-                // Function to create the back button
-        function createBackButton() {
-            const backButton = document.createElement('button');
-            backButton.className = 'back-button';
-            backButton.innerText = 'Retour'; // Text for the button
-
-            backButton.onclick = () => {
-                // --- NEW LOGIC ---
-                // 1. Directly call the function that shows the main sections view
+     function createBackButton() {
+        const backButton = document.createElement('button');
+        backButton.className = 'back-button';
+        backButton.innerText = 'Retour'; // Text for the button
+        backButton.onclick = () => {
+            // 1. Add fade-out class to sections-container
+            addTransitionClass('sections-container', 'fade-out');
+            setTimeout(() => {
+                // 2. After the fade-out completes, hide the sections-container
+                document.getElementById('sections-container').style.display = 'none';
+                // 3. Now, call showSections() to display the main sections with fade-in
                 showSections();
-
-                // 2. Clear the search input field, as we are returning to the main view
+                // 4. Clear the search input field, as we are returning to the main view
                 document.getElementById('search-input').value = '';
-
-                // 3. (Optional but recommended) Update the history state to reflect the main view
-                //    Using replaceState avoids adding a new entry to the history stack
-                //    when clicking the custom back button.
-                history.replaceState({ view: 'main' }, '', '#main'); 
-                // --- END OF NEW LOGIC ---
-
-                // The old problematic line is removed:
-                // history.back(); 
-                // location.reload(); // Also removed/kept commented
-            };
-            return backButton;
-        }
+                // 5.  (Optional but recommended) Update the history state to reflect the main view
+                history.replaceState({ view: 'main' }, '', '#main');
+                   document.getElementById('search-results-count').textContent = ``;
+            }, 300); // Match the CSS transition duration
+        };
+        return backButton;
+    }
 
 
 
     async function loadPage() {
-    const data = await fetchData();
-    if (!data) return;
+        const data = await fetchData();
+        if (!data) return;
 
-    const notifications = [];
-    const sections = {};
+        const notifications = [];
+        const sections = {};
 
-    data.slice(1).forEach(row => {
-        if (!row || row.length === 0) return;
-        
-        const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
-        
-        sectionNames.forEach(section => {
-            if (section && !sections[section]) {
-                sections[section] = { 
-                     sectionName : section,
-                    color: row[4] || '#f5f5f5', 
-                    image: row[5] || '', 
-                    branches: {} 
-                };
+        data.slice(1).forEach(row => {
+            if (!row || row.length === 0) return;
+
+            const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
+
+            sectionNames.forEach(section => {
+                if (section && !sections[section]) {
+                    sections[section] = {
+                        sectionName : section,
+                        color: row[4] || '#f5f5f5',
+                        image: row[5] || '',
+                        branches: {}
+                    };
+                }
+            });
+
+            if (row[9]) notifications.push(row);
+        });
+
+        data.slice(1).forEach(row => {
+            if (!row || row.length === 0) return;
+
+            const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
+
+            if (row[0] && row[1]) {
+                const dateRangeStr = row[17] ? row[17].trim() : '';
+                let shouldDisplay = true;
+
+                if (dateRangeStr && dateRangeStr.includes('au') && dateRangeStr.includes('&')) {
+                    const [startDateStr, endDateStr] = dateRangeStr.split('au').map(str => str.trim());
+
+                    if (startDateStr && endDateStr) {
+                        const parseDate = (dateStr) => {
+                            const [date, time = '00:00'] = dateStr.trim().split(' ');
+                            const [day, month, year] = date.split('/');
+                            const [hours, minutes] = time.split(':');
+                            return new Date(year, month - 1, day, hours || 0, minutes || 0);
+                        };
+
+                        const startDateTime = parseDate(startDateStr);
+                        const endDateTime = parseDate(endDateStr);
+                        const now = new Date();
+
+                        shouldDisplay = now >= startDateTime && now <= endDateTime;
+                    }
+                }
+
+                if (shouldDisplay) {
+                    sectionNames.forEach(section => {
+                        if (section) {
+                            const branch = row[6] || section;
+
+                            if (!sections[section].branches[branch]) {
+                                sections[section].branches[branch] = {
+                                    color: row[7] || '#f5f5f5',
+                                    image: row[8] || '',
+                                    books: []
+                                };
+                            }
+
+                            const bookData = [
+                                row[0] || '',
+                                row[1] || '',
+                                row[2] || '',
+                                row[11] || '',
+                                row[12] || '',
+                                row[13] || ''
+                            ];
+
+                            sections[section].branches[branch].books.push(bookData);
+                        }
+                    });
+                }
             }
         });
 
-        if (row[9]) notifications.push(row);
-    });
+        setupNewsBar(notifications);
 
-    data.slice(1).forEach(row => {
-        if (!row || row.length === 0) return;
-
-        const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
-        
-        if (row[0] && row[1]) {
-            const dateRangeStr = row[17] ? row[17].trim() : '';
-            let shouldDisplay = true;
-
-            if (dateRangeStr && dateRangeStr.includes('au') && dateRangeStr.includes('&')) {
-                const [startDateStr, endDateStr] = dateRangeStr.split('au').map(str => str.trim());
-                
-                if (startDateStr && endDateStr) {
-                    const parseDate = (dateStr) => {
-                        const [date, time = '00:00'] = dateStr.trim().split(' ');
-                        const [day, month, year] = date.split('/');
-                        const [hours, minutes] = time.split(':');
-                        return new Date(year, month - 1, day, hours || 0, minutes || 0);
-                    };
-
-                    const startDateTime = parseDate(startDateStr);
-                    const endDateTime = parseDate(endDateStr);
-                    const now = new Date();
-                    
-                    shouldDisplay = now >= startDateTime && now <= endDateTime;
-                }
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm.length > 0) {
+                const filteredBooks = filterResults(data, searchTerm);
+                displayFilteredResults(filteredBooks);
+            } else {
+                displayResults(sections);
             }
+        });
 
-            if (shouldDisplay) {
-                sectionNames.forEach(section => {
-                    if (section) {
-                        const branch = row[6] || section;
-                        
-                        if (!sections[section].branches[branch]) {
-                            sections[section].branches[branch] = { 
-                                color: row[7] || '#f5f5f5', 
-                                image: row[8] || '', 
-                                books: [] 
-                            };
-                        }
-                        
-                        const bookData = [
-                            row[0] || '',
-                            row[1] || '',
-                            row[2] || '',
-                            row[11] || '',
-                            row[12] || '',
-                            row[13] || ''
-                        ];
-                        
-                        sections[section].branches[branch].books.push(bookData);
-                    }
-                });
-            }
-        }
-    });
+        displayResults(sections);
+    }
+    function updateMarqueeDuration() {
+        const scrollContent = document.getElementById('scroll-content');
+        const contentLength = scrollContent.textContent.length;
+        const baseDuration = 10;
+        const duration = Math.max(baseDuration, contentLength / 10);
+        scrollContent.style.animationDuration = `${duration}s`;
+    }
 
-    setupNewsBar(notifications);
+    updateMarqueeDuration();
 
-    const searchInput = document.getElementById('search-input');
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.trim();
-        if (searchTerm.length > 0) {
-            const filteredBooks = filterResults(data, searchTerm);
-            displayFilteredResults(filteredBooks);
-        } else {
-            displayResults(sections);
-        }
-    });
-    
-    displayResults(sections);
-}
-function updateMarqueeDuration() {
-    const scrollContent = document.getElementById('scroll-content');
-    const contentLength = scrollContent.textContent.length;
-    const baseDuration = 10;
-    const duration = Math.max(baseDuration, contentLength / 10);
-    scrollContent.style.animationDuration = `${duration}s`;
-}
+    function resetMarqueeAnimation() {
+        const scrollContent = document.getElementById('scroll-content');
+        scrollContent.style.animation = 'none';
+        void scrollContent.offsetWidth;
+        scrollContent.style.animation = 'marquee 15s linear infinite';
+    }
 
-updateMarqueeDuration();
+    resetMarqueeAnimation();
+    function displayResults(sections) {
+        const sectionsContainer = document.getElementById('sections-container');
+        // First apply the fade-out
+        addTransitionClass('sections-container', 'fade-out');
 
-function resetMarqueeAnimation() {
-    const scrollContent = document.getElementById('scroll-content');
-    scrollContent.style.animation = 'none';
-    void scrollContent.offsetWidth;
-    scrollContent.style.animation = 'marquee 15s linear infinite';
-}
+        setTimeout(() => {
+            // After the fade-out completes, clear the container and populate with new content
+            sectionsContainer.innerHTML = ''; // Clear old content
+              document.getElementById('search-results-count').textContent = ``;
+            for (const [sectionName, sectionData] of Object.entries(sections)) {
+                if (!sectionName || sectionName.trim() === '') continue;
 
-resetMarqueeAnimation();
-function displayResults(sections) {
-    const sectionsContainer = document.getElementById('sections-container');
-    sectionsContainer.innerHTML = '';    
-for (const [sectionName, sectionData] of Object.entries(sections)) {
-        if (!sectionName || sectionName.trim() === '') continue;
+                const totalBooks = Object.values(sectionData.branches)
+                    .reduce((total, branch) => total + branch.books.length, 0);
 
-        const totalBooks = Object.values(sectionData.branches)
-            .reduce((total, branch) => total + branch.books.length, 0);
+                const sectionCard = document.createElement('div');
+                sectionCard.className = 'section-card';
+                sectionCard.style.backgroundColor = sectionData.color;
 
-        const sectionCard = document.createElement('div');
-        sectionCard.className = 'section-card';
-        sectionCard.style.backgroundColor = sectionData.color;
-
-        sectionCard.innerHTML = `
+                sectionCard.innerHTML = `
             <img src="${sectionData.image || 'placeholder-image-url'}" alt="Image de la section" style="width: 60px; height: 60px;">
             <div class="section-name">${sectionName}</div>
             <div class="book-count" style="color: purple; font-size: 12px; font-weight: bold; margin-top: 8px;">
@@ -1970,59 +2168,74 @@ for (const [sectionName, sectionData] of Object.entries(sections)) {
             </div>
         `;
 
-        sectionCard.onclick = () => {
-            showBranchAndBooks(sectionData);
-        };
+                sectionCard.onclick = () => {
+                    showBranchAndBooks(sectionData);
+                };
 
-        sectionsContainer.appendChild(sectionCard);
+                sectionsContainer.appendChild(sectionCard);
+            }
+            sectionsContainer.style.display = 'block';  // Ensure container is visible
+            setUniformCardDimensions();
+
+            // Finally, apply the fade-in to show the new content
+            removeTransitionClass('sections-container', 'fade-out');
+            addTransitionClass('sections-container', 'fade-in');
+            setTimeout(() => {
+                removeTransitionClass('sections-container', 'fade-in');
+            }, 300);  // Match css transition duration
+        }, 300);
     }
+    function setUniformCardDimensions() {
+        const allCards = document.querySelectorAll('.book-card, .section-card');
 
-    setTimeout(setUniformCardDimensions, 100);
-}
-function setUniformCardDimensions() {
-            const allCards = document.querySelectorAll('.book-card, .section-card');
+        allCards.forEach(card => {
+            card.style.height = 'auto';
+        });
 
-            allCards.forEach(card => {
-                card.style.height = 'auto';
-            });
+        const cardHeights = Array.from(allCards).map(card => card.scrollHeight);
+        const maxHeight = Math.max(...cardHeights, 140);
 
-            const cardHeights = Array.from(allCards).map(card => card.scrollHeight);
-            const maxHeight = Math.max(...cardHeights, 140);
+        allCards.forEach(card => {
+            card.style.height = `${maxHeight}px`;
+        });
+    }
+    window.addEventListener('load', setUniformCardDimensions);
+    window.addEventListener('resize', setUniformCardDimensions)
 
-            allCards.forEach(card => {
-                card.style.height = `${maxHeight}px`;
-            });
-        }
-        window.addEventListener('load', setUniformCardDimensions);
-        window.addEventListener('resize', setUniformCardDimensions)
+    loadPage();
+    document.addEventListener('DOMContentLoaded', function() {
+        const openBtn = document.getElementById('open-contact-btn');
+        const closeBtn = document.getElementById('close-popup');
+        const popup = document.getElementById('contact-popup');
+        const contactForm = document.getElementById('contact-form');
+        const emailInput = document.getElementById('email-input');
+        const emailError = document.getElementById('email-error');
 
-loadPage();
- document.addEventListener('DOMContentLoaded', function() {
-            const openBtn = document.getElementById('open-contact-btn');
-            const closeBtn = document.getElementById('close-popup');
-            const popup = document.getElementById('contact-popup');
-            const contactForm = document.getElementById('contact-form');
-            const emailInput = document.getElementById('email-input');
-            const emailError = document.getElementById('email-error');
+        openBtn.addEventListener('click', function() {
+            addTransitionClass('contact-popup', 'fade-in'); // Use transition
+            popup.style.display = 'flex';
+            emailError.style.display = 'none';
+        });
 
-            openBtn.addEventListener('click', function() {
-                popup.style.display = 'flex';
-                emailError.style.display = 'none';
-            });
+        closeBtn.addEventListener('click', function() {
+            addTransitionClass('contact-popup', 'fade-out'); // Use transition
+            setTimeout(() => {
+                popup.style.display = 'none'; // Hide after transition
+                removeTransitionClass('contact-popup', 'fade-out');
+            },300);
 
-            closeBtn.addEventListener('click', function() {
-                popup.style.display = 'none';
-            });
 
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const name = document.getElementById('name-input').value;
-                const email = emailInput.value;
+        });
 
-                fetch(`https://script.google.com/macros/s/AKfycby-HG4Sk0z5uD7VlJThhWJa4RVMRndBHAyjwbGeZzt-wMDi0WeRfi9ak0RdhbDOnQxwzw/exec?action=checkEmail&email=${encodeURIComponent(email)}`, {
-                    method: 'GET'
-                })
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name-input').value;
+            const email = emailInput.value;
+
+            fetch(`https://script.google.com/macros/s/AKfycby-HG4Sk0z5uD7VlJThhWJa4RVMRndBHAyjwbGeZzt-wMDi0WeRfi9ak0RdhbDOnQxwzw/exec?action=checkEmail&email=${encodeURIComponent(email)}`, {
+                method: 'GET'
+            })
                 .then(response => response.json())
                 .then(data => {
                     if (data.exists) {
@@ -2041,33 +2254,23 @@ loadPage();
                 .then(response => {
                     if (response) {
                         alert('Merci ! Votre message a été envoyé.');
-                        popup.style.display = 'none';
-                        contactForm.reset();
+                        addTransitionClass('contact-popup', 'fade-out');
+                        setTimeout(() => {
+                            popup.style.display = 'none';
+                            removeTransitionClass('contact-popup', 'fade-out');
+                            contactForm.reset();
+                        },300);
+
+
                     }
                 })
                 .catch(error => {
                     console.error('Erreur:', error);
                     alert('Une erreur s est produite ou adresse e-mail est déjà utilisée');
                 });
-            });
         });
-           
-
-     
-            // Check if a flag exists in sessionStorage indicating a previous load in this session
-            if (!sessionStorage.getItem('pageLoadedOnce')) {
-                // If the flag doesn't exist, this is the first load in the session
-                // Set the flag so it doesn't refresh again
-                sessionStorage.setItem('pageLoadedOnce', 'true');
-                // Reload the page
-                console.log('First load in session detected. Refreshing page...'); // Optional console log
-                location.reload();
-            } else {
-                // The flag exists, meaning the page was already loaded (and refreshed) once in this session
-                console.log('Page already loaded in this session. No refresh needed.'); // Optional console log
-            }
-   
+    });
 
 </script>
 </body>
-</html> 
+</html>
