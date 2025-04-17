@@ -250,7 +250,7 @@
             flex-direction: column;
             align-items: center;
             padding: auto;
-            background-color: #ffffff;
+            background: #ffffff;
             border-radius: 18px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             width: 85px;
@@ -270,7 +270,7 @@
         }
 
         .book-note {
-            background-color : red;
+            background : linear-gradient(to right, #f50a0a, #4d0b49);
             color: white;
             padding: 2px 4px;
             border-radius: 4px;
@@ -280,7 +280,11 @@
             width: auto;
             text-align: center;
             margin:  5px;
-            margin-bottom:  5px;
+            margin-bottom:  8px;
+        }
+        .book-note:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .section-card:hover {
@@ -398,7 +402,7 @@
             background-color: #F5F5F5;
         }
         .countdown {
-            background-color: #2d3436;
+            background : linear-gradient(to right,#07400d, #ed772d);
             color: white;
             padding: 2px 4px;
             border-radius: 4px;
@@ -409,6 +413,10 @@
             text-align: center;
             margin : 5px;
             margin-bottom:  8px;
+        }
+        .countdown:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .countdown-expired {
@@ -993,7 +1001,269 @@
 </script>
 
 
+<script>
+    // ... (الكود السابق بدون تغيير) ...
 
+    // دالة للتحقق من كلمة السر من Google Sheets
+    async function verifyPassword(enteredPassword) {
+        const sheetId = "1u_k5KNO7oLgq-xxWiUfPjoArQkv0o1wvJGxTxcWXA5Y";
+        const sheetName = "2024";
+        const apiKey = "AIzaSyDN9HjJed_FxRchAOaFlbv7DGs57IWr7cw";
+        const column = "AA";
+
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}!${column}:${column}?key=${apiKey}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.values && data.values.length > 0) {
+                const validPasswords = data.values
+                    .map(row => row[0]?.split(":")[1]?.trim())
+                    .filter(password => password);
+
+                return validPasswords.includes(enteredPassword);
+            } else {
+                console.error("Aucune donnée de mot de passe trouvée.");
+                return false;
+            }
+        } catch (error) {
+            console.error("Une erreur s'est produite lors de la vérification du mot de passe:", error);
+            return false;
+        }
+    }
+
+function showPasswordPrompt() {
+            // إنشاء عنصر div لنافذة طلب كلمة السر
+            const passwordDialog = document.createElement('div');
+            passwordDialog.id = 'password-dialog';
+            passwordDialog.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        `;
+
+            // Création du contenu de la fenêtre
+            const passwordContent = document.createElement('div');
+            passwordContent.style.cssText = `
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            font-family: 'Cairo', sans-serif;
+            max-width: 400px;
+            width: 90%;
+        `;
+
+            // Ajout du champ de saisie du mot de passe
+            const passwordInput = document.createElement('input');
+            passwordInput.type = 'password';
+            passwordInput.placeholder = 'Entrez le mot de passe';
+            passwordInput.style.cssText = `
+            width: 90%;
+            padding: 12px 15px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(67, 97, 238, 0.3);
+            border-radius: 30px;
+            font-size: 16px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        `;
+
+            passwordInput.addEventListener('focus', () => {
+                passwordInput.style.borderColor = '#4361ee';
+                passwordInput.style.boxShadow = '0 0 0 3px rgba(67, 97, 238, 0.25), inset 0 2px 5px rgba(0, 0, 0, 0.05)';
+            });
+
+            passwordInput.addEventListener('blur', () => {
+                passwordInput.style.borderColor = 'rgba(67, 97, 238, 0.3)';
+                passwordInput.style.boxShadow = 'inset 0 2px 5px rgba(0, 0, 0, 0.05)';
+            });
+
+            // Conteneur pour les boutons
+            const buttonContainer = document.createElement('div');
+            buttonContainer.style.cssText = `
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        `;
+
+            // Bouton de confirmation
+            const confirmButton = document.createElement('button');
+            confirmButton.textContent = 'Confirmer';
+            confirmButton.style.cssText = `
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        `;
+
+            confirmButton.addEventListener('mouseover', () => {
+                confirmButton.style.transform = 'translateY(-2px)';
+                confirmButton.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.25)';
+            });
+
+            confirmButton.addEventListener('mouseout', () => {
+                confirmButton.style.transform = 'translateY(0)';
+                confirmButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+            });
+
+            // Bouton d'annulation
+            const cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Annuler';
+            cancelButton.style.cssText = `
+            background: linear-gradient(135deg, #f72585 0%, #d90429 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        `;
+
+            cancelButton.addEventListener('mouseover', () => {
+                cancelButton.style.transform = 'translateY(-2px)';
+                cancelButton.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.25)';
+            });
+
+            cancelButton.addEventListener('mouseout', () => {
+                cancelButton.style.transform = 'translateY(0)';
+                cancelButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+            });
+
+            // Bouton WhatsApp
+            const whatsappButton = document.createElement('button');
+            whatsappButton.style.cssText = `
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 90%;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        `;
+
+            whatsappButton.addEventListener('mouseover', () => {
+                whatsappButton.style.transform = 'translateY(-2px)';
+                whatsappButton.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.25)';
+            });
+
+            whatsappButton.addEventListener('mouseout', () => {
+                whatsappButton.style.transform = 'translateY(0)';
+                whatsappButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+            });
+
+            // Icône WhatsApp
+            const whatsappIcon = document.createElement('img');
+            whatsappIcon.src = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
+            whatsappIcon.style.cssText = `
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        `;
+            whatsappButton.appendChild(whatsappIcon);
+
+            // Texte du bouton WhatsApp
+            const whatsappText = document.createElement('span');
+            whatsappText.textContent = "Demander via WhatsApp";
+            whatsappButton.appendChild(whatsappText);
+
+            // Lien WhatsApp
+            whatsappButton.addEventListener('click', () => {
+                window.open("https://wa.me/+212641434629?text=Je%20veux%20le%20mot%20de%20passe%20pour%20ACFTC OUJDA %20s'il%20vous%20plaît.%20Voici%20mon%20Matricule:", '_blank');
+            });
+
+            // Note sur le mot de passe
+            const passwordNote = document.createElement('p');
+            passwordNote.textContent = "Remarque: Le mot de passe est le même que celui utilisé sur (RELIQUAT).";
+            passwordNote.style.cssText = `
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            background: rgba(67, 97, 238, 0.05);
+            padding: 10px 15px;
+            border-radius: 10px;
+        `;
+
+        // إضافة العناصر إلى محتوى النافذة
+        passwordContent.appendChild(passwordInput);
+        passwordContent.appendChild(confirmButton);
+        passwordContent.appendChild(cancelButton);
+        passwordContent.appendChild(whatsappButton); // تم تغيير هذا السطر
+        passwordContent.appendChild(passwordNote);
+
+        // إضافة محتوى النافذة إلى عنصر div
+        passwordDialog.appendChild(passwordContent);
+
+        // إضافة عنصر div إلى الصفحة
+        document.body.appendChild(passwordDialog);
+
+        // إضافة وظائف للأزرار
+        confirmButton.addEventListener('click', () => {
+            const password = passwordInput.value;
+            if (password) {
+                verifyPassword(password).then(isValid => {
+                    if (isValid) {
+                        localStorage.setItem("authenticated", "true");
+                        document.body.removeChild(passwordDialog);
+                        loadPage();
+                    } else {
+                        alert("Mot de passe incorrect.");
+                        passwordInput.value = "";
+                    }
+                });
+            }
+        });
+
+        cancelButton.addEventListener('click', () => {
+            document.body.removeChild(passwordDialog);
+            setTimeout(showPasswordPrompt, 500);
+        });
+    }
+
+    // دالة لفحص حالة الدخول قبل تحميل الصفحة
+    function checkAuthentication() {
+        if (localStorage.getItem("authenticated") === "true") {
+            loadPage();
+        } else {
+            showPasswordPrompt();
+        }
+    }
+
+    //  استدعاء `checkAuthentication` بدلاً من `loadPage`
+    checkAuthentication();
+</script>
 
 <script>
 
