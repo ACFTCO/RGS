@@ -250,7 +250,7 @@
             flex-direction: column;
             align-items: center;
             padding: auto;
-            background: #ffffff;
+            background-color: #ffffff;
             border-radius: 18px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             width: 85px;
@@ -265,8 +265,8 @@
         .book-title {
             font-size: 55%;
             font-weight: bold;
-            color: #333;
-            margin: 4px 10;
+            color: #0c0536;
+            margin: 3px;
         }
 
         .book-note {
@@ -296,14 +296,14 @@
             width: 60px;
             height: 60px;
             border-radius: 10px;
-            margin-bottom: 5px;
-            margin-top : 5px;
+            margin-bottom: 3px;
+            margin-top : 3px;
         }
         .section-card .section-name{
             font-size: 9px;
             font-weight: bold;
-            color: #333;
-
+            color: #0c0536;
+            margin : 3px;
         }
         .book-link {
             text-decoration: none;
@@ -422,21 +422,23 @@
         .countdown-expired {
             background-color: #e74c3c;
         }
-        .book-count {
-            background-color: rgba(255, 0, 0, 0.1);
-            font-size: 12px;
-            font-weight: bold;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 8px auto 0;
-            border: 1px solid #000;
-            margin-bottom: 8px;
-            margin-top : 5px;
-        }
+       .book-count {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 0, 0, 0.1);
+    font-size: 12px;
+    font-weight: bold;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    margin-bottom : 10px;
+    }
         #popup-modal {
             display: none;
             position: fixed;
@@ -1002,7 +1004,6 @@
 
 
 
-<script>
 
     // الدوال المساعدة للانتقالات
     function addTransitionClass(elementId, className) {
