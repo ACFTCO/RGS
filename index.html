@@ -422,23 +422,21 @@
         .countdown-expired {
             background-color: #e74c3c;
         }
-       .book-count {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 0, 0, 0.1);
-    font-size: 12px;
-    font-weight: bold;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #000;
-    margin-bottom : 10px;
-    }
+        .book-count {
+            background-color: rgba(255, 0, 0, 0.1);
+            font-size: 12px;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 8px auto 0;
+            border: 1px solid #000;
+            margin-bottom: 8px;
+            margin-top : 5px;
+        }
         #popup-modal {
             display: none;
             position: fixed;
@@ -1004,6 +1002,7 @@
 
 
 
+<script>
 
     // الدوال المساعدة للانتقالات
     function addTransitionClass(elementId, className) {
