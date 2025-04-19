@@ -65,7 +65,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            
+
             background-size: 500px 500px;
             background-repeat: no-repeat;
             background-position: center;
@@ -132,7 +132,7 @@
             color: white;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 44px 15px rgba(0, 0, 0, 0.2);
             position: relative;
             width: calc(100% - 40px);
             max-width: 800px;
@@ -209,7 +209,7 @@
             object-fit: contain;
             position: absolute;
             top: 0;
-            
+
        }
         #news-bar {
             background-color: #ffff00;
@@ -887,7 +887,7 @@
     </h1>
 
     <button id="open-documentations" class="documentations">DOCUMENTATIONS</button>
-    
+
 </header>
 <!-- Password Popup -->
 <div id="password-popup">
@@ -999,7 +999,6 @@
         alert(`إشعار جديد: ${payload.notification.title} - ${payload.notification.body}`);
     });
 </script>
-
 
 
 <script>
@@ -1419,7 +1418,7 @@
         };
     }
 
-    function updateAllCountdowns() {
+        function updateAllCountdowns() {
         const countdownElements = document.querySelectorAll('.countdown');
         countdownElements.forEach(element => {
             const deadline = element.dataset.deadline;
@@ -1427,10 +1426,27 @@
 
             const timeLeft = calculateTimeLeft(deadline);
             if (!timeLeft || timeLeft.textOnly) {
-                element.textContent = deadline;
+                // Cas où le compte à rebours est terminé ou le format est invalide
+                element.textContent = deadline; // <-- Cette ligne est celle à modifier pour le cas expiré
                 element.style.backgroundColor = '#2d3436';
+                if (!timeLeft) { // Spécifiquement pour le cas expiré (si timeLeft est null)
+                    // Extraction du texte entre parenthèses
+                    const match = deadline.match(/\((.*?)\)/);
+                    if (match && match[1]) {
+                        element.textContent = match[1]; // Affiche seulement le texte entre parenthèses
+                    } else {
+                        element.textContent = 'Expiré'; // Texte par défaut si pas de parenthèses
+                    }
+                     element.style.backgroundColor = '#e74c3c'; // Couleur pour indiquer expiré
+                } else { // Cas format invalide (timeLeft.textOnly est true)
+                     element.textContent = deadline; // On garde l'affichage de la chaîne entière pour le format invalide
+                     element.style.backgroundColor = '#2d3436'; // Couleur pour format invalide
+                }
+
             } else {
+                // Cas où le compte à rebours est actif
                 element.textContent = formatCountdown(timeLeft);
+                 element.style.backgroundColor = ''; // Remettre la couleur par défaut si le compte à rebours redevient actif (par ex. si l'heure du système change)
             }
         });
     }
@@ -1458,7 +1474,7 @@
 
     setInterval(updateAllCountdowns, 1000);
 
-    async function processPopupMessages(data) {
+    function processPopupMessages(data) {
         const popupMessages = [];
 
         data.slice(1).forEach(row => {
@@ -1468,9 +1484,10 @@
 
                 if (dateRange) {
                     const [startDateTime, endDateTime] = dateRange.split(' au ').map(dateTime => {
-                        const [date, time] = dateTime.split(' ');
-                        const [day, month, year] = date.split('/');
-                        const [hours, minutes] = time ? time.split(':') : [0, 0];
+                        const [date, time] = dateTime.trim().split(' ');
+                        const [day, month, year] = date.trim().split('/');
+                        const [hours, minutes] = time ? time.trim().split(':') : ['00', '00'];
+
                         return new Date(year, month - 1, day, hours, minutes);
                     });
 
@@ -2076,31 +2093,52 @@
         const notifications = [];
         const sections = {};
 
+        // --- START: CHANGES FOR SORTING (COLUMN S) ---
+        // First pass: Initialize sections and capture primary properties including sort order from Column S (index 18)
         data.slice(1).forEach(row => {
             if (!row || row.length === 0) return;
 
-            const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
+            const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()).filter(s => s) : []; // Filter empty names
 
             sectionNames.forEach(section => {
-                if (section && !sections[section]) {
-                    sections[section] = {
-                        sectionName : section,
-                        color: row[4] || '#f5f5f5',
-                        image: row[5] || '',
-                        branches: {}
-                    };
+                if (section) {
+                    // Only initialize section properties if it doesn't exist yet or if the current row
+                    // provides color (E), image (F), AND sort order (S). This heuristic tries to
+                    // find the primary "definition" row for the section.
+                    // A simpler approach might just take the first row encountered, but this is more robust.
+                    // Or, if column S should ONLY define the order and other columns define other things,
+                    // we'd need a different approach. Assuming column S is associated with the primary section definition.
+                     if (!sections[section] || (row[4] && row[5] && row[18])) {
+                         sections[section] = {
+                            sectionName: section,
+                            color: row[4] || (sections[section] ? sections[section].color : '#f5f5f5'), // Get color from column E (index 4), fallback to existing or default
+                            image: row[5] || (sections[section] ? sections[section].image : ''),       // Get image from column F (index 5), fallback to existing or default
+                            sortOrder: parseInt(row[18], 10), // Get sort order from column S (index 18)
+                            branches: sections[section] ? sections[section].branches : {} // Keep existing branches
+                        };
+                        // Handle NaN sortOrder - default to a large number so they appear at the end
+                        if (isNaN(sections[section].sortOrder)) {
+                             sections[section].sortOrder = Infinity;
+                        }
+                    }
                 }
             });
 
-            if (row[9]) notifications.push(row);
+             // Capture notification data regardless of section processing
+            if (row[9]) { // Column J (index 9) for news bar notification text
+                 notifications.push(row); // Store the whole row or just relevant parts
+            }
         });
+        // --- END: CHANGES FOR SORTING (COLUMN S) ---
 
+
+        // Second pass: Populate branches and books (Existing logic - no changes needed here for sorting)
         data.slice(1).forEach(row => {
             if (!row || row.length === 0) return;
 
             const sectionNames = row[3] ? row[3].split('&').map(s => s.trim()) : [];
 
-            if (row[0] && row[1]) {
+            if (row[0] && row[1]) { // Assuming Column A (index 0) is book title and Column B (index 1) is URL
                 const dateRangeStr = row[17] ? row[17].trim() : '';
                 let shouldDisplay = true;
 
@@ -2110,8 +2148,8 @@
                     if (startDateStr && endDateStr) {
                         const parseDate = (dateStr) => {
                             const [date, time = '00:00'] = dateStr.trim().split(' ');
-                            const [day, month, year] = date.split('/');
-                            const [hours, minutes] = time.split(':');
+                            const [day, month, year] = date.trim().split('/');
+                            const [hours, minutes] = time ? time.trim().split(':') : ['00', '00'];
                             return new Date(year, month - 1, day, hours || 0, minutes || 0);
                         };
 
@@ -2125,24 +2163,24 @@
 
                 if (shouldDisplay) {
                     sectionNames.forEach(section => {
-                        if (section) {
-                            const branch = row[6] || section;
+                        if (section && sections[section]) { // Ensure section object exists
+                            const branch = row[6] || section; // Column G (index 6) for branch
 
                             if (!sections[section].branches[branch]) {
                                 sections[section].branches[branch] = {
-                                    color: row[7] || '#f5f5f5',
-                                    image: row[8] || '',
+                                    color: row[7] || sections[section].color || '#f5f5f5', // Column H (index 7) for branch color, fallback to section color
+                                    image: row[8] || sections[section].image || '', // Column I (index 8) for branch image, fallback to section image
                                     books: []
                                 };
                             }
 
                             const bookData = [
-                                row[0] || '',
-                                row[1] || '',
-                                row[2] || '',
-                                row[11] || '',
-                                row[12] || '',
-                                row[13] || ''
+                                row[0] || '', // A - Title
+                                row[1] || '', // B - URL
+                                row[2] || '', // C - Image URL
+                                row[11] || '', // L - Note
+                                row[12] || '', // M - Background Color
+                                row[13] || '' // N - Deadline
                             ];
 
                             sections[section].branches[branch].books.push(bookData);
@@ -2152,20 +2190,21 @@
             }
         });
 
+        cachedSections = sections; // Cache the processed sections object
         setupNewsBar(notifications);
 
         const searchInput = document.getElementById('search-input');
         searchInput.addEventListener('input', () => {
             const searchTerm = searchInput.value.trim();
             if (searchTerm.length > 0) {
-                const filteredBooks = filterResults(data, searchTerm);
+                const filteredBooks = filterResults(data, searchTerm); // filterResults uses raw data
                 displayFilteredResults(filteredBooks);
             } else {
-                displayResults(sections);
+                displayResults(cachedSections); // displayResults uses processed/cached sections
             }
         });
 
-        displayResults(sections);
+        displayResults(cachedSections); // Display initially with cached sections
     }
     function updateMarqueeDuration() {
         const scrollContent = document.getElementById('scroll-content');
@@ -2194,8 +2233,26 @@
             // After the fade-out completes, clear the container and populate with new content
             sectionsContainer.innerHTML = ''; // Clear old content
               document.getElementById('search-results-count').textContent = ``;
-            for (const [sectionName, sectionData] of Object.entries(sections)) {
-                if (!sectionName || sectionName.trim() === '') continue;
+
+            // --- START: CHANGES FOR SORTING (COLUMN S) ---
+            // Convert the sections object into an array for sorting
+            const sectionsArray = Object.values(sections);
+
+            // Sort the array based on the 'sortOrder' property from Column S (index 18)
+            sectionsArray.sort((a, b) => {
+                const orderA = a.sortOrder === undefined || isNaN(a.sortOrder) ? Infinity : a.sortOrder;
+                const orderB = b.sortOrder === undefined || isNaN(b.sortOrder) ? Infinity : b.sortOrder;
+
+                if (orderA < orderB) return -1;
+                if (orderA > orderB) return 1;
+                // Fallback: If sortOrder is the same or invalid, sort by section name alphabetically
+                return a.sectionName.localeCompare(b.sectionName);
+            });
+
+            // Iterate through the *sorted* array to create and append section cards
+            for (const sectionData of sectionsArray) {
+                // Ensure the section name is valid before displaying
+                if (!sectionData.sectionName || sectionData.sectionName.trim() === '') continue;
 
                 const totalBooks = Object.values(sectionData.branches)
                     .reduce((total, branch) => total + branch.books.length, 0);
@@ -2208,7 +2265,7 @@
                 <div class="card-bottom-line"></div>
                 <div class="card-top-line"></div>
             <img src="${sectionData.image || 'placeholder-image-url'}" alt="Image de la section" style="width: 60px; height: 60px;">
-            <div class="section-name">${sectionName}</div>
+            <div class="section-name">${sectionData.sectionName}</div>
             <div class="book-count" style="color: purple; font-size: 12px; font-weight: bold; margin-top: 8px;">
                 ${totalBooks}
             </div>
@@ -2220,6 +2277,8 @@
 
                 sectionsContainer.appendChild(sectionCard);
             }
+             // --- END: CHANGES FOR SORTING (COLUMN S) ---
+
             sectionsContainer.style.display = 'block';  // Ensure container is visible
             setUniformCardDimensions();
 
